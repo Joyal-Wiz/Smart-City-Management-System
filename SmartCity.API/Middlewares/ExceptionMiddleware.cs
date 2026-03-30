@@ -1,10 +1,8 @@
-﻿    using System.Net;
-    using System.Text.Json;
-    using SmartCity.Application.DTOs;
+﻿using System.Net;
+using System.Text.Json;
+using SmartCity.Application.DTOs;
 
-
-
-namespace SmartCity.API.Middlewares
+namespace SmartCity.API.Middleware
 {
     public class ExceptionMiddleware
     {
@@ -15,7 +13,7 @@ namespace SmartCity.API.Middlewares
             _next = next;
         }
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             try
             {
@@ -29,19 +27,19 @@ namespace SmartCity.API.Middlewares
 
         private static Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
+            context.Response.ContentType = "application/json";
+
             var response = new ApiResponse<string>
             {
                 Success = false,
                 Message = exception.Message,
-                Data = null
+                Data = null,
+                Errors = new List<string> { exception.Message }
             };
 
-            var result = JsonSerializer.Serialize(response);
+            context.Response.StatusCode = (int)HttpStatusCode.InternalServerError;
 
-            context.Response.ContentType = "application/json";
-            context.Response.StatusCode = (int)HttpStatusCode.BadRequest;
-
-            return context.Response.WriteAsync(result);
+            return context.Response.WriteAsync(JsonSerializer.Serialize(response));
         }
     }
 }

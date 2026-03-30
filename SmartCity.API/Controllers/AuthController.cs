@@ -22,10 +22,7 @@ namespace SmartCity.API.Controllers
         {
             var result = await _mediator.Send(command);
 
-            if (!result.Success)
-                return BadRequest(result);
-
-            return Ok(result);
+            return result.Success ? Ok(result) : BadRequest(result);
         }
 
         [HttpPost("login")]
@@ -33,16 +30,15 @@ namespace SmartCity.API.Controllers
         {
             var result = await _mediator.Send(command);
 
-            if (!result.Success)
-                return Unauthorized(result);
-
-            return Ok(result);
+            return result.Success ? Ok(result) : Unauthorized(result);
         }
+
         [HttpPost("refresh")]
-        public async Task<IActionResult> RefreshToken(RefreshTokenCommand command)
+        public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
         {
             var result = await _mediator.Send(command);
-            return Ok(result);
+
+            return result.Success ? Ok(result) : Unauthorized(result);
         }
     }
 }

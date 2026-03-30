@@ -1,5 +1,7 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
+using SmartCity.Application.Features.Auth.Commands.DTOs;
+using SmartCity.Application.Features.Auth.DTOs;
 using SmartCity.Application.Interfaces;
 using SmartCity.Domain.Entities;
 using SmartCity.Domain.Enums;
@@ -7,7 +9,7 @@ using SmartCity.Domain.Interfaces;
 
 namespace SmartCity.Application.Features.Auth.Commands.Register
 {
-    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, ApiResponse<Guid>>
+    public class RegisterUserHandler : IRequestHandler<RegisterUserCommand, ApiResponse<RegisterResponseDto>>
     {
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
@@ -23,7 +25,7 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
             _workerRepository = workerRepository;
         }
 
-        public async Task<ApiResponse<Guid>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<RegisterResponseDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
         {
             // 🔹 Normalize email
             var email = request.Email.Trim().ToLower();
@@ -33,7 +35,7 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
 
             if (existingUser != null)
             {
-                return ApiResponse<Guid>.FailResponse("Email already registered");
+                return ApiResponse<RegisterResponseDto>.FailResponse("Email already registered");
             }
 
             // 🔹 Create User
@@ -63,7 +65,13 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
                 await _workerRepository.AddAsync(worker);
             }
 
-            return ApiResponse<Guid>.SuccessResponse("User registered successfully", user.Id);
+            // ✅ Return structured response
+            return ApiResponse<RegisterResponseDto>.SuccessResponse(
+                "User registered successfully",
+                new RegisterResponseDto
+                {
+                    UserId = user.Id
+                });
         }
     }
 }

@@ -3,7 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
-using SmartCity.API.Middlewares;
+using SmartCity.API.Middleware;
 using SmartCity.API.Services;
 using SmartCity.Application.Behaviors;
 using SmartCity.Application.Features.Auth.Commands.Register;
@@ -103,7 +103,6 @@ var app = builder.Build();
 
 // ✅ MIDDLEWARE
 app.UseMiddleware<ExceptionMiddleware>();
-
 
 
 if (app.Environment.IsDevelopment())

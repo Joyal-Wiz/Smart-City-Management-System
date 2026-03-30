@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
+using SmartCity.Application.Features.Auth.Commands.DTOs;
 
 namespace SmartCity.Application.Features.Auth.Commands.Register
 {
-    public class RegisterUserCommand : IRequest<ApiResponse<Guid>>
+    public class RegisterUserCommand : IRequest<ApiResponse<RegisterResponseDto>> 
     {
         public string Name { get; set; } = string.Empty;
 
