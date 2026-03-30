@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="SmartCity.API/SmartCity.API.csproj" />
+  <Project Path="SmartCity.Application/SmartCity.Application.csproj" />
+  <Project Path="SmartCity.Domain/SmartCity.Domain.csproj" />
+  <Project Path="SmartCity.Infrastructure/SmartCity.Infrastructure.csproj" />
+</Solution>
