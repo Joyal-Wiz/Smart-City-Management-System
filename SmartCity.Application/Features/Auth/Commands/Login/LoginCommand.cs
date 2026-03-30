@@ -1,12 +1,9 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
+using SmartCity.Application.Features.Auth.DTOs;
 
-namespace SmartCity.Application.Features.Auth.Commands.Login
+public class LoginCommand : IRequest<ApiResponse<LoginResponseDto>>
 {
-    public class LoginCommand : IRequest<ApiResponse<AuthResponseDto>>
-    {
-        public string Email { get; set; } = string.Empty;
-
-        public string Password { get; set; } = string.Empty;
-    }
+    public string Email { get; set; }
+    public string Password { get; set; }
 }

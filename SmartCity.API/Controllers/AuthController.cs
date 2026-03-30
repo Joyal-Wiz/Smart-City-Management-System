@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using SmartCity.Application.Features.Auth.Commands.Login;
+using SmartCity.Application.Features.Auth.Commands.RefreshToken;
 using SmartCity.Application.Features.Auth.Commands.Register;
 
 namespace SmartCity.API.Controllers
@@ -35,6 +36,12 @@ namespace SmartCity.API.Controllers
             if (!result.Success)
                 return Unauthorized(result);
 
+            return Ok(result);
+        }
+        [HttpPost("refresh")]
+        public async Task<IActionResult> RefreshToken(RefreshTokenCommand command)
+        {
+            var result = await _mediator.Send(command);
             return Ok(result);
         }
     }

@@ -28,6 +28,8 @@ builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<IFileService, FileService>();
 builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
 builder.Services.AddValidatorsFromAssembly(typeof(CreateIssueValidator).Assembly);
+builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
+
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
