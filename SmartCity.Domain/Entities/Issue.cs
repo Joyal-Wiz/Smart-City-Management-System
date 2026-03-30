@@ -28,7 +28,6 @@ namespace SmartCity.Domain.Entities
         public DateTime? ResolvedAt { get; private set; }
         public string? ImagePath { get; set; }
 
-
         public void AssignWorker(Guid workerId)
         {
             if (Status != IssueStatus.Reported)

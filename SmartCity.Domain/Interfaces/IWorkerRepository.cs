@@ -10,7 +10,11 @@ namespace SmartCity.Domain.Interfaces
         Task<List<Worker>> GetAvailableWorkersAsync();
 
         Task<Worker?> GetByIdAsync(Guid id);
+        Task AddAsync(Worker worker);
 
         Task UpdateAsync(Worker worker);
+        Task<List<Worker>> GetPendingWorkersAsync();
+
+
     }
 }

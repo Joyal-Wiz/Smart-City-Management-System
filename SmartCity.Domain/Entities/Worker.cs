@@ -10,5 +10,7 @@ namespace SmartCity.Domain.Entities
         public string Name { get; set; }
 
         public bool IsAvailable { get; set; } = true;
+        public string Status { get; set; } = "Pending";
+
     }
 }
