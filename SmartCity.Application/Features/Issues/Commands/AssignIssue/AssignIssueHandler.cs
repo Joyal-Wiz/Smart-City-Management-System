@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
+using SmartCity.Domain.Enums;
 using SmartCity.Domain.Interfaces;
 
 namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
@@ -30,7 +31,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 return ApiResponse<string>.FailResponse("Worker not found");
 
             // 3. Check worker status
-            if (worker.Status != "Approved")
+            if (worker.Status != WorkerStatus.Approved)
                 return ApiResponse<string>.FailResponse("Worker not approved");
 
             // 4. Assign

@@ -1,15 +1,10 @@
 ﻿using MediatR;
-using SmartCity.Domain.Entities;
+using SmartCity.Application.DTOs;
 using SmartCity.Domain.Interfaces;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-
-
 
 namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
 {
-    public class GetPendingWorkersHandler : IRequestHandler<GetPendingWorkersQuery, List<Worker>>
+    public class GetPendingWorkersHandler : IRequestHandler<GetPendingWorkersQuery, List<WorkerDto>>
     {
         private readonly IWorkerRepository _workerRepository;
 
@@ -18,9 +13,17 @@ namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
             _workerRepository = workerRepository;
         }
 
-        public async Task<List<Worker>> Handle(GetPendingWorkersQuery request, CancellationToken cancellationToken)
+        public async Task<List<WorkerDto>> Handle(GetPendingWorkersQuery request, CancellationToken cancellationToken)
         {
-            return await _workerRepository.GetPendingWorkersAsync();
+            var workers = await _workerRepository.GetPendingWorkersAsync();
+
+            return workers.Select(w => new WorkerDto
+            {
+                Id = w.Id,
+                Name = w.Name,
+                IsAvailable = w.IsAvailable,
+                Status = w.Status.ToString()
+            }).ToList();
         }
     }
 }

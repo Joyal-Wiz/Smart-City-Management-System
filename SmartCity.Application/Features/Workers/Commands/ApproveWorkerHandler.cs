@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
+using SmartCity.Domain.Enums;
 using SmartCity.Domain.Interfaces;
 
 namespace SmartCity.Application.Features.Workers.Commands.ApproveWorker
@@ -22,12 +23,12 @@ namespace SmartCity.Application.Features.Workers.Commands.ApproveWorker
                 return ApiResponse<string>.FailResponse("Worker not found");
             }
 
-            if (worker.Status == "Approved")
+            if (worker.Status != WorkerStatus.Approved)
             {
                 return ApiResponse<string>.FailResponse("Worker already approved");
             }
 
-            worker.Status = "Approved";
+            worker.Status = WorkerStatus.Approved;
             worker.IsAvailable = true;
 
             await _workerRepository.UpdateAsync(worker);

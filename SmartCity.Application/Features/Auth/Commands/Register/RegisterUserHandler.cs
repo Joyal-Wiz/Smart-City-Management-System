@@ -57,7 +57,7 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
                     Id = Guid.NewGuid(),
                     Name = user.Name,
                     IsAvailable = false,
-                    Status = "Pending"
+                    Status = WorkerStatus.Pending,
                 };
 
                 await _workerRepository.AddAsync(worker);

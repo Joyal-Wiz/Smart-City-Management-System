@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using SmartCity.Application.DTOs;
 using SmartCity.Domain.Entities; 
 using System.Collections.Generic;
 
@@ -6,7 +7,8 @@ using System.Collections.Generic;
 
 namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
 {
-    public class GetPendingWorkersQuery : IRequest<List<Worker>>
+
+    public class GetPendingWorkersQuery : IRequest<List<WorkerDto>>
     {
     }
 }

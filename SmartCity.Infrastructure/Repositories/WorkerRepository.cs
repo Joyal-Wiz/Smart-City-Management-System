@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmartCity.Domain.Entities;
+using SmartCity.Domain.Enums;
 using SmartCity.Domain.Interfaces;
 using SmartCity.Infrastructure.Persistence;
 using System;
@@ -17,12 +18,17 @@ namespace SmartCity.Infrastructure.Repositories
         {
             _context = context;
         }
-
-        // ✅ Get Pending Workers
         public async Task<List<Worker>> GetPendingWorkersAsync()
         {
             return await _context.Workers
-                .Where(w => w.Status == "Pending")
+                .Where(w => w.Status == WorkerStatus.Pending)
+                .ToListAsync();
+        }
+
+        public async Task<List<Worker>> GetAvailableWorkersAsync()
+        {
+            return await _context.Workers
+                .Where(w => w.IsAvailable && w.Status == WorkerStatus.Approved)
                 .ToListAsync();
         }
 
@@ -39,13 +45,6 @@ namespace SmartCity.Infrastructure.Repositories
             await _context.SaveChangesAsync();
         }
 
-        // ✅ Get Available Workers
-        public async Task<List<Worker>> GetAvailableWorkersAsync()
-        {
-            return await _context.Workers
-                .Where(w => w.IsAvailable && w.Status == "Approved")
-                .ToListAsync();
-        }
         public async Task AddAsync(Worker worker)
         {
             await _context.Workers.AddAsync(worker);

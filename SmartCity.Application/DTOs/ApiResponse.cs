@@ -12,23 +12,14 @@ namespace SmartCity.Application.DTOs
         public string Message { get; set; }
         public T Data { get; set; }
 
-        public static ApiResponse<T> SuccessResponse(string message, T data = default)
+        public static ApiResponse<T> SuccessResponse(string message, T data)
         {
-            return new ApiResponse<T>
-            {
-                Success = true,
-                Message = message,
-                Data = data
-            };
+            return new ApiResponse<T> { Success = true, Message = message, Data = data };
         }
 
         public static ApiResponse<T> FailResponse(string message)
         {
-            return new ApiResponse<T>
-            {
-                Success = false,
-                Message = message
-            };
+            return new ApiResponse<T> { Success = false, Message = message };
         }
     }
 }

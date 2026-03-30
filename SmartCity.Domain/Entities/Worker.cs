@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SmartCity.Domain.Enums;
+using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -10,7 +11,6 @@ namespace SmartCity.Domain.Entities
         public string Name { get; set; }
 
         public bool IsAvailable { get; set; } = true;
-        public string Status { get; set; } = "Pending";
-
+        public WorkerStatus Status { get; set; } = WorkerStatus.Pending;
     }
 }
