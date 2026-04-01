@@ -32,13 +32,11 @@ namespace SmartCity.Infrastructure.Repositories
                 .ToListAsync();
         }
 
-        // ✅ Get By Id
         public async Task<Worker> GetByIdAsync(Guid id)
         {
             return await _context.Workers.FindAsync(id);
         }
 
-        // ✅ Update Worker
         public async Task UpdateAsync(Worker worker)
         {
             _context.Workers.Update(worker);
@@ -49,6 +47,25 @@ namespace SmartCity.Infrastructure.Repositories
         {
             await _context.Workers.AddAsync(worker);
             await _context.SaveChangesAsync();
+        }
+        public async Task<List<Worker>> GetAllAsync()
+        {
+            return await _context.Workers.ToListAsync();
+        }
+
+        public async Task<(List<Worker> Workers, int TotalCount)> GetPendingWorkersPagedAsync(int pageNumber, int pageSize)
+        {
+            var query = _context.Workers
+                .Where(w => w.Status == WorkerStatus.Pending);
+
+            var totalCount = await query.CountAsync();
+
+            var workers = await query
+                .Skip((pageNumber - 1) * pageSize)
+                .Take(pageSize)
+                .ToListAsync();
+
+            return (workers, totalCount);
         }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
+using SmartCity.Application.Features.Workers.Commands.RejectWorker;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 
 namespace SmartCity.API.Controllers
@@ -21,7 +22,7 @@ namespace SmartCity.API.Controllers
 
         [Authorize(Roles = "Admin")] 
         [HttpGet("workers/pending")]
-        public async Task<IActionResult> GetPendingWorkers()
+        public async Task<IActionResult> GetPendingWorkers([FromQuery] GetPendingWorkersQuery query)
         {
             var result = await _mediator.Send(new GetPendingWorkersQuery());
             return Ok(result);
@@ -38,6 +39,16 @@ namespace SmartCity.API.Controllers
 
             return Ok(result);
         }
+
+        [Authorize(Roles = "Admin")]
+        [HttpPost("reject")]
+        public async Task<IActionResult> RejectWorker([FromBody] RejectWorkerCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return result.Success ? Ok(result) : BadRequest(result);
+        }
+
         [Authorize(Roles = "Admin")]
         [HttpPost("issues/assign")]
         public async Task<IActionResult> AssignIssue([FromBody] AssignIssueCommand command)

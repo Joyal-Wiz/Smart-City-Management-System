@@ -4,7 +4,8 @@ using SmartCity.Domain.Interfaces;
 
 namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
 {
-    public class GetPendingWorkersHandler : IRequestHandler<GetPendingWorkersQuery, List<WorkerDto>>
+    public class GetPendingWorkersHandler
+        : IRequestHandler<GetPendingWorkersQuery, ApiResponse<PagedResult<WorkerDto>>>
     {
         private readonly IWorkerRepository _workerRepository;
 
@@ -13,17 +14,36 @@ namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
             _workerRepository = workerRepository;
         }
 
-        public async Task<List<WorkerDto>> Handle(GetPendingWorkersQuery request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<PagedResult<WorkerDto>>> Handle(
+            GetPendingWorkersQuery request,
+            CancellationToken cancellationToken)
         {
-            var workers = await _workerRepository.GetPendingWorkersAsync();
+            // ✅ Safe pagination
+            var pageNumber = request.PageNumber < 1 ? 1 : request.PageNumber;
+            var pageSize = request.PageSize < 1 ? 10 : request.PageSize;
 
-            return workers.Select(w => new WorkerDto
+            var (workers, totalCount) = await _workerRepository
+                .GetPendingWorkersPagedAsync(pageNumber, pageSize);
+
+            var workerDtos = workers.Select(w => new WorkerDto
             {
                 Id = w.Id,
                 Name = w.Name,
                 IsAvailable = w.IsAvailable,
                 Status = w.Status.ToString()
             }).ToList();
+
+            var result = new PagedResult<WorkerDto>
+            {
+                Items = workerDtos,
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalCount = totalCount
+            };
+
+            return ApiResponse<PagedResult<WorkerDto>>.SuccessResponse(
+                "Pending workers fetched successfully",
+                result);
         }
     }
 }
