@@ -1,12 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SmartCity.Domain.Enums;
 using SmartCity.Domain.ValueObjects;
 
 namespace SmartCity.Domain.Entities
 {
-
     public class Issue
     {
         public Guid Id { get; set; }
@@ -26,12 +23,16 @@ namespace SmartCity.Domain.Entities
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public DateTime? ResolvedAt { get; private set; }
+
         public string? ImagePath { get; set; }
 
         public void AssignWorker(Guid workerId)
         {
             if (Status != IssueStatus.Reported)
-                throw new Exception("Issue must be in Reported state");
+                throw new InvalidOperationException("Issue must be in Reported state to assign");
+
+            if (AssignedWorkerId != null)
+                throw new InvalidOperationException("Issue is already assigned");
 
             AssignedWorkerId = workerId;
             Status = IssueStatus.Assigned;
@@ -40,7 +41,7 @@ namespace SmartCity.Domain.Entities
         public void StartProgress()
         {
             if (Status != IssueStatus.Assigned)
-                throw new Exception("Issue must be assigned first");
+                throw new InvalidOperationException("Issue must be assigned first");
 
             Status = IssueStatus.InProgress;
         }
@@ -48,7 +49,7 @@ namespace SmartCity.Domain.Entities
         public void MarkResolved()
         {
             if (Status != IssueStatus.InProgress)
-                throw new Exception("Issue must be in progress");
+                throw new InvalidOperationException("Issue must be in progress");
 
             Status = IssueStatus.Resolved;
             ResolvedAt = DateTime.UtcNow;

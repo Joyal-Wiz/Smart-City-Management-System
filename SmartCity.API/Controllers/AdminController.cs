@@ -49,8 +49,8 @@ namespace SmartCity.API.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
+        [HttpPost("assign")]
         [Authorize(Roles = "Admin")]
-        [HttpPost("issues/assign")]
         public async Task<IActionResult> AssignIssue([FromBody] AssignIssueCommand command)
         {
             var result = await _mediator.Send(command);
