@@ -10,6 +10,7 @@ namespace SmartCity.Domain.Enums
         Assigned,
         InProgress,
         Resolved,
-        Closed
+        Closed,
+        Rejected,
     }
 }

@@ -6,9 +6,11 @@ namespace SmartCity.Domain.Entities
     {
         public Guid Id { get; private set; }
 
-        public Guid IssueId { get; private set; }
+        public Issue Issue { get; set; }
 
-        public Guid WorkerId { get; private set; }
+        public Guid IssueId { get; set; }
+        public Guid WorkerId { get; set; }
+        public Worker Worker { get; set; } 
 
         public DateTime Deadline { get; private set; }
 
@@ -16,7 +18,7 @@ namespace SmartCity.Domain.Entities
 
         public DateTime AssignedAt { get; private set; }
 
-        public Guid AssignedBy { get; private set; } 
+        public Guid AssignedBy { get; private set; }
 
         private IssueAssignment() { }
 

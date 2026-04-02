@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
+using SmartCity.Application.Features.Workers.DTOs;
 using SmartCity.Domain.Interfaces;
 
 namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
@@ -18,7 +19,6 @@ namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
             GetPendingWorkersQuery request,
             CancellationToken cancellationToken)
         {
-            // ✅ Safe pagination
             var pageNumber = request.PageNumber < 1 ? 1 : request.PageNumber;
             var pageSize = request.PageSize < 1 ? 10 : request.PageSize;
 
@@ -28,9 +28,10 @@ namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
             var workerDtos = workers.Select(w => new WorkerDto
             {
                 Id = w.Id,
-                Name = w.Name,
-                IsAvailable = w.IsAvailable,
-                Status = w.Status.ToString()
+                Name = w.User.Name,
+                Email = w.User.Email,
+                Status = w.Status,
+                IsAvailable = w.IsAvailable
             }).ToList();
 
             var result = new PagedResult<WorkerDto>

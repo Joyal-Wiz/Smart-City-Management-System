@@ -23,13 +23,11 @@ namespace SmartCity.Application.Features.Auth.Commands.RefreshToken
             var storedToken = await _context.RefreshTokens
                 .FirstOrDefaultAsync(x => x.Token == request.RefreshToken, cancellationToken);
 
-            // ❌ Invalid token
             if (storedToken == null || storedToken.IsRevoked || storedToken.ExpiryDate < DateTime.UtcNow)
             {
                 return ApiResponse<LoginResponseDto>.FailResponse("Invalid or expired refresh token");
             }
 
-            // ✅ Get user
             var user = await _context.Users.FindAsync(new object[] { storedToken.UserId }, cancellationToken);
 
             if (user == null)
@@ -37,7 +35,6 @@ namespace SmartCity.Application.Features.Auth.Commands.RefreshToken
                 return ApiResponse<LoginResponseDto>.FailResponse("User not found");
             }
 
-            // 🔐 Generate new access token
             var newAccessToken = _jwtService.GenerateToken(user);
 
             var response = new LoginResponseDto

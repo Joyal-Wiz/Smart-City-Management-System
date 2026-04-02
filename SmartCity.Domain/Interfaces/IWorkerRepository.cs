@@ -18,6 +18,8 @@ namespace SmartCity.Domain.Interfaces
         Task<List<Worker>> GetPendingWorkersAsync();
 
         Task<List<Worker>> GetAllAsync();
+        IQueryable<Worker> GetQueryable();
+        Task<Worker?> GetByUserIdAsync(Guid userId);
 
         Task<(List<Worker> Workers, int TotalCount)> GetPendingWorkersPagedAsync(int pageNumber, int pageSize);
 

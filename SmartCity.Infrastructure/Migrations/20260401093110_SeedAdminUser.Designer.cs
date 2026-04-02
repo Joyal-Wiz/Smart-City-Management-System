@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmartCity.Infrastructure.Persistence;
 
@@ -11,9 +12,11 @@ using SmartCity.Infrastructure.Persistence;
 namespace SmartCity.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20260401093110_SeedAdminUser")]
+    partial class SeedAdminUser
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -44,14 +47,8 @@ namespace SmartCity.Infrastructure.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("RejectionReason")
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
-
-                    b.Property<string>("ResolvedImagePath")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -222,21 +219,11 @@ namespace SmartCity.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartCity.Domain.Entities.IssueAssignment", b =>
                 {
-                    b.HasOne("SmartCity.Domain.Entities.Issue", "Issue")
-                        .WithMany("Assignments")
+                    b.HasOne("SmartCity.Domain.Entities.Issue", null)
+                        .WithMany()
                         .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("SmartCity.Domain.Entities.Worker", "Worker")
-                        .WithMany("Assignments")
-                        .HasForeignKey("WorkerId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Issue");
-
-                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("SmartCity.Domain.Entities.Worker", b =>
@@ -248,16 +235,6 @@ namespace SmartCity.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
-                });
-
-            modelBuilder.Entity("SmartCity.Domain.Entities.Issue", b =>
-                {
-                    b.Navigation("Assignments");
-                });
-
-            modelBuilder.Entity("SmartCity.Domain.Entities.Worker", b =>
-                {
-                    b.Navigation("Assignments");
                 });
 #pragma warning restore 612, 618
         }

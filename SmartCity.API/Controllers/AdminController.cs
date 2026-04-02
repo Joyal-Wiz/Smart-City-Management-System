@@ -2,9 +2,12 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
+using SmartCity.Application.Features.Issues.Queries.GetAllIssues;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
+using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 
 namespace SmartCity.API.Controllers
@@ -18,6 +21,26 @@ namespace SmartCity.API.Controllers
         public AdminController(IMediator mediator)
         {
             _mediator = mediator;
+        }
+
+        [Authorize(Roles = "Admin")]
+        [HttpGet("workers")]
+        public async Task<IActionResult> GetAllWorkers(
+        [FromQuery] int pageNumber = 1,
+        [FromQuery] int pageSize = 10)
+        {
+            var query = new GetAllWorkersQuery
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize
+            };
+
+            var result = await _mediator.Send(query);
+
+            if (!result.Success)
+                return BadRequest(result);
+
+            return Ok(result);
         }
 
         [Authorize(Roles = "Admin")] 
@@ -41,7 +64,7 @@ namespace SmartCity.API.Controllers
         }
 
         [Authorize(Roles = "Admin")]
-        [HttpPost("reject")]
+        [HttpPost("workers/reject")]
         public async Task<IActionResult> RejectWorker([FromBody] RejectWorkerCommand command)
         {
             var result = await _mediator.Send(command);
@@ -49,7 +72,22 @@ namespace SmartCity.API.Controllers
             return result.Success ? Ok(result) : BadRequest(result);
         }
 
-        [HttpPost("assign")]
+        [Authorize(Roles = "Admin")]
+        [HttpGet("issues")]
+        public async Task<IActionResult> GetAllIssues(
+    [FromQuery] GetAllIssuesQuery query)
+        {
+            var result = await _mediator.Send(query);
+
+            return Ok(new ApiResponse<object>
+            {
+                Success = true,
+                Message = "Issues fetched successfully",
+                Data = result
+            });
+        }
+
+        [HttpPost("issues/assign")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> AssignIssue([FromBody] AssignIssueCommand command)
         {

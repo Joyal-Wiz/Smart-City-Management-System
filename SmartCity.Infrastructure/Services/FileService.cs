@@ -1,32 +1,47 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using SmartCity.Application.Interfaces;
 
-
 namespace SmartCity.Infrastructure.Services
 {
- 
-
     public class FileService : IFileService
     {
-        private readonly string _uploadPath = "Uploads";
+        private readonly IWebHostEnvironment _environment;
+
+        public FileService(IWebHostEnvironment environment)
+        {
+            _environment = environment;
+        }
 
         public async Task<string> SaveFileAsync(IFormFile file)
         {
-            if (!Directory.Exists(_uploadPath))
-                Directory.CreateDirectory(_uploadPath);
+            if (file == null || file.Length == 0)
+                throw new Exception("Invalid file");
 
-            var fileName = Guid.NewGuid() + Path.GetExtension(file.FileName);
-            var filePath = Path.Combine(_uploadPath, fileName);
+            var allowedExtensions = new[] { ".jpg", ".jpeg", ".png" };
+            var extension = Path.GetExtension(file.FileName).ToLower();
+
+            if (!allowedExtensions.Contains(extension))
+                throw new Exception("Only JPG and PNG images are allowed");
+
+            
+            if (file.Length > 5 * 1024 * 1024)
+                throw new Exception("File size exceeds 5MB");
+
+            
+            var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads", "issues");
+
+            if (!Directory.Exists(uploadsFolder))
+                Directory.CreateDirectory(uploadsFolder);
+
+            var fileName = Guid.NewGuid() + extension;
+            var filePath = Path.Combine(uploadsFolder, fileName);
 
             using var stream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(stream);
 
-            return filePath;
+          
+            return $"uploads/issues/{fileName}";
         }
     }
 }

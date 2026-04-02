@@ -5,9 +5,12 @@ namespace SmartCity.Application.Interfaces
 {
     public interface IApplicationDbContext
     {
+        DbSet<Issue> Issues { get; }
+        DbSet<Worker> Workers { get; }
+        DbSet<IssueAssignment> IssueAssignments { get; }
+        DbSet<User> Users { get; }
         DbSet<RefreshToken> RefreshTokens { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
-        DbSet<User> Users { get; }
     }
 }

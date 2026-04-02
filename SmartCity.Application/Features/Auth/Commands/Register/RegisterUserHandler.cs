@@ -25,12 +25,12 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
             _workerRepository = workerRepository;
         }
 
-        public async Task<ApiResponse<RegisterResponseDto>> Handle(RegisterUserCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<RegisterResponseDto>> Handle(
+            RegisterUserCommand request,
+            CancellationToken cancellationToken)
         {
-            // 🔹 Normalize email
             var email = request.Email.Trim().ToLower();
 
-            // 🔹 Check if user exists
             var existingUser = await _userRepository.GetByEmailAsync(email);
 
             if (existingUser != null)
@@ -38,7 +38,6 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
                 return ApiResponse<RegisterResponseDto>.FailResponse("Email already registered");
             }
 
-            // 🔹 Create User
             var user = new User
             {
                 Id = Guid.NewGuid(),
@@ -51,21 +50,22 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
 
             await _userRepository.AddAsync(user);
 
-            // 🔥 Create Worker (if selected)
             if (user.Role == UserRole.Worker)
             {
                 var worker = new Worker
                 {
                     Id = Guid.NewGuid(),
-                    Name = user.Name,
-                    IsAvailable = false,
+
+                    UserId = user.Id,
+
                     Status = WorkerStatus.Pending,
+
+                    IsAvailable = false
                 };
 
                 await _workerRepository.AddAsync(worker);
             }
 
-            // ✅ Return structured response
             return ApiResponse<RegisterResponseDto>.SuccessResponse(
                 "User registered successfully",
                 new RegisterResponseDto

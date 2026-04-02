@@ -36,6 +36,11 @@ namespace SmartCity.Infrastructure.Repositories
         {
             return await _context.Workers.FindAsync(id);
         }
+        public async Task<Worker?> GetByUserIdAsync(Guid userId)
+        {
+            return await _context.Workers
+                .FirstOrDefaultAsync(w => w.UserId == userId);
+        }
 
         public async Task UpdateAsync(Worker worker)
         {
@@ -53,9 +58,10 @@ namespace SmartCity.Infrastructure.Repositories
             return await _context.Workers.ToListAsync();
         }
 
-        public async Task<(List<Worker> Workers, int TotalCount)> GetPendingWorkersPagedAsync(int pageNumber, int pageSize)
+        public async Task<(List<Worker>, int)> GetPendingWorkersPagedAsync(int pageNumber, int pageSize)
         {
             var query = _context.Workers
+                .Include(w => w.User) 
                 .Where(w => w.Status == WorkerStatus.Pending);
 
             var totalCount = await query.CountAsync();
@@ -66,6 +72,10 @@ namespace SmartCity.Infrastructure.Repositories
                 .ToListAsync();
 
             return (workers, totalCount);
+        }
+        public IQueryable<Worker> GetQueryable()
+        {
+            return _context.Workers.AsQueryable();
         }
     }
 }
