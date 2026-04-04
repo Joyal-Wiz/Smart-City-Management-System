@@ -19,6 +19,7 @@ namespace SmartCity.Domain.Entities
         public DateTime AssignedAt { get; private set; }
 
         public Guid AssignedBy { get; private set; }
+        public bool IsDeadlineNotified { get; set; } = false;
 
         private IssueAssignment() { }
 

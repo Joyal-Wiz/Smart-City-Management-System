@@ -1,7 +1,6 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Auth.Commands.DTOs;
-using SmartCity.Application.Features.Auth.DTOs;
 using SmartCity.Application.Interfaces;
 using SmartCity.Domain.Entities;
 using SmartCity.Domain.Enums;
@@ -14,15 +13,18 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IWorkerRepository _workerRepository;
+        private readonly INotificationService _notificationService; // 🔥 ADD
 
         public RegisterUserHandler(
             IUserRepository userRepository,
             IPasswordHasher passwordHasher,
-            IWorkerRepository workerRepository)
+            IWorkerRepository workerRepository,
+            INotificationService notificationService) // 🔥 ADD
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
             _workerRepository = workerRepository;
+            _notificationService = notificationService; // 🔥 ADD
         }
 
         public async Task<ApiResponse<RegisterResponseDto>> Handle(
@@ -50,20 +52,26 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
 
             await _userRepository.AddAsync(user);
 
+            // 🔥 WORKER CREATION
             if (user.Role == UserRole.Worker)
             {
                 var worker = new Worker
                 {
                     Id = Guid.NewGuid(),
-
                     UserId = user.Id,
-
                     Status = WorkerStatus.Pending,
-
                     IsAvailable = false
                 };
 
                 await _workerRepository.AddAsync(worker);
+
+                // 🔥 ADD NOTIFICATION (IMPORTANT)
+                await _notificationService.CreateAsync(
+                    "New Worker Registered",
+                    $"Worker {user.Name} has registered and is waiting for approval",
+                    "Worker",
+                    worker.Id
+                );
             }
 
             return ApiResponse<RegisterResponseDto>.SuccessResponse(

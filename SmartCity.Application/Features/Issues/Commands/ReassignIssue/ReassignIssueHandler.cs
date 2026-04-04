@@ -12,15 +12,18 @@ namespace SmartCity.Application.Features.Issues.Commands.ReassignIssue
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUser;
         private readonly ILogger<ReassignIssueHandler> _logger;
+        private readonly INotificationService _notificationService; // 🔥 ADD
 
         public ReassignIssueHandler(
             IApplicationDbContext context,
             ICurrentUserService currentUser,
-            ILogger<ReassignIssueHandler> logger)
+            ILogger<ReassignIssueHandler> logger,
+            INotificationService notificationService) // 🔥 ADD
         {
             _context = context;
             _currentUser = currentUser;
             _logger = logger;
+            _notificationService = notificationService; // 🔥 ADD
         }
 
         public async Task<bool> Handle(
@@ -68,6 +71,14 @@ namespace SmartCity.Application.Features.Issues.Commands.ReassignIssue
             issue.ReassignWorker(request.WorkerId);
 
             await _context.SaveChangesAsync(cancellationToken);
+
+            // 🔥 ADD NOTIFICATION (IMPORTANT)
+            await _notificationService.CreateAsync(
+                "Issue Reassigned",
+                $"Issue has been reassigned to a new worker (WorkerId: {request.WorkerId})",
+                "Issue",
+                request.IssueId
+            );
 
             _logger.LogInformation("Issue {IssueId} reassigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);

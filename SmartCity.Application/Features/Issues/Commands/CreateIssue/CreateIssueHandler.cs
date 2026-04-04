@@ -12,18 +12,23 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
         private readonly IIssueRepository _issueRepository;
         private readonly IFileService _fileService;
         private readonly ICurrentUserService _currentUser;
+        private readonly INotificationService _notificationService;
 
         public CreateIssueHandler(
             IIssueRepository issueRepository,
             IFileService fileService,
-            ICurrentUserService currentUser)
+            ICurrentUserService currentUser,
+            INotificationService notificationService)
         {
             _issueRepository = issueRepository;
             _fileService = fileService;
             _currentUser = currentUser;
+            _notificationService = notificationService; // ✅ FIXED
         }
 
-        public async Task<ApiResponse<Guid>> Handle(CreateIssueCommand request, CancellationToken cancellationToken)
+        public async Task<ApiResponse<Guid>> Handle(
+            CreateIssueCommand request,
+            CancellationToken cancellationToken)
         {
             var location = new Location(request.Latitude, request.Longitude);
 
@@ -46,7 +51,18 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
 
             await _issueRepository.AddAsync(issue);
 
-            return ApiResponse<Guid>.SuccessResponse("Issue created successfully", issue.Id);
+            // 🔥 ADD NOTIFICATION (IMPORTANT)
+            await _notificationService.CreateAsync(
+                "New Issue Reported",
+                $"A new issue has been reported: {issue.Description}",
+                "Issue",
+                issue.Id
+            );
+
+            return ApiResponse<Guid>.SuccessResponse(
+                "Issue created successfully",
+                issue.Id
+            );
         }
     }
 }

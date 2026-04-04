@@ -16,19 +16,22 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
         private readonly IIssueAssignmentRepository _assignmentRepository;
         private readonly ICurrentUserService _currentUser;
         private readonly ILogger<AssignIssueHandler> _logger;
+        private readonly INotificationService _notificationService; // 🔥 ADD
 
         public AssignIssueHandler(
             IIssueRepository issueRepository,
             IWorkerRepository workerRepository,
             IIssueAssignmentRepository assignmentRepository,
             ICurrentUserService currentUser,
-            ILogger<AssignIssueHandler> logger)
+            ILogger<AssignIssueHandler> logger,
+            INotificationService notificationService) // 🔥 ADD
         {
             _issueRepository = issueRepository;
             _workerRepository = workerRepository;
             _assignmentRepository = assignmentRepository;
             _currentUser = currentUser;
             _logger = logger;
+            _notificationService = notificationService; // 🔥 ADD
         }
 
         public async Task<ApiResponse<AssignIssueResponseDto>> Handle(
@@ -87,6 +90,14 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
 
             await _issueRepository.UpdateAsync(issue);
             await _assignmentRepository.AddAsync(assignment);
+
+            // 🔥 ADD NOTIFICATION (IMPORTANT)
+            await _notificationService.CreateAsync(
+                "Issue Assigned",
+                $"Issue assigned to worker with ID: {request.WorkerId}",
+                "Issue",
+                request.IssueId
+            );
 
             _logger.LogInformation("Issue {IssueId} successfully assigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);

@@ -24,15 +24,24 @@ namespace SmartCity.Infrastructure.Services
             if (!allowedExtensions.Contains(extension))
                 throw new Exception("Only JPG and PNG images are allowed");
 
-            
             if (file.Length > 5 * 1024 * 1024)
                 throw new Exception("File size exceeds 5MB");
 
-            
-            var uploadsFolder = Path.Combine(_environment.WebRootPath, "uploads", "issues");
+            // 🔥 FIX: Handle null WebRootPath
+            var rootPath = _environment.WebRootPath;
 
+            if (string.IsNullOrEmpty(rootPath))
+            {
+                rootPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot");
+            }
+
+            var uploadsFolder = Path.Combine(rootPath, "uploads", "issues");
+
+            // 🔥 Ensure folder exists
             if (!Directory.Exists(uploadsFolder))
+            {
                 Directory.CreateDirectory(uploadsFolder);
+            }
 
             var fileName = Guid.NewGuid() + extension;
             var filePath = Path.Combine(uploadsFolder, fileName);
@@ -40,7 +49,7 @@ namespace SmartCity.Infrastructure.Services
             using var stream = new FileStream(filePath, FileMode.Create);
             await file.CopyToAsync(stream);
 
-          
+            // 🔥 Return relative path (for API usage)
             return $"uploads/issues/{fileName}";
         }
     }

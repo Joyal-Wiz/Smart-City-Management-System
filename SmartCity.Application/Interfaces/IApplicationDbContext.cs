@@ -10,6 +10,7 @@ namespace SmartCity.Application.Interfaces
         DbSet<IssueAssignment> IssueAssignments { get; }
         DbSet<User> Users { get; }
         DbSet<RefreshToken> RefreshTokens { get; }
+        DbSet<Notification> Notifications { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken);
     }

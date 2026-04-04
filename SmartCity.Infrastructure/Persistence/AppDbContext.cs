@@ -17,6 +17,7 @@ namespace SmartCity.Infrastructure.Persistence
         public DbSet<Worker> Workers { get; set; }
         public DbSet<RefreshToken> RefreshTokens { get; set; }
         public DbSet<IssueAssignment> IssueAssignments { get; set; }
+        public DbSet<Notification> Notifications { get; set; }
 
         public override Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
             => base.SaveChangesAsync(cancellationToken);

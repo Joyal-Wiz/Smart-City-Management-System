@@ -11,15 +11,18 @@ namespace SmartCity.Application.Features.Issues.Commands.RejectIssue
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUser;
         private readonly ILogger<RejectIssueHandler> _logger;
+        private readonly INotificationService _notificationService; // 🔥 ADD
 
         public RejectIssueHandler(
             IApplicationDbContext context,
             ICurrentUserService currentUser,
-            ILogger<RejectIssueHandler> logger)
+            ILogger<RejectIssueHandler> logger,
+            INotificationService notificationService) // 🔥 ADD
         {
             _context = context;
             _currentUser = currentUser;
             _logger = logger;
+            _notificationService = notificationService; // 🔥 ADD
         }
 
         public async Task<bool> Handle(
@@ -63,12 +66,25 @@ namespace SmartCity.Application.Features.Issues.Commands.RejectIssue
                 throw new InvalidOperationException("Cannot reject a resolved issue");
             }
 
+            // 🔥 DOMAIN ACTION
             issue.MarkAsRejected(request.Reason);
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            _logger.LogInformation("Issue {IssueId} rejected by WorkerId: {WorkerId} with reason: {Reason}",
-                request.IssueId, worker.Id, request.Reason);
+            // 🔥 ADD NOTIFICATION (IMPORTANT)
+            await _notificationService.CreateAsync(
+                "Issue Rejected",
+                $"Issue rejected by worker. Reason: {request.Reason}",
+                "Issue",
+                request.IssueId
+            );
+
+            _logger.LogInformation(
+                "Issue {IssueId} rejected by WorkerId: {WorkerId} with reason: {Reason}",
+                request.IssueId,
+                worker.Id,
+                request.Reason
+            );
 
             return true;
         }

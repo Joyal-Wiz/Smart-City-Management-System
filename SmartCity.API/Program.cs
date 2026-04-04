@@ -43,6 +43,8 @@ builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 builder.Services.AddScoped<IIssueAssignmentRepository, IssueAssignmentRepository>();
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
+builder.Services.AddScoped<INotificationService, NotificationService>();
+builder.Services.AddHostedService<DeadlineCheckerService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

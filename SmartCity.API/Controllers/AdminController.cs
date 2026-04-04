@@ -2,14 +2,17 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
 using SmartCity.Application.Features.Issues.Commands.ReassignIssue;
 using SmartCity.Application.Features.Issues.Queries.GetAllIssues;
+using SmartCity.Application.Features.Notifications.Commands.MarkAsRead;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
+using SmartCity.Application.Interfaces;
 
 namespace SmartCity.API.Controllers
 {
@@ -18,10 +21,39 @@ namespace SmartCity.API.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IMediator _mediator;
+        private readonly IApplicationDbContext _context; // 🔥 ADD THIS
 
-        public AdminController(IMediator mediator)
+
+        public AdminController(IMediator mediator, IApplicationDbContext context)
         {
             _mediator = mediator;
+            _context = context; 
+
+        }
+
+        [HttpGet("notifications")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetNotifications()
+        {
+            var notifications = await _context.Notifications
+                .OrderByDescending(n => n.CreatedAt)
+                .ToListAsync();
+
+            return Ok(notifications);
+        }
+
+        [HttpPost("notifications/read")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> MarkAsRead([FromBody] MarkNotificationAsReadCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(new ApiResponse<object>
+            {
+                Success = true,
+                Message = "Notification marked as read",
+                Data = result
+            });
         }
 
         [Authorize(Roles = "Admin")]
