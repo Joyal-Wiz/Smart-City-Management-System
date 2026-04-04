@@ -1,0 +1,158 @@
+2026-04-04 12:07:42.813 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-04 12:07:42.893 +05:30 [INF] Creating key {5db236f4-97d8-498e-ad4a-31dc4de0b777} with creation date 2026-04-04 06:37:42Z, activation date 2026-04-06 06:16:42Z, and expiration date 2026-07-03 06:37:42Z.
+2026-04-04 12:07:42.906 +05:30 [INF] Writing data to file 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys\key-5db236f4-97d8-498e-ad4a-31dc4de0b777.xml'.
+2026-04-04 12:07:42.983 +05:30 [WRN] The WebRootPath was not found: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\wwwroot. Static files may be unavailable.
+2026-04-04 12:07:43.130 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-04 12:07:43.134 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-04 12:07:43.228 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-04 12:07:43.230 +05:30 [INF] Hosting environment: Development
+2026-04-04 12:07:43.231 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-04 12:27:02.883 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-04 12:27:02.964 +05:30 [WRN] The WebRootPath was not found: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\wwwroot. Static files may be unavailable.
+2026-04-04 12:27:03.097 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-04 12:27:03.101 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-04 12:27:03.164 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-04 12:27:03.168 +05:30 [INF] Hosting environment: Development
+2026-04-04 12:27:03.168 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-04 12:27:12.959 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-04 12:27:13.266 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 322.0043ms
+2026-04-04 12:27:13.363 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-04 12:27:13.363 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-04 12:27:13.386 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 23.5535ms
+2026-04-04 12:27:13.455 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 91.5207ms
+2026-04-04 12:27:13.506 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-04 12:27:13.561 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 54.6535ms
+2026-04-04 12:29:21.884 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/auth/login - application/json 63
+2026-04-04 12:29:22.047 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-04 12:29:22.102 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginCommand) on controller SmartCity.API.Controllers.AuthController (SmartCity.API).
+2026-04-04 12:29:24.865 +05:30 [INF] Executed DbCommand (90ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-04-04 12:29:25.236 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [RefreshTokens] ([Id], [CreatedAt], [ExpiryDate], [IsRevoked], [Token], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-04-04 12:29:25.276 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.Features.Auth.DTOs.LoginResponseDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-04 12:29:25.289 +05:30 [INF] Executed action SmartCity.API.Controllers.AuthController.Login (SmartCity.API) in 3175.6617ms
+2026-04-04 12:29:25.292 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-04 12:29:25.303 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/auth/login - 200 null application/json; charset=utf-8 3418.5436ms
+2026-04-04 12:29:53.207 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/auth/login - application/json 57
+2026-04-04 12:29:53.299 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-04 12:29:53.305 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginCommand) on controller SmartCity.API.Controllers.AuthController (SmartCity.API).
+2026-04-04 12:29:53.384 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-04-04 12:29:53.394 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [RefreshTokens] ([Id], [CreatedAt], [ExpiryDate], [IsRevoked], [Token], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-04-04 12:29:53.398 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.Features.Auth.DTOs.LoginResponseDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-04 12:29:53.399 +05:30 [INF] Executed action SmartCity.API.Controllers.AuthController.Login (SmartCity.API) in 90.3375ms
+2026-04-04 12:29:53.401 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-04 12:29:53.402 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/auth/login - 200 null application/json; charset=utf-8 205.7393ms
+2026-04-04 12:30:17.303 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/workers/reject - application/json 56
+2026-04-04 12:30:17.338 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-04-04 12:30:17.348 +05:30 [INF] AuthenticationScheme: Bearer was forbidden.
+2026-04-04 12:30:17.353 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/workers/reject - 403 0 null 55.5208ms
+2026-04-04 12:30:23.498 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - null null
+2026-04-04 12:30:23.509 +05:30 [INF] Authorization failed. These requirements were not met:
+RolesAuthorizationRequirement:User.IsInRole must be true for one of the following roles: (Admin)
+2026-04-04 12:30:23.513 +05:30 [INF] AuthenticationScheme: Bearer was forbidden.
+2026-04-04 12:30:23.516 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - 403 0 null 17.6796ms
+2026-04-04 12:30:45.153 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/worker/issues?pageNumber=1&pageSize=10 - null null
+2026-04-04 12:30:45.166 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API)'
+2026-04-04 12:30:45.189 +05:30 [INF] Route matched with {action = "GetMyIssues", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyIssues(Int32, Int32) on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-04 12:30:45.270 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id]
+FROM [Workers] AS [w]
+WHERE [w].[UserId] = @__userId_0
+2026-04-04 12:30:45.468 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__workerId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Issues] AS [i]
+INNER JOIN [IssueAssignments] AS [i0] ON [i].[Id] = [i0].[IssueId]
+WHERE [i0].[WorkerId] = @__workerId_0
+2026-04-04 12:30:45.601 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[@__workerId_0='?' (DbType = Guid), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[Description], [i].[Location_Latitude], [i].[Location_Longitude], [i].[Status], [i0].[Deadline], [i0].[Salary], [i].[ImagePath], CASE
+    WHEN [i].[Status] = 6 THEN [i].[RejectionReason]
+    ELSE NULL
+END
+FROM [Issues] AS [i]
+INNER JOIN [IssueAssignments] AS [i0] ON [i].[Id] = [i0].[IssueId]
+WHERE [i0].[WorkerId] = @__workerId_0
+ORDER BY [i].[Id] DESC
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-04-04 12:30:45.620 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Workers.DTOs.WorkerIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-04 12:30:45.672 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API) in 475.5403ms
+2026-04-04 12:30:45.680 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API)'
+2026-04-04 12:30:45.685 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/worker/issues?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 532.2754ms
+2026-04-04 12:31:08.559 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/worker/issues?pageNumber=1&pageSize=10 - null null
+2026-04-04 12:31:08.574 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API)'
+2026-04-04 12:31:08.578 +05:30 [INF] Route matched with {action = "GetMyIssues", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyIssues(Int32, Int32) on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-04 12:31:08.596 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id]
+FROM [Workers] AS [w]
+WHERE [w].[UserId] = @__userId_0
+2026-04-04 12:31:08.617 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__workerId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Issues] AS [i]
+INNER JOIN [IssueAssignments] AS [i0] ON [i].[Id] = [i0].[IssueId]
+WHERE [i0].[WorkerId] = @__workerId_0
+2026-04-04 12:31:08.636 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__workerId_0='?' (DbType = Guid), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[Description], [i].[Location_Latitude], [i].[Location_Longitude], [i].[Status], [i0].[Deadline], [i0].[Salary], [i].[ImagePath], CASE
+    WHEN [i].[Status] = 6 THEN [i].[RejectionReason]
+    ELSE NULL
+END
+FROM [Issues] AS [i]
+INNER JOIN [IssueAssignments] AS [i0] ON [i].[Id] = [i0].[IssueId]
+WHERE [i0].[WorkerId] = @__workerId_0
+ORDER BY [i].[Id] DESC
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-04-04 12:31:08.643 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Workers.DTOs.WorkerIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-04 12:31:08.647 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API) in 64.5095ms
+2026-04-04 12:31:08.651 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API)'
+2026-04-04 12:31:08.654 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/worker/issues?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 96.0035ms
+2026-04-04 12:32:03.921 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/worker/issues/reject - application/json 78
+2026-04-04 12:32:03.953 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.RejectIssue (SmartCity.API)'
+2026-04-04 12:32:03.966 +05:30 [INF] Route matched with {action = "RejectIssue", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RejectIssue(SmartCity.Application.Features.Issues.Commands.RejectIssue.RejectIssueCommand) on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-04 12:32:04.015 +05:30 [INF] RejectIssue started for IssueId: "df585e67-531e-4edb-b282-ccc204b77fe3"
+2026-04-04 12:32:04.105 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__request_IssueId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[AssignedWorkerId], [t].[CreatedAt], [t].[CreatedByUserId], [t].[Description], [t].[ImagePath], [t].[RejectionReason], [t].[ResolvedAt], [t].[ResolvedImagePath], [t].[Status], [t].[Type], [t].[Location_Latitude], [t].[Location_Longitude], [i0].[Id], [i0].[AssignedAt], [i0].[AssignedBy], [i0].[Deadline], [i0].[IssueId], [i0].[Salary], [i0].[WorkerId]
+FROM (
+    SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+    FROM [Issues] AS [i]
+    WHERE [i].[Id] = @__request_IssueId_0
+) AS [t]
+LEFT JOIN [IssueAssignments] AS [i0] ON [t].[Id] = [i0].[IssueId]
+ORDER BY [t].[Id]
+2026-04-04 12:32:04.181 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@___currentUser_UserId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[UserId] = @___currentUser_UserId_0
+2026-04-04 12:32:04.217 +05:30 [WRN] Unauthorized reject attempt by WorkerId: "f24e514b-d52d-4857-8ee8-fafc51d91762" on IssueId: "df585e67-531e-4edb-b282-ccc204b77fe3"
+2026-04-04 12:32:04.435 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.RejectIssue (SmartCity.API) in 461.2517ms
+2026-04-04 12:32:04.441 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.RejectIssue (SmartCity.API)'
+2026-04-04 12:32:04.609 +05:30 [ERR] Unhandled exception occurred
+System.UnauthorizedAccessException: You are not assigned to this issue
+   at SmartCity.Application.Features.Issues.Commands.RejectIssue.RejectIssueHandler.Handle(RejectIssueCommand request, CancellationToken cancellationToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Application\Features\Issues\Commands\RejectIssue\RejectIssueHandler.cs:line 57
+   at SmartCity.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Application\Behaviors\ValidationBehavior.cs:line 44
+   at SmartCity.API.Controllers.WorkerController.RejectIssue(RejectIssueCommand command) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\Controllers\WorkerController.cs:line 72
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeInnerFilterAsync>g__Awaited|13_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SmartCity.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\Middlewares\ExceptionMiddleware.cs:line 25
+2026-04-04 12:32:04.718 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/worker/issues/reject - 401 null application/json 797.4044ms

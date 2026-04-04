@@ -3,6 +3,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Serilog;
 using SmartCity.API.Middleware;
 using SmartCity.API.Services;
 using SmartCity.Application.Behaviors;
@@ -15,7 +16,17 @@ using SmartCity.Infrastructure.Repositories;
 using SmartCity.Infrastructure.Services;
 using System.Text;
 
+
+Log.Logger = new LoggerConfiguration()
+    .MinimumLevel.Information()
+    .WriteTo.Console()
+    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .CreateLogger();
+
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Host.UseSerilog(); 
+
 
 // ✅ ADD SERVICES (BEFORE BUILD)
 builder.Services.AddValidatorsFromAssembly(typeof(RegisterUserValidator).Assembly);
@@ -114,6 +125,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseStaticFiles();
 app.UseHttpsRedirection();
+
+app.UseMiddleware<ExceptionMiddleware>();
 app.UseAuthentication();
 app.UseAuthorization();
 app.UseAuthorization();

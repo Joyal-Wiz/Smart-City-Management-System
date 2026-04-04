@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Logging;
 using SmartCity.Application.Interfaces;
+using SmartCity.Domain.Enums;
 
 namespace SmartCity.Application.Features.Issues.Commands.RejectIssue
 {
@@ -8,51 +10,67 @@ namespace SmartCity.Application.Features.Issues.Commands.RejectIssue
     {
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUser;
+        private readonly ILogger<RejectIssueHandler> _logger;
 
         public RejectIssueHandler(
             IApplicationDbContext context,
-            ICurrentUserService currentUser)
+            ICurrentUserService currentUser,
+            ILogger<RejectIssueHandler> logger)
         {
             _context = context;
             _currentUser = currentUser;
+            _logger = logger;
         }
 
         public async Task<bool> Handle(
             RejectIssueCommand request,
             CancellationToken cancellationToken)
         {
-            // 🔍 Get Issue with assignments
+            _logger.LogInformation("RejectIssue started for IssueId: {IssueId}", request.IssueId);
+
             var issue = await _context.Issues
                 .Include(i => i.Assignments)
                 .FirstOrDefaultAsync(i => i.Id == request.IssueId, cancellationToken);
 
             if (issue == null)
+            {
+                _logger.LogWarning("RejectIssue failed - Issue not found: {IssueId}", request.IssueId);
                 throw new Exception("Issue not found");
+            }
 
-            // 🔍 Get Worker from logged-in user
             var worker = await _context.Workers
                 .FirstOrDefaultAsync(w => w.UserId == _currentUser.UserId, cancellationToken);
 
             if (worker == null)
+            {
+                _logger.LogWarning("RejectIssue failed - Worker not found for UserId: {UserId}", _currentUser.UserId);
                 throw new UnauthorizedAccessException("Worker not found");
+            }
 
-            // 🔒 Validate assignment (CRITICAL SECURITY)
             var isAssigned = issue.Assignments
                 .Any(a => a.WorkerId == worker.Id);
 
             if (!isAssigned)
+            {
+                _logger.LogWarning("Unauthorized reject attempt by WorkerId: {WorkerId} on IssueId: {IssueId}",
+                    worker.Id, request.IssueId);
                 throw new UnauthorizedAccessException("You are not assigned to this issue");
+            }
 
-            // ⚠️ Optional: Prevent rejecting already completed issues
-            if (issue.Status.ToString() == "Resolved")
+            if (issue.Status == IssueStatus.Resolved)
+            {
+                _logger.LogWarning("Reject failed - Issue already resolved: {IssueId}", request.IssueId);
                 throw new InvalidOperationException("Cannot reject a resolved issue");
+            }
 
-            // 🔥 Domain logic
             issue.MarkAsRejected(request.Reason);
-            // 💾 Save changes
+
             await _context.SaveChangesAsync(cancellationToken);
 
-            return true; // ✅ YOU MISSED THIS
+            _logger.LogInformation("Issue {IssueId} rejected by WorkerId: {WorkerId} with reason: {Reason}",
+                request.IssueId, worker.Id, request.Reason);
+
+            return true;
         }
     }
 }
