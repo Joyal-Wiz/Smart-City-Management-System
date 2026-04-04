@@ -29,9 +29,7 @@ namespace SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead
                 .ToListAsync(cancellationToken);
 
             foreach (var n in notifications)
-            {
                 n.IsRead = true;
-            }
 
             await _context.SaveChangesAsync(cancellationToken);
 

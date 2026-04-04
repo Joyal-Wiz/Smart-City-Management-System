@@ -7,12 +7,15 @@ using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
 using SmartCity.Application.Features.Issues.Commands.ReassignIssue;
 using SmartCity.Application.Features.Issues.Queries.GetAllIssues;
+using SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead;
 using SmartCity.Application.Features.Notifications.Commands.MarkAsRead;
+using SmartCity.Application.Features.Notifications.Queries.GetAdminNotifications;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 using SmartCity.Application.Interfaces;
+using SmartCity.Application.Features.Notifications.Queries.GetAdminUnreadCount;
 
 namespace SmartCity.API.Controllers
 {
@@ -31,44 +34,31 @@ namespace SmartCity.API.Controllers
 
         }
 
-        [HttpGet("notifications/unread-count")]
-        [Authorize(Roles = "Admin")]
-
-        public async Task<IActionResult> GetUnreadCount()
-        {
-            var count = await _context.Notifications
-                .Where(n => !n.IsRead && n.UserId == null)
-                .CountAsync();
-
-            return Ok(new { count });
-        }
-
-        [HttpPost("notifications/read-all")]
-        [Authorize(Roles = "Admin")]
-
-        public async Task<IActionResult> MarkAllAsRead()
-        {
-            var notifications = await _context.Notifications
-                .Where(n => !n.IsRead && n.UserId == null)
-                .ToListAsync();
-
-            foreach (var n in notifications)
-                n.IsRead = true;
-
-            await _context.SaveChangesAsync(CancellationToken.None);
-
-            return Ok(new { message = "All notifications marked as read" });
-        }
-
         [HttpGet("notifications")]
         [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetNotifications()
         {
-            var notifications = await _context.Notifications
-                .OrderByDescending(n => n.CreatedAt)
-                .ToListAsync();
+            var result = await _mediator.Send(new GetAdminNotificationsQuery());
 
-            return Ok(notifications);
+            return Ok(ApiResponse<object>.SuccessResponse("Notifications fetched", result));
+        }
+
+        [HttpGet("notifications/unread-count")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetUnreadCount()
+        {
+            var count = await _mediator.Send(new GetAdminUnreadCountQuery());
+
+            return Ok(ApiResponse<object>.SuccessResponse("Unread count", new { count }));
+        }
+
+        [HttpPost("notifications/read-all")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> MarkAllAsRead()
+        {
+            var result = await _mediator.Send(new MarkAllAsReadCommand());
+
+            return Ok(ApiResponse<object>.SuccessResponse("All notifications marked as read", result));
         }
 
         [HttpPost("notifications/read")]
