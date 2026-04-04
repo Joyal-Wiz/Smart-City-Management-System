@@ -35,18 +35,21 @@ namespace SmartCity.Infrastructure.Services
 
                     var now = DateTime.UtcNow;
 
+                    // 🔥 DEADLINE MISSED
                     var expiredIssues = await context.IssueAssignments
                         .Include(a => a.Issue)
+                        .Include(a => a.Worker)
                         .Where(a =>
                             a.Deadline < now &&
                             a.Issue.Status != IssueStatus.Resolved &&
-                            a.IsDeadlineNotified == false) // 🔥 PREVENT DUPLICATE
+                            a.IsDeadlineNotified == false)
                         .ToListAsync(stoppingToken);
 
                     foreach (var assignment in expiredIssues)
                     {
                         _logger.LogWarning("Deadline missed for IssueId: {IssueId}", assignment.IssueId);
 
+                        // 🔹 ADMIN NOTIFICATION
                         await notificationService.CreateAsync(
                             "Deadline Missed",
                             $"Issue {assignment.IssueId} was not completed before deadline",
@@ -54,8 +57,38 @@ namespace SmartCity.Infrastructure.Services
                             assignment.IssueId
                         );
 
-                        // 🔥 MARK AS NOTIFIED
+                        // 🔹 WORKER NOTIFICATION
+                        await notificationService.CreateAsync(
+                            "Deadline Missed",
+                            $"You missed the deadline for issue {assignment.IssueId}",
+                            "Issue",
+                            assignment.IssueId,
+                            assignment.Worker.UserId
+                        );
+
                         assignment.IsDeadlineNotified = true;
+                    }
+
+                    // 🔥 DEADLINE NEAR (WITHIN 2 HOURS)
+                    var nearDeadlineIssues = await context.IssueAssignments
+                        .Include(a => a.Issue)
+                        .Include(a => a.Worker)
+                        .Where(a =>
+                            a.Deadline > now &&
+                            a.Deadline <= now.AddHours(2) &&
+                            a.Issue.Status != IssueStatus.Resolved &&
+                            a.IsDeadlineNotified == false)
+                        .ToListAsync(stoppingToken);
+
+                    foreach (var assignment in nearDeadlineIssues)
+                    {
+                        await notificationService.CreateAsync(
+                            "Deadline Approaching",
+                            $"Your issue deadline is near: {assignment.Deadline}",
+                            "Issue",
+                            assignment.IssueId,
+                            assignment.Worker.UserId
+                        );
                     }
 
                     await context.SaveChangesAsync(stoppingToken);
@@ -65,7 +98,6 @@ namespace SmartCity.Infrastructure.Services
                     _logger.LogError(ex, "Error in DeadlineCheckerService");
                 }
 
-                // 🔥 Runs every 2 minutes
                 await Task.Delay(TimeSpan.FromMinutes(2), stoppingToken);
             }
         }

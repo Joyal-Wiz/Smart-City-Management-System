@@ -99,6 +99,15 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 request.IssueId
             );
 
+            // 🔥 WORKER NOTIFICATION
+            await _notificationService.CreateAsync(
+                "New Work Assigned",
+                $"You have been assigned a new issue. Deadline: {request.Deadline}",
+                "Issue",
+                request.IssueId,
+                worker.UserId
+            );
+
             _logger.LogInformation("Issue {IssueId} successfully assigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);
 

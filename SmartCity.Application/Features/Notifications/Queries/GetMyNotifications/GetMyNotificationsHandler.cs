@@ -1,0 +1,45 @@
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
+using SmartCity.Application.Interfaces;
+using SmartCity.Application.Features.Notifications.DTOs;
+
+namespace SmartCity.Application.Features.Notifications.Queries.GetMyNotifications
+{
+    public class GetMyNotificationsHandler
+        : IRequestHandler<GetMyNotificationsQuery, List<NotificationDto>>
+    {
+        private readonly IApplicationDbContext _context;
+        private readonly ICurrentUserService _currentUser;
+
+        public GetMyNotificationsHandler(
+            IApplicationDbContext context,
+            ICurrentUserService currentUser)
+        {
+            _context = context;
+            _currentUser = currentUser;
+        }
+
+        public async Task<List<NotificationDto>> Handle(
+            GetMyNotificationsQuery request,
+            CancellationToken cancellationToken)
+        {
+            var userId = _currentUser.UserId;
+
+            var notifications = await _context.Notifications
+                .Where(n => n.UserId == userId)
+                .OrderByDescending(n => n.CreatedAt)
+                .Take(50) // 🔥 prevent overload
+                .Select(n => new NotificationDto
+                {
+                    Id = n.Id,
+                    Title = n.Title,
+                    Message = n.Message,
+                    IsRead = n.IsRead,
+                    CreatedAt = n.CreatedAt
+                })
+                .ToListAsync(cancellationToken);
+
+            return notifications;
+        }
+    }
+}

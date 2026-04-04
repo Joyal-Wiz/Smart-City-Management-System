@@ -8,6 +8,6 @@ namespace SmartCity.Application.Interfaces
 {
     public interface INotificationService
     {
-        Task CreateAsync(string title, string message, string type, Guid? relatedId = null);
+        Task CreateAsync(string title, string message, string type, Guid? relatedId = null, Guid? userId = null);
     }
 }
