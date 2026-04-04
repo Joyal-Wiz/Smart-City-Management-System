@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
+using SmartCity.Application.Features.Issues.Commands.ReassignIssue;
 using SmartCity.Application.Features.Issues.Queries.GetAllIssues;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
@@ -97,6 +98,20 @@ namespace SmartCity.API.Controllers
                 return BadRequest(result);
 
             return Ok(result);
+        }
+
+        [HttpPost("issues/reassign")]
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> ReassignIssue([FromBody] ReassignIssueCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            return Ok(new ApiResponse<object>
+            {
+                Success = true,
+                Message = "Issue reassigned successfully",
+                Data = result
+            });
         }
     }
 }

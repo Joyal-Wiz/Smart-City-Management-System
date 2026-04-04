@@ -77,5 +77,14 @@ namespace SmartCity.Domain.Entities
             Status = IssueStatus.Rejected;
             RejectionReason = reason;
         }
+        public void ReassignWorker(Guid workerId)
+        {
+            if (Status != IssueStatus.Rejected)
+                throw new InvalidOperationException("Only rejected issues can be reassigned");
+
+            AssignedWorkerId = workerId;
+            Status = IssueStatus.Assigned;
+        }
+
     }
 }

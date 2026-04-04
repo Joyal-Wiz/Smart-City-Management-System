@@ -10,7 +10,6 @@ using SmartCity.Application.Features.Workers.Queries.GetMyIssues;
 
 namespace SmartCity.API.Controllers
 {
-    [Authorize(Roles = "Worker")]
     [ApiController]
     [Route("api/worker")]
     public class WorkerController : ControllerBase
@@ -66,8 +65,8 @@ namespace SmartCity.API.Controllers
             return Ok(result);
         }
 
-        [HttpPost("issues/reject")]
         [Authorize(Roles = "Worker")]
+        [HttpPost("issues/reject")]
         public async Task<IActionResult> RejectIssue(RejectIssueCommand command)
         {
             var result = await _mediator.Send(command);
