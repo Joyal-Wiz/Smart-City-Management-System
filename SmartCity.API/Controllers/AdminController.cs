@@ -7,15 +7,16 @@ using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
 using SmartCity.Application.Features.Issues.Commands.ReassignIssue;
 using SmartCity.Application.Features.Issues.Queries.GetAllIssues;
+using SmartCity.Application.Features.Notifications.Commands.MarkAdminNotificationsAsRead;
 using SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead;
 using SmartCity.Application.Features.Notifications.Commands.MarkAsRead;
 using SmartCity.Application.Features.Notifications.Queries.GetAdminNotifications;
+using SmartCity.Application.Features.Notifications.Queries.GetAdminUnreadCount;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 using SmartCity.Application.Interfaces;
-using SmartCity.Application.Features.Notifications.Queries.GetAdminUnreadCount;
 
 namespace SmartCity.API.Controllers
 {
@@ -54,11 +55,14 @@ namespace SmartCity.API.Controllers
 
         [HttpPost("notifications/read-all")]
         [Authorize(Roles = "Admin")]
-        public async Task<IActionResult> MarkAllAsRead()
+        public async Task<IActionResult> MarkAdminNotificationsAsRead()
         {
-            var result = await _mediator.Send(new MarkAllAsReadCommand());
+            var result = await _mediator.Send(new MarkAdminNotificationsAsReadCommand());
 
-            return Ok(ApiResponse<object>.SuccessResponse("All notifications marked as read", result));
+            return Ok(ApiResponse<object>.SuccessResponse(
+                "Admin notifications marked as read",
+                result
+            ));
         }
 
         [HttpPost("notifications/read")]

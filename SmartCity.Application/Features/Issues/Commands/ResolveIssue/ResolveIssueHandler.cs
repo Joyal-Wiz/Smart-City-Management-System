@@ -12,20 +12,20 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
         private readonly IWorkerRepository _workerRepository;
         private readonly ICurrentUserService _currentUser;
         private readonly IFileService _fileService;
-        private readonly INotificationService _notificationService; // 🔥 ADD
+        private readonly INotificationService _notificationService;
 
         public ResolveIssueHandler(
             IIssueRepository issueRepository,
             IWorkerRepository workerRepository,
             ICurrentUserService currentUser,
             IFileService fileService,
-            INotificationService notificationService) // 🔥 ADD
+            INotificationService notificationService)
         {
             _issueRepository = issueRepository;
             _workerRepository = workerRepository;
             _currentUser = currentUser;
             _fileService = fileService;
-            _notificationService = notificationService; // 🔥 ADD
+            _notificationService = notificationService;
         }
 
         public async Task<ApiResponse<string>> Handle(
@@ -76,13 +76,14 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
 
             // 🔹 Save changes
             await _issueRepository.UpdateAsync(issue);
-
-            // 🔥 ADD NOTIFICATION (IMPORTANT)
+               
+            // FIXED: SEND TO CITIZEN
             await _notificationService.CreateAsync(
                 "Issue Resolved",
-                "An issue has been successfully resolved by the worker",
+                $"Your reported issue has been resolved.",
                 "Issue",
-                request.IssueId
+                issue.Id,
+                issue.CreatedByUserId // ✅ THIS IS THE FIX
             );
 
             return ApiResponse<string>.SuccessResponse(

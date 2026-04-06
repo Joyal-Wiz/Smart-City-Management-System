@@ -1,35 +1,36 @@
 ﻿using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead
+namespace SmartCity.Application.Features.Notifications.Commands.MarkAdminNotificationsAsRead
 {
-    public class MarkAllAsReadHandler
-        : IRequestHandler<MarkAllAsReadCommand, bool>
+    public class MarkAdminNotificationsAsReadHandler
+       : IRequestHandler<MarkAdminNotificationsAsReadCommand, bool>
     {
         private readonly IApplicationDbContext _context;
-        private readonly ICurrentUserService _currentUser;
 
-        public MarkAllAsReadHandler(
-            IApplicationDbContext context,
-            ICurrentUserService currentUser)
+        public MarkAdminNotificationsAsReadHandler(IApplicationDbContext context)
         {
             _context = context;
-            _currentUser = currentUser;
         }
 
         public async Task<bool> Handle(
-            MarkAllAsReadCommand request,
+            MarkAdminNotificationsAsReadCommand request,
             CancellationToken cancellationToken)
         {
-            var userId = _currentUser.UserId;
-
             var notifications = await _context.Notifications
-                .Where(n => n.UserId == userId && !n.IsRead)
+                .Where(n => n.UserId == null && !n.IsRead)
                 .ToListAsync(cancellationToken);
 
             foreach (var n in notifications)
+            {
                 n.IsRead = true;
+            }
 
             await _context.SaveChangesAsync(cancellationToken);
 
@@ -37,4 +38,3 @@ namespace SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead
         }
     }
 }
-

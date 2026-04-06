@@ -1615,3 +1615,30 @@ WHERE [Id] = @p1;
 2026-04-04 16:34:11.477 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.MarkWorkerAllAsRead (SmartCity.API) in 139.9034ms
 2026-04-04 16:34:11.482 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.MarkWorkerAllAsRead (SmartCity.API)'
 2026-04-04 16:34:11.483 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/worker/notifications/read-all - 200 null application/json; charset=utf-8 167.7815ms
+2026-04-04 17:13:02.331 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-04 17:13:02.381 +05:30 [INF] Deadline Checker Service started
+2026-04-04 17:13:02.699 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-04 17:13:02.701 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-04 17:13:02.766 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-04 17:13:02.769 +05:30 [INF] Hosting environment: Development
+2026-04-04 17:13:02.771 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-04 17:13:03.626 +05:30 [INF] Executed DbCommand (59ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-04 17:13:03.682 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-04 17:13:07.183 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-04 17:13:07.568 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-04 17:13:07.568 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-04 17:13:07.577 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 415.4434ms
+2026-04-04 17:13:07.622 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 54.8163ms
+2026-04-04 17:13:07.680 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 112.6136ms
+2026-04-04 17:13:07.726 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-04 17:13:07.781 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 55.4693ms

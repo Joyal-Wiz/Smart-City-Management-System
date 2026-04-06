@@ -1,13 +1,14 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.CreateIssue;
 
 namespace SmartCity.API.Controllers
 {
-    [Authorize]
     [ApiController]
     [Route("api/issues")]
+    [Authorize] // 🔒 All endpoints require auth
     public class IssueController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -17,10 +18,16 @@ namespace SmartCity.API.Controllers
             _mediator = mediator;
         }
 
-        [Authorize(Roles = "Citizen")]
+        // 🧾 CREATE ISSUE (Citizen Only)
         [HttpPost]
+        [Authorize(Roles = "Citizen")]
         public async Task<IActionResult> CreateIssue([FromForm] CreateIssueCommand command)
         {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ApiResponse<object>.FailResponse("Invalid request"));
+            }
+
             var result = await _mediator.Send(command);
 
             if (!result.Success)
