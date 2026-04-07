@@ -1,22 +1,17 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using System.Net;
+using System.Text.Json;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Exceptions;
-using System.Net;
-using System.Text.Json;
 
 namespace SmartCity.API.Middleware
 {
     public class ExceptionMiddleware
     {
         private readonly RequestDelegate _next;
-        private readonly ILogger<ExceptionMiddleware> _logger;
 
-        public ExceptionMiddleware(
-            RequestDelegate next,
-            ILogger<ExceptionMiddleware> logger)
+        public ExceptionMiddleware(RequestDelegate next)
         {
             _next = next;
-            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -27,53 +22,50 @@ namespace SmartCity.API.Middleware
             }
             catch (Exception ex)
             {
-                // 🔥 Log the exception
-                _logger.LogError(ex, "Unhandled exception occurred");
-
                 await HandleExceptionAsync(context, ex);
             }
         }
 
-        private static Task HandleExceptionAsync(HttpContext context, Exception exception)
+        private static async Task HandleExceptionAsync(HttpContext context, Exception exception)
         {
-            HttpStatusCode statusCode = HttpStatusCode.InternalServerError;
-            string message = exception.Message;
+            HttpStatusCode statusCode;
+            string message;
 
-            // 🔥 Map exception types to status codes
             switch (exception)
             {
                 case NotFoundException:
                     statusCode = HttpStatusCode.NotFound;
+                    message = exception.Message;
                     break;
 
                 case BadRequestException:
                     statusCode = HttpStatusCode.BadRequest;
+                    message = exception.Message;
                     break;
 
                 case UnauthorizedAccessException:
                     statusCode = HttpStatusCode.Unauthorized;
+                    message = "Unauthorized";
                     break;
 
-                case InvalidOperationException:
-                case ArgumentException:
-                    statusCode = HttpStatusCode.BadRequest;
+                default:
+                    statusCode = HttpStatusCode.InternalServerError;
+                    message = "An unexpected error occurred";
                     break;
             }
 
             var response = new ApiResponse<object>
             {
-                Success = false,
                 Message = message,
-                Data = null,
-                Errors = new List<string> { message }
+                Errors = new List<string> { exception.Message }
             };
-
-            var json = JsonSerializer.Serialize(response);
 
             context.Response.ContentType = "application/json";
             context.Response.StatusCode = (int)statusCode;
 
-            return context.Response.WriteAsync(json);
+            var json = JsonSerializer.Serialize(response);
+
+            await context.Response.WriteAsync(json);
         }
     }
 }

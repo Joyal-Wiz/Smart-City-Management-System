@@ -118,7 +118,7 @@ var app = builder.Build();
 
 // ✅ MIDDLEWARE
 app.UseMiddleware<ExceptionMiddleware>();
-
+app.UseMiddleware<SmartCity.API.Middleware.ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {

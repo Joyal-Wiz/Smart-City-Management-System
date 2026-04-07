@@ -1972,3 +1972,847 @@ FROM [IssueAssignments] AS [i]
 INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
 INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
 WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:35:48.927 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-06 16:35:49.037 +05:30 [INF] Deadline Checker Service started
+2026-04-06 16:35:49.669 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-06 16:35:49.674 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-06 16:35:49.902 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-06 16:35:49.906 +05:30 [INF] Hosting environment: Development
+2026-04-06 16:35:49.912 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-06 16:35:51.592 +05:30 [INF] Executed DbCommand (98ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:35:51.665 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:35:53.777 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-06 16:35:54.279 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 525.6888ms
+2026-04-06 16:35:54.373 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-06 16:35:54.373 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-06 16:35:54.411 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 38.1802ms
+2026-04-06 16:35:54.502 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 129.5232ms
+2026-04-06 16:35:54.576 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-06 16:35:54.643 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 67.912ms
+2026-04-06 16:36:02.596 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/auth/login - application/json 63
+2026-04-06 16:36:02.754 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-06 16:36:02.784 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginCommand) on controller SmartCity.API.Controllers.AuthController (SmartCity.API).
+2026-04-06 16:36:02.958 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-04-06 16:36:03.297 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [RefreshTokens] ([Id], [CreatedAt], [ExpiryDate], [IsRevoked], [Token], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-04-06 16:36:03.324 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.Features.Auth.DTOs.LoginResponseDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:36:03.342 +05:30 [INF] Executed action SmartCity.API.Controllers.AuthController.Login (SmartCity.API) in 545.7077ms
+2026-04-06 16:36:03.345 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-06 16:36:03.354 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/auth/login - 200 null application/json; charset=utf-8 758.7506ms
+2026-04-06 16:37:51.737 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:37:51.770 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:37:55.148 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/notifications/read-all - null 0
+2026-04-06 16:37:55.256 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.MarkAdminNotificationsAsRead (SmartCity.API)'
+2026-04-06 16:37:55.269 +05:30 [INF] Route matched with {action = "MarkAdminNotificationsAsRead", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MarkAdminNotificationsAsRead() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:37:55.309 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [n].[Id], [n].[CreatedAt], [n].[IsRead], [n].[Message], [n].[RelatedEntityId], [n].[Title], [n].[Type], [n].[UniqueKey], [n].[UserId]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] IS NULL AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-06 16:37:55.409 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p3='?' (DbType = Guid), @p2='?' (DbType = Boolean), @p5='?' (DbType = Guid), @p4='?' (DbType = Boolean), @p7='?' (DbType = Guid), @p6='?' (DbType = Boolean), @p9='?' (DbType = Guid), @p8='?' (DbType = Boolean), @p11='?' (DbType = Guid), @p10='?' (DbType = Boolean), @p13='?' (DbType = Guid), @p12='?' (DbType = Boolean), @p15='?' (DbType = Guid), @p14='?' (DbType = Boolean), @p17='?' (DbType = Guid), @p16='?' (DbType = Boolean), @p19='?' (DbType = Guid), @p18='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [Notifications] SET [IsRead] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [Notifications] SET [IsRead] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+UPDATE [Notifications] SET [IsRead] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+UPDATE [Notifications] SET [IsRead] = @p6
+OUTPUT 1
+WHERE [Id] = @p7;
+UPDATE [Notifications] SET [IsRead] = @p8
+OUTPUT 1
+WHERE [Id] = @p9;
+UPDATE [Notifications] SET [IsRead] = @p10
+OUTPUT 1
+WHERE [Id] = @p11;
+UPDATE [Notifications] SET [IsRead] = @p12
+OUTPUT 1
+WHERE [Id] = @p13;
+UPDATE [Notifications] SET [IsRead] = @p14
+OUTPUT 1
+WHERE [Id] = @p15;
+UPDATE [Notifications] SET [IsRead] = @p16
+OUTPUT 1
+WHERE [Id] = @p17;
+UPDATE [Notifications] SET [IsRead] = @p18
+OUTPUT 1
+WHERE [Id] = @p19;
+2026-04-06 16:37:55.439 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-06 16:37:55.455 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.MarkAdminNotificationsAsRead (SmartCity.API) in 182.2861ms
+2026-04-06 16:37:55.459 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.MarkAdminNotificationsAsRead (SmartCity.API)'
+2026-04-06 16:37:55.463 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/notifications/read-all - 200 null application/json; charset=utf-8 315.476ms
+2026-04-06 16:38:03.961 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/notifications/unread-count - null null
+2026-04-06 16:38:03.987 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetUnreadCount (SmartCity.API)'
+2026-04-06 16:38:04.009 +05:30 [INF] Route matched with {action = "GetUnreadCount", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUnreadCount() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:38:04.090 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] IS NULL AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-06 16:38:04.106 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-06 16:38:04.115 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetUnreadCount (SmartCity.API) in 97.5538ms
+2026-04-06 16:38:04.119 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetUnreadCount (SmartCity.API)'
+2026-04-06 16:38:04.123 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/notifications/unread-count - 200 null application/json; charset=utf-8 163.148ms
+2026-04-06 16:38:07.576 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/notifications - null null
+2026-04-06 16:38:07.588 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetNotifications (SmartCity.API)'
+2026-04-06 16:38:07.601 +05:30 [INF] Route matched with {action = "GetNotifications", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetNotifications() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:38:07.659 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_0) [n].[Id], [n].[Title], [n].[Message], [n].[IsRead], [n].[CreatedAt]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] IS NULL
+ORDER BY [n].[CreatedAt] DESC
+2026-04-06 16:38:07.673 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-06 16:38:07.703 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetNotifications (SmartCity.API) in 95.0839ms
+2026-04-06 16:38:07.707 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetNotifications (SmartCity.API)'
+2026-04-06 16:38:07.711 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/notifications - 200 null application/json; charset=utf-8 136.3878ms
+2026-04-06 16:38:50.999 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - null null
+2026-04-06 16:38:51.017 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API)'
+2026-04-06 16:38:51.031 +05:30 [INF] Route matched with {action = "GetAllWorkers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllWorkers(Int32, Int32) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:38:51.074 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Workers] AS [w]
+WHERE [w].[Status] = 2
+2026-04-06 16:38:51.094 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-04-06 16:38:51.096 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-04-06 16:38:51.130 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [u].[Name], [u].[Email], [t].[Status]
+FROM (
+    SELECT [w].[Id], [w].[Status], [w].[UserId]
+    FROM [Workers] AS [w]
+    WHERE [w].[Status] = 2
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Users] AS [u] ON [t].[UserId] = [u].[Id]
+2026-04-06 16:38:51.140 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Workers.DTOs.WorkerDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:38:51.180 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API) in 140.9388ms
+2026-04-06 16:38:51.197 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API)'
+2026-04-06 16:38:51.200 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 201.388ms
+2026-04-06 16:39:51.803 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:39:51.818 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:41:00.869 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-06 16:41:00.917 +05:30 [INF] Deadline Checker Service started
+2026-04-06 16:41:01.139 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-06 16:41:01.140 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-06 16:41:01.210 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-06 16:41:01.213 +05:30 [INF] Hosting environment: Development
+2026-04-06 16:41:01.215 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-06 16:41:02.481 +05:30 [INF] Executed DbCommand (70ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:41:02.557 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:41:02.910 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - null null
+2026-04-06 16:41:03.200 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API)'
+2026-04-06 16:41:03.249 +05:30 [INF] Route matched with {action = "GetAllWorkers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllWorkers(Int32, Int32) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:41:03.358 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Workers] AS [w]
+WHERE [w].[Status] = 2
+2026-04-06 16:41:03.387 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-04-06 16:41:03.389 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-04-06 16:41:03.419 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [u].[Name], [u].[Email], [t].[Status]
+FROM (
+    SELECT [w].[Id], [w].[Status], [w].[UserId]
+    FROM [Workers] AS [w]
+    WHERE [w].[Status] = 2
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Users] AS [u] ON [t].[UserId] = [u].[Id]
+2026-04-06 16:41:03.442 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Workers.DTOs.WorkerDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:41:03.485 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API) in 227.9678ms
+2026-04-06 16:41:03.489 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API)'
+2026-04-06 16:41:03.502 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 603.2388ms
+2026-04-06 16:41:13.440 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/workers/pending?PageNumber=1&PageSize=5 - null null
+2026-04-06 16:41:13.466 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetPendingWorkers (SmartCity.API)'
+2026-04-06 16:41:13.484 +05:30 [INF] Route matched with {action = "GetPendingWorkers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetPendingWorkers(SmartCity.Application.Features.Workers.Queries.GetPendingWorkers.GetPendingWorkersQuery) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:41:13.650 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Workers] AS [w]
+WHERE [w].[Status] = 1
+2026-04-06 16:41:13.660 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-04-06 16:41:13.663 +05:30 [WRN] The query uses a row limiting operator ('Skip'/'Take') without an 'OrderBy' operator. This may lead to unpredictable results. If the 'Distinct' operator is used after 'OrderBy', then make sure to use the 'OrderBy' operator after 'Distinct' as the ordering would otherwise get erased.
+2026-04-06 16:41:13.692 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [t].[CreatedAt], [t].[IsAvailable], [t].[Status], [t].[UserId], [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM (
+    SELECT [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+    FROM [Workers] AS [w]
+    WHERE [w].[Status] = 1
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Users] AS [u] ON [t].[UserId] = [u].[Id]
+2026-04-06 16:41:13.862 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Workers.DTOs.WorkerDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:41:13.870 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetPendingWorkers (SmartCity.API) in 378.0569ms
+2026-04-06 16:41:13.881 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetPendingWorkers (SmartCity.API)'
+2026-04-06 16:41:13.886 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/workers/pending?PageNumber=1&PageSize=5 - 200 null application/json; charset=utf-8 445.6485ms
+2026-04-06 16:41:26.115 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - null null
+2026-04-06 16:41:26.130 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API)'
+2026-04-06 16:41:26.134 +05:30 [INF] Route matched with {action = "GetAllWorkers", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllWorkers(Int32, Int32) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:41:26.161 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Workers] AS [w]
+WHERE [w].[Status] = 2
+2026-04-06 16:41:26.182 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [t].[Id], [u].[Name], [u].[Email], [t].[Status]
+FROM (
+    SELECT [w].[Id], [w].[Status], [w].[UserId]
+    FROM [Workers] AS [w]
+    WHERE [w].[Status] = 2
+    ORDER BY (SELECT 1)
+    OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+) AS [t]
+INNER JOIN [Users] AS [u] ON [t].[UserId] = [u].[Id]
+2026-04-06 16:41:26.188 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Workers.DTOs.WorkerDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:41:26.192 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API) in 52.3369ms
+2026-04-06 16:41:26.194 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetAllWorkers (SmartCity.API)'
+2026-04-06 16:41:26.197 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/workers?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 83.0071ms
+2026-04-06 16:41:45.978 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/workers/approve - application/json 56
+2026-04-06 16:41:46.008 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.ApproveWorker (SmartCity.API)'
+2026-04-06 16:41:46.028 +05:30 [INF] Route matched with {action = "ApproveWorker", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ApproveWorker(SmartCity.Application.Features.Workers.Commands.ApproveWorker.ApproveWorkerCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:41:46.122 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[Id] = @__get_Item_0
+2026-04-06 16:41:46.311 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@p4='?' (DbType = Guid), @p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Workers] SET [CreatedAt] = @p0, [IsAvailable] = @p1, [Status] = @p2, [UserId] = @p3
+OUTPUT 1
+WHERE [Id] = @p4;
+2026-04-06 16:41:46.346 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.Features.Workers.DTOs.ApproveWorkerResponseDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:41:46.361 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.ApproveWorker (SmartCity.API) in 321.417ms
+2026-04-06 16:41:46.366 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.ApproveWorker (SmartCity.API)'
+2026-04-06 16:41:46.373 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/workers/approve - 200 null application/json; charset=utf-8 394.3782ms
+2026-04-06 16:42:10.117 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/workers/reject - application/json 56
+2026-04-06 16:42:10.141 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.RejectWorker (SmartCity.API)'
+2026-04-06 16:42:10.147 +05:30 [INF] Route matched with {action = "RejectWorker", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] RejectWorker(SmartCity.Application.Features.Workers.Commands.RejectWorker.RejectWorkerCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 16:42:10.187 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[Id] = @__get_Item_0
+2026-04-06 16:42:10.232 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@p4='?' (DbType = Guid), @p0='?' (DbType = DateTime2), @p1='?' (DbType = Boolean), @p2='?' (DbType = Int32), @p3='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Workers] SET [CreatedAt] = @p0, [IsAvailable] = @p1, [Status] = @p2, [UserId] = @p3
+OUTPUT 1
+WHERE [Id] = @p4;
+2026-04-06 16:42:10.246 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[SmartCity.Application.Features.Workers.DTOs.RejectWorkerResponseDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-06 16:42:10.257 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.RejectWorker (SmartCity.API) in 102.2773ms
+2026-04-06 16:42:10.261 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.RejectWorker (SmartCity.API)'
+2026-04-06 16:42:10.266 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/workers/reject - 200 null application/json; charset=utf-8 150.5485ms
+2026-04-06 16:43:02.651 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:43:02.682 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:45:02.768 +05:30 [INF] Executed DbCommand (57ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:45:02.793 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:47:02.828 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:47:02.847 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:49:02.876 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:49:02.904 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:51:02.939 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:51:02.960 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:53:02.992 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:53:03.024 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:55:03.058 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:55:03.077 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:57:03.116 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:57:03.136 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:59:03.178 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 16:59:03.202 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:01:03.242 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:01:03.265 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:03:03.295 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:03:03.332 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:05:03.382 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:05:03.414 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:07:03.459 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:07:03.487 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:09:03.521 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:09:03.562 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:11:03.601 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:11:03.628 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:13:03.676 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:13:03.691 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:15:03.797 +05:30 [INF] Executed DbCommand (35ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:15:03.815 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:17:03.869 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:17:03.895 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:19:03.936 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:19:03.971 +05:30 [INF] Executed DbCommand (25ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:21:04.008 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:21:04.053 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:23:04.114 +05:30 [INF] Executed DbCommand (29ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:23:04.156 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:25:04.213 +05:30 [INF] Executed DbCommand (37ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:25:04.233 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:27:04.269 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:27:04.293 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:29:04.349 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:29:04.377 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:31:04.424 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:31:04.449 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:33:04.497 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:33:04.524 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:35:04.570 +05:30 [INF] Executed DbCommand (26ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:35:04.584 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:37:04.612 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:37:04.644 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:38:04.759 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues?PageNumber=1&PageSize=5 - null null
+2026-04-06 17:38:04.783 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetAllIssues (SmartCity.API)'
+2026-04-06 17:38:04.806 +05:30 [INF] Route matched with {action = "GetAllIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetAllIssues(SmartCity.Application.Features.Issues.Queries.GetAllIssues.GetAllIssuesQuery) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 17:38:04.863 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Issues] AS [i]
+2026-04-06 17:38:04.971 +05:30 [INF] Executed DbCommand (48ms) [Parameters=[@__p_0='?' (DbType = Int32), @__p_1='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[Description], [i].[Type], [i].[Status], [i].[Location_Latitude] AS [Latitude], [i].[Location_Longitude] AS [Longitude], [i].[ImagePath] AS [BeforeImagePath], [i].[ResolvedImagePath] AS [AfterImagePath], (
+    SELECT TOP(1) [u].[Name]
+    FROM [IssueAssignments] AS [i0]
+    INNER JOIN [Workers] AS [w] ON [i0].[WorkerId] = [w].[Id]
+    INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+    WHERE [i].[Id] = [i0].[IssueId]) AS [AssignedWorkerName], COALESCE((
+    SELECT TOP(1) [i1].[Salary]
+    FROM [IssueAssignments] AS [i1]
+    WHERE [i].[Id] = [i1].[IssueId]), 0.0) AS [Salary], COALESCE((
+    SELECT TOP(1) [i2].[Deadline]
+    FROM [IssueAssignments] AS [i2]
+    WHERE [i].[Id] = [i2].[IssueId]), '0001-01-01T00:00:00.0000000') AS [Deadline], [i].[RejectionReason]
+FROM [Issues] AS [i]
+ORDER BY [i].[CreatedAt] DESC
+OFFSET @__p_0 ROWS FETCH NEXT @__p_1 ROWS ONLY
+2026-04-06 17:38:04.989 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-06 17:38:05.073 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetAllIssues (SmartCity.API) in 256.3177ms
+2026-04-06 17:38:05.079 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetAllIssues (SmartCity.API)'
+2026-04-06 17:38:05.083 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues?PageNumber=1&PageSize=5 - 200 null application/json; charset=utf-8 325.58ms
+2026-04-06 17:38:22.684 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 166
+2026-04-06 17:38:22.711 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-06 17:38:22.727 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 17:38:23.026 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 292.3281ms
+2026-04-06 17:38:23.035 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-06 17:38:23.079 +05:30 [ERR] Unhandled exception occurred
+System.Exception: Deadline must be in the future, Salary must be greater than zero
+   at SmartCity.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Application\Behaviors\ValidationBehavior.cs:line 40
+   at SmartCity.API.Controllers.AdminController.AssignIssue(AssignIssueCommand command) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\Controllers\AdminController.cs:line 149
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SmartCity.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\Middlewares\ExceptionMiddleware.cs:line 26
+2026-04-06 17:38:23.229 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 500 null application/json 545.1858ms
+2026-04-06 17:39:04.673 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:39:04.698 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:39:24.477 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/reassign - application/json 166
+2026-04-06 17:39:24.505 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.ReassignIssue (SmartCity.API)'
+2026-04-06 17:39:24.515 +05:30 [INF] Route matched with {action = "ReassignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ReassignIssue(SmartCity.Application.Features.Issues.Commands.ReassignIssue.ReassignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-06 17:39:24.689 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.ReassignIssue (SmartCity.API) in 164.2657ms
+2026-04-06 17:39:24.699 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.ReassignIssue (SmartCity.API)'
+2026-04-06 17:39:24.748 +05:30 [ERR] Unhandled exception occurred
+System.Exception: Deadline must be in the future, Salary must be greater than 0
+   at SmartCity.Application.Behaviors.ValidationBehavior`2.Handle(TRequest request, RequestHandlerDelegate`1 next, CancellationToken cancellationToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Application\Behaviors\ValidationBehavior.cs:line 40
+   at SmartCity.API.Controllers.AdminController.ReassignIssue(ReassignIssueCommand command) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\Controllers\AdminController.cs:line 161
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ActionMethodExecutor.TaskOfIActionResultExecutor.Execute(ActionContext actionContext, IActionResultTypeMapper mapper, ObjectMethodExecutor executor, Object controller, Object[] arguments)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeActionMethodAsync>g__Awaited|12_0(ControllerActionInvoker invoker, ValueTask`1 actionResultValueTask)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.<InvokeNextActionFilterAsync>g__Awaited|10_0(ControllerActionInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Rethrow(ActionExecutedContextSealed context)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.Next(State& next, Scope& scope, Object& state, Boolean& isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ControllerActionInvoker.InvokeInnerFilterAsync()
+--- End of stack trace from previous location ---
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeFilterPipelineAsync>g__Awaited|20_0(ResourceInvoker invoker, Task lastTask, State next, Scope scope, Object state, Boolean isCompleted)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Mvc.Infrastructure.ResourceInvoker.<InvokeAsync>g__Logged|17_1(ResourceInvoker invoker)
+   at Microsoft.AspNetCore.Routing.EndpointMiddleware.<Invoke>g__AwaitRequestTask|7_0(Endpoint endpoint, Task requestTask, ILogger logger)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authorization.AuthorizationMiddleware.Invoke(HttpContext context)
+   at Microsoft.AspNetCore.Authentication.AuthenticationMiddleware.Invoke(HttpContext context)
+   at SmartCity.API.Middleware.ExceptionMiddleware.InvokeAsync(HttpContext context) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API\Middlewares\ExceptionMiddleware.cs:line 26
+2026-04-06 17:39:24.767 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/reassign - 500 null application/json 294.1248ms
+2026-04-06 17:41:04.749 +05:30 [INF] Executed DbCommand (27ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:41:04.783 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:43:04.817 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:43:04.832 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:45:04.863 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:45:04.890 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:47:04.940 +05:30 [INF] Executed DbCommand (33ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:47:04.968 +05:30 [INF] Executed DbCommand (22ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:49:05.051 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:49:05.078 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:51:05.110 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:51:05.135 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:53:05.167 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:53:05.183 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:55:05.208 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:55:05.228 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:57:05.271 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:57:05.296 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:59:05.334 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 17:59:05.354 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 18:01:05.372 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 18:01:05.386 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 18:03:05.425 +05:30 [INF] Executed DbCommand (23ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-06 18:03:05.442 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)

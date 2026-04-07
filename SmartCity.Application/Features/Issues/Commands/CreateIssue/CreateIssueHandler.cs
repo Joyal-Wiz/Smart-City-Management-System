@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using SmartCity.Application.DTOs;
+using SmartCity.Application.Features.Issues.DTOs;
 using SmartCity.Application.Interfaces;
 using SmartCity.Domain.Entities;
 using SmartCity.Domain.Interfaces;
@@ -7,7 +7,8 @@ using SmartCity.Domain.ValueObjects;
 
 namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
 {
-    public class CreateIssueHandler : IRequestHandler<CreateIssueCommand, ApiResponse<Guid>>
+    public class CreateIssueHandler
+        : IRequestHandler<CreateIssueCommand, CreateIssueResponseDto> // ✅ FIXED
     {
         private readonly IIssueRepository _issueRepository;
         private readonly IFileService _fileService;
@@ -23,10 +24,10 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
             _issueRepository = issueRepository;
             _fileService = fileService;
             _currentUser = currentUser;
-            _notificationService = notificationService; // ✅ FIXED
+            _notificationService = notificationService;
         }
 
-        public async Task<ApiResponse<Guid>> Handle(
+        public async Task<CreateIssueResponseDto> Handle(
             CreateIssueCommand request,
             CancellationToken cancellationToken)
         {
@@ -51,7 +52,6 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
 
             await _issueRepository.AddAsync(issue);
 
-            // 🔥 ADD NOTIFICATION (IMPORTANT)
             await _notificationService.CreateAsync(
                 "New Issue Reported",
                 $"A new issue has been reported: {issue.Description}",
@@ -59,10 +59,11 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
                 issue.Id
             );
 
-            return ApiResponse<Guid>.SuccessResponse(
-                "Issue created successfully",
-                issue.Id
-            );
+            return new CreateIssueResponseDto
+            {
+                IssueId = issue.Id,
+                Status = issue.Status.ToString() 
+            };
         }
     }
 }

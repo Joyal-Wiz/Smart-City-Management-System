@@ -1,22 +1,22 @@
 ﻿using MediatR;
 using Microsoft.Extensions.Logging;
-using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.DTOs;
 using SmartCity.Application.Interfaces;
 using SmartCity.Domain.Entities;
 using SmartCity.Domain.Enums;
 using SmartCity.Domain.Interfaces;
+using SmartCity.Application.Exceptions;
 
 namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
 {
-    public class AssignIssueHandler : IRequestHandler<AssignIssueCommand, ApiResponse<AssignIssueResponseDto>>
+    public class AssignIssueHandler : IRequestHandler<AssignIssueCommand, AssignIssueResponseDto>
     {
         private readonly IIssueRepository _issueRepository;
         private readonly IWorkerRepository _workerRepository;
         private readonly IIssueAssignmentRepository _assignmentRepository;
         private readonly ICurrentUserService _currentUser;
         private readonly ILogger<AssignIssueHandler> _logger;
-        private readonly INotificationService _notificationService; // 🔥 ADD
+        private readonly INotificationService _notificationService;
 
         public AssignIssueHandler(
             IIssueRepository issueRepository,
@@ -24,17 +24,17 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             IIssueAssignmentRepository assignmentRepository,
             ICurrentUserService currentUser,
             ILogger<AssignIssueHandler> logger,
-            INotificationService notificationService) // 🔥 ADD
+            INotificationService notificationService)
         {
             _issueRepository = issueRepository;
             _workerRepository = workerRepository;
             _assignmentRepository = assignmentRepository;
             _currentUser = currentUser;
             _logger = logger;
-            _notificationService = notificationService; // 🔥 ADD
+            _notificationService = notificationService;
         }
 
-        public async Task<ApiResponse<AssignIssueResponseDto>> Handle(
+        public async Task<AssignIssueResponseDto> Handle(
             AssignIssueCommand request,
             CancellationToken cancellationToken)
         {
@@ -43,23 +43,14 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
 
             var issue = await _issueRepository.GetByIdAsync(request.IssueId);
             if (issue == null)
-            {
-                _logger.LogWarning("AssignIssue failed - Issue not found: {IssueId}", request.IssueId);
-                return ApiResponse<AssignIssueResponseDto>.FailResponse("Issue not found");
-            }
+                throw new NotFoundException("Issue not found");
 
             var worker = await _workerRepository.GetByIdAsync(request.WorkerId);
             if (worker == null)
-            {
-                _logger.LogWarning("AssignIssue failed - Worker not found: {WorkerId}", request.WorkerId);
-                return ApiResponse<AssignIssueResponseDto>.FailResponse("Worker not found");
-            }
+                throw new NotFoundException("Worker not found");
 
             if (worker.Status != WorkerStatus.Approved)
-            {
-                _logger.LogWarning("AssignIssue failed - Worker not approved: {WorkerId}", request.WorkerId);
-                return ApiResponse<AssignIssueResponseDto>.FailResponse("Worker is not approved");
-            }
+                throw new BadRequestException("Worker is not approved");
 
             try
             {
@@ -68,7 +59,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             catch (Exception ex)
             {
                 _logger.LogWarning("AssignIssue domain error: {Message}", ex.Message);
-                return ApiResponse<AssignIssueResponseDto>.FailResponse(ex.Message);
+                throw new BadRequestException(ex.Message);
             }
 
             IssueAssignment assignment;
@@ -84,14 +75,14 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             }
             catch (Exception ex)
             {
-                _logger.LogWarning("AssignIssue creation failed: {Message}", ex.Message);
-                return ApiResponse<AssignIssueResponseDto>.FailResponse(ex.Message);
+                _logger.LogWarning("Assignment creation failed: {Message}", ex.Message);
+                throw new BadRequestException(ex.Message);
             }
 
             await _issueRepository.UpdateAsync(issue);
             await _assignmentRepository.AddAsync(assignment);
 
-            // 🔥 ADD NOTIFICATION (IMPORTANT)
+            // 🔔 Admin notification
             await _notificationService.CreateAsync(
                 "Issue Assigned",
                 $"Issue assigned to worker with ID: {request.WorkerId}",
@@ -99,7 +90,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 request.IssueId
             );
 
-            // 🔥 WORKER NOTIFICATION
+            // 🔔 Worker notification
             await _notificationService.CreateAsync(
                 "New Work Assigned",
                 $"You have been assigned a new issue. Deadline: {request.Deadline}",
@@ -108,10 +99,10 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 worker.UserId
             );
 
-            _logger.LogInformation("Issue {IssueId} successfully assigned to Worker {WorkerId}",
+            _logger.LogInformation("Issue {IssueId} assigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);
 
-            var response = new AssignIssueResponseDto
+            return new AssignIssueResponseDto
             {
                 AssignmentId = assignment.Id,
                 IssueId = request.IssueId,
@@ -119,11 +110,6 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 Deadline = request.Deadline,
                 Salary = request.Salary
             };
-
-            return ApiResponse<AssignIssueResponseDto>.SuccessResponse(
-                "Issue assigned successfully",
-                response
-            );
         }
     }
 }

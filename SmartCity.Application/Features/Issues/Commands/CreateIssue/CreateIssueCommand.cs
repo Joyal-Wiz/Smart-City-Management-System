@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using SmartCity.Application.DTOs;
 using SmartCity.Domain.Enums;
+using SmartCity.Application.Features.Issues.DTOs;
 
 namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
 {
-    public class CreateIssueCommand : IRequest<ApiResponse<Guid>>
+    public class CreateIssueCommand : IRequest<CreateIssueResponseDto>
     {
         public string Description { get; set; } = string.Empty;
 

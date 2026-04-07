@@ -8,7 +8,7 @@ using SmartCity.Domain.Interfaces;
 namespace SmartCity.Application.Features.Workers.Queries.GetAllWorkers
 {
     public class GetAllWorkersQueryHandler
-        : IRequestHandler<GetAllWorkersQuery, ApiResponse<PagedResult<WorkerDto>>>
+        : IRequestHandler<GetAllWorkersQuery, PagedResult<WorkerDto>>
     {
         private readonly IWorkerRepository _workerRepository;
 
@@ -17,7 +17,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetAllWorkers
             _workerRepository = workerRepository;
         }
 
-        public async Task<ApiResponse<PagedResult<WorkerDto>>> Handle(
+        public async Task<PagedResult<WorkerDto>> Handle(
             GetAllWorkersQuery request,
             CancellationToken cancellationToken)
         {
@@ -40,18 +40,13 @@ namespace SmartCity.Application.Features.Workers.Queries.GetAllWorkers
                 })
                 .ToListAsync(cancellationToken);
 
-            var pagedResult = new PagedResult<WorkerDto>
+            return new PagedResult<WorkerDto>
             {
                 Items = workers,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 TotalCount = totalCount
             };
-
-            return ApiResponse<PagedResult<WorkerDto>>.SuccessResponse(
-                "Workers fetched successfully",
-                pagedResult
-            );
         }
     }
 }

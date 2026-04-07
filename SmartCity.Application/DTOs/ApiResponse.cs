@@ -1,48 +1,45 @@
-﻿namespace SmartCity.Application.DTOs
+﻿using System.Text.Json.Serialization;
+
+namespace SmartCity.Application.DTOs
 {
     public class ApiResponse<T>
     {
-        public bool Success { get; set; }
-
         public string Message { get; set; } = string.Empty;
 
+        // ✅ FIXED: works for both value types (Guid, int) and reference types
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
         public T? Data { get; set; }
 
+        // ✅ keep this (only appears when errors exist)
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         public List<string>? Errors { get; set; }
 
-        // ✅ Success
+        // ✅ Success (with data)
         public static ApiResponse<T> SuccessResponse(string message, T data)
         {
             return new ApiResponse<T>
             {
-                Success = true,
                 Message = message,
-                Data = data,
-                Errors = null
+                Data = data
             };
         }
 
-        // ❌ Failure (single error)
-        public static ApiResponse<T> FailResponse(string message)
+        // ✅ Success (no data)
+        public static ApiResponse<T> SuccessResponse(string message)
         {
             return new ApiResponse<T>
             {
-                Success = false,
-                Message = message,
-                Data = default,
-                Errors = new List<string> { message }
+                Message = message
             };
         }
 
-        // ❌ Failure (multiple errors)
-        public static ApiResponse<T> FailResponse(string message, List<string> errors)
+        // ❌ Failure
+        public static ApiResponse<T> FailResponse(string message, List<string>? errors = null)
         {
             return new ApiResponse<T>
             {
-                Success = false,
                 Message = message,
-                Data = default,
-                Errors = errors
+                Errors = errors ?? new List<string> { message }
             };
         }
     }

@@ -8,7 +8,7 @@ namespace SmartCity.API.Controllers
 {
     [ApiController]
     [Route("api/issues")]
-    [Authorize] // 🔒 All endpoints require auth
+    [Authorize]
     public class IssueController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -30,10 +30,10 @@ namespace SmartCity.API.Controllers
 
             var result = await _mediator.Send(command);
 
-            if (!result.Success)
-                return BadRequest(result);
-
-            return Ok(result);
+            return Ok(ApiResponse<object>.SuccessResponse(
+                "Issue created successfully",
+                result
+            ));
         }
     }
 }

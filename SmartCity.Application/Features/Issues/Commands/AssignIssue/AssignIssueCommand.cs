@@ -1,10 +1,9 @@
 ﻿using MediatR;
-using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.DTOs;
 
 namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
 {
-    public class AssignIssueCommand : IRequest<ApiResponse<AssignIssueResponseDto>>
+    public class AssignIssueCommand : IRequest<AssignIssueResponseDto>
     {
         public Guid IssueId { get; set; }
         public Guid WorkerId { get; set; }
