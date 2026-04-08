@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
 using SmartCity.API.Middleware;
-using SmartCity.API.Services;
 using SmartCity.Application.Behaviors;
 using SmartCity.Application.Features.Auth.Commands.Register;
 using SmartCity.Application.Features.Issues.Commands.CreateIssue;
@@ -14,6 +13,7 @@ using SmartCity.Domain.Interfaces;
 using SmartCity.Infrastructure.Persistence;
 using SmartCity.Infrastructure.Repositories;
 using SmartCity.Infrastructure.Services;
+using SmartCity.API.Services;
 using System.Text;
 
 
@@ -45,6 +45,8 @@ builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddHostedService<DeadlineCheckerService>();
+builder.Services.AddSignalR();
+builder.Services.AddScoped<NotificationRealtimeService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -84,7 +86,7 @@ builder.Services.AddMediatR(cfg =>
 // ✅ DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 // ✅ Repository
 builder.Services.AddScoped<IIssueRepository, IssueRepository>();
 
@@ -135,5 +137,6 @@ app.UseAuthorization();
 
 // ✅ MAP CONTROLLERS
 app.MapControllers();
+app.MapHub<SmartCity.API.Hubs.NotificationHub>("/hubs/notifications");
 
 app.Run();

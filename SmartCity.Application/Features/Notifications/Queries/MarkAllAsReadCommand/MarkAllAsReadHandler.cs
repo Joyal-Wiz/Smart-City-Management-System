@@ -23,10 +23,15 @@ namespace SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead
             CancellationToken cancellationToken)
         {
             var userId = _currentUser.UserId;
+            var role = _currentUser.Role;
 
-            var notifications = await _context.Notifications
-                .Where(n => n.UserId == userId && !n.IsRead)
-                .ToListAsync(cancellationToken);
+            var notifications = role == "Admin"
+                ? await _context.Notifications
+                    .Where(n => n.UserId == null && !n.IsRead)
+                    .ToListAsync(cancellationToken)
+                : await _context.Notifications
+                    .Where(n => n.UserId == userId && !n.IsRead)
+                    .ToListAsync(cancellationToken);
 
             foreach (var n in notifications)
                 n.IsRead = true;
@@ -37,4 +42,3 @@ namespace SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead
         }
     }
 }
-

@@ -1,24 +1,43 @@
 ﻿using Microsoft.AspNetCore.Http;
 using SmartCity.Application.Interfaces;
+using System;
 using System.Security.Claims;
 
-public class CurrentUserService : ICurrentUserService
+namespace SmartCity.Infrastructure.Services
 {
-    private readonly IHttpContextAccessor _httpContextAccessor;
-
-    public CurrentUserService(IHttpContextAccessor httpContextAccessor)
+    public class CurrentUserService : ICurrentUserService
     {
-        _httpContextAccessor = httpContextAccessor;
-    }
+        private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public Guid UserId
-    {
-        get
+        public CurrentUserService(IHttpContextAccessor httpContextAccessor)
         {
-            var userId = _httpContextAccessor.HttpContext?.User?
-                .FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            _httpContextAccessor = httpContextAccessor;
+        }
 
-            return userId != null ? Guid.Parse(userId) : Guid.Empty;
+        // ✅ GET USER ID FROM JWT
+        public Guid UserId
+        {
+            get
+            {
+                var userId = _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.NameIdentifier)?
+                    .Value;
+
+                return userId != null ? Guid.Parse(userId) : Guid.Empty;
+            }
+        }
+
+        // 🔥 GET ROLE FROM JWT (VERY IMPORTANT)
+        public string Role
+        {
+            get
+            {
+                return _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.Role)?
+                    .Value ?? string.Empty;
+            }
         }
     }
 }

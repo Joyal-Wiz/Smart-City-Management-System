@@ -1697,3 +1697,457 @@ FROM [IssueAssignments] AS [i]
 INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
 INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
 WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:34:20.194 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-07 12:34:20.247 +05:30 [INF] Deadline Checker Service started
+2026-04-07 12:34:20.465 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-07 12:34:20.467 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-07 12:34:20.526 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-07 12:34:20.529 +05:30 [INF] Hosting environment: Development
+2026-04-07 12:34:20.532 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-07 12:34:22.498 +05:30 [INF] Executed DbCommand (86ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:34:22.570 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:34:24.019 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/issues - multipart/form-data; boundary=----WebKitFormBoundarykBoopt2FkU5uRrIF 71787
+2026-04-07 12:34:24.446 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.IssueController.CreateIssue (SmartCity.API)'
+2026-04-07 12:34:24.500 +05:30 [INF] Route matched with {action = "CreateIssue", controller = "Issue"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] CreateIssue(SmartCity.Application.Features.Issues.Commands.CreateIssue.CreateIssueCommand) on controller SmartCity.API.Controllers.IssueController (SmartCity.API).
+2026-04-07 12:34:24.925 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Guid), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (DbType = DateTime2), @p8='?' (Size = 4000), @p9='?' (DbType = Int32), @p10='?' (DbType = Int32), @p11='?' (DbType = Double), @p12='?' (DbType = Double)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Issues] ([Id], [AssignedWorkerId], [CreatedAt], [CreatedByUserId], [Description], [ImagePath], [RejectionReason], [ResolvedAt], [ResolvedImagePath], [Status], [Type], [Location_Latitude], [Location_Longitude])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2026-04-07 12:34:25.033 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-07 12:34:25.142 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-07 12:34:25.203 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:34:25.235 +05:30 [INF] Executed action SmartCity.API.Controllers.IssueController.CreateIssue (SmartCity.API) in 725.517ms
+2026-04-07 12:34:25.244 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.IssueController.CreateIssue (SmartCity.API)'
+2026-04-07 12:34:25.275 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/issues - 200 null application/json; charset=utf-8 1294.0912ms
+2026-04-07 12:34:55.681 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/issues/8b96457b-c9dd-4afb-aa6c-70c423248f4d - null null
+2026-04-07 12:34:55.731 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetIssueDetails (SmartCity.API)'
+2026-04-07 12:34:55.755 +05:30 [INF] Route matched with {action = "GetIssueDetails", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetIssueDetails(System.Guid) on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:34:55.958 +05:30 [INF] Executed DbCommand (41ms) [Parameters=[@__request_IssueId_0='?' (DbType = Guid), @__userId_1='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[Description], [i].[ImagePath], [i].[Status], COALESCE((
+    SELECT TOP(1) [i0].[Deadline]
+    FROM [IssueAssignments] AS [i0]
+    WHERE [i].[Id] = [i0].[IssueId]), '0001-01-01T00:00:00.0000000'), (
+    SELECT TOP(1) [u].[Name]
+    FROM [IssueAssignments] AS [i1]
+    INNER JOIN [Workers] AS [w] ON [i1].[WorkerId] = [w].[Id]
+    INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+    WHERE [i].[Id] = [i1].[IssueId]), CASE
+    WHEN [i].[Status] = 3 THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END, [i].[ResolvedImagePath], [i].[ResolvedAt], [i].[RejectionReason]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__request_IssueId_0 AND [i].[CreatedByUserId] = @__userId_1
+2026-04-07 12:34:55.983 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.Features.Issues.DTOs.IssueDetailsDto'.
+2026-04-07 12:34:56.022 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetIssueDetails (SmartCity.API) in 259.9833ms
+2026-04-07 12:34:56.032 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetIssueDetails (SmartCity.API)'
+2026-04-07 12:34:56.037 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/issues/8b96457b-c9dd-4afb-aa6c-70c423248f4d - 200 null application/json; charset=utf-8 356.5478ms
+2026-04-07 12:35:34.689 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/issues?pageNumber=1&pageSize=10 - null null
+2026-04-07 12:35:34.740 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetMyIssues (SmartCity.API)'
+2026-04-07 12:35:34.757 +05:30 [INF] Route matched with {action = "GetMyIssues", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyIssues(Int32, Int32) on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:35:34.839 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Issues] AS [i]
+WHERE [i].[CreatedByUserId] = @__userId_0
+2026-04-07 12:35:34.929 +05:30 [INF] Executed DbCommand (47ms) [Parameters=[@__userId_0='?' (DbType = Guid), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[Description], [i].[Status], [i].[CreatedAt], COALESCE((
+    SELECT TOP(1) [u].[Name]
+    FROM [IssueAssignments] AS [i0]
+    INNER JOIN [Workers] AS [w] ON [i0].[WorkerId] = [w].[Id]
+    INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+    WHERE [i].[Id] = [i0].[IssueId]), N'Not Assigned')
+FROM [Issues] AS [i]
+WHERE [i].[CreatedByUserId] = @__userId_0
+ORDER BY [i].[CreatedAt] DESC
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-04-07 12:35:34.949 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.PagedResult`1[[SmartCity.Application.Features.Issues.DTOs.IssueListDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-07 12:35:34.998 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetMyIssues (SmartCity.API) in 228.4248ms
+2026-04-07 12:35:35.009 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetMyIssues (SmartCity.API)'
+2026-04-07 12:35:35.015 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/issues?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 334.4945ms
+2026-04-07 12:36:22.637 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:36:22.660 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:38:22.709 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:38:22.738 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:39:46.931 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/notifications - null null
+2026-04-07 12:39:46.954 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:39:46.967 +05:30 [INF] Route matched with {action = "GetMyNotifications", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyNotifications() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:39:47.004 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__p_1='?' (DbType = Int32), @__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_1) [n].[Id], [n].[Title], [n].[Message], [n].[IsRead], [n].[CreatedAt]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0
+ORDER BY [n].[CreatedAt] DESC
+2026-04-07 12:39:47.013 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:39:47.025 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API) in 53.1113ms
+2026-04-07 12:39:47.038 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:39:47.042 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/notifications - 200 null application/json; charset=utf-8 112.3444ms
+2026-04-07 12:39:54.587 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/notifications/unread-count - null null
+2026-04-07 12:39:54.600 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetUnreadCount (SmartCity.API)'
+2026-04-07 12:39:54.614 +05:30 [INF] Route matched with {action = "GetUnreadCount", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUnreadCount() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:39:54.649 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0 AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-07 12:39:54.655 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:39:54.663 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetUnreadCount (SmartCity.API) in 41.7002ms
+2026-04-07 12:39:54.666 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetUnreadCount (SmartCity.API)'
+2026-04-07 12:39:54.668 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/notifications/unread-count - 200 null application/json; charset=utf-8 81.914ms
+2026-04-07 12:39:59.365 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/user/notifications/read-all - null 0
+2026-04-07 12:39:59.381 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.MarkAllAsRead (SmartCity.API)'
+2026-04-07 12:39:59.396 +05:30 [INF] Route matched with {action = "MarkAllAsRead", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MarkAllAsRead() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:39:59.444 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [n].[Id], [n].[CreatedAt], [n].[IsRead], [n].[Message], [n].[RelatedEntityId], [n].[Title], [n].[Type], [n].[UniqueKey], [n].[UserId]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0 AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-07 12:39:59.480 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Notifications] SET [IsRead] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-04-07 12:39:59.503 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:39:59.524 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.MarkAllAsRead (SmartCity.API) in 119.5576ms
+2026-04-07 12:39:59.532 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.MarkAllAsRead (SmartCity.API)'
+2026-04-07 12:39:59.537 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/user/notifications/read-all - 200 null application/json; charset=utf-8 172.9773ms
+2026-04-07 12:40:05.365 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/notifications - null null
+2026-04-07 12:40:05.372 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:40:05.376 +05:30 [INF] Route matched with {action = "GetMyNotifications", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyNotifications() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:40:05.401 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@__p_1='?' (DbType = Int32), @__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_1) [n].[Id], [n].[Title], [n].[Message], [n].[IsRead], [n].[CreatedAt]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0
+ORDER BY [n].[CreatedAt] DESC
+2026-04-07 12:40:05.412 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:40:05.417 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API) in 37.3012ms
+2026-04-07 12:40:05.431 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:40:05.435 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/notifications - 200 null application/json; charset=utf-8 70.5734ms
+2026-04-07 12:40:09.987 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/user/notifications/read-all - null 0
+2026-04-07 12:40:10.025 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.MarkAllAsRead (SmartCity.API)'
+2026-04-07 12:40:10.030 +05:30 [INF] Route matched with {action = "MarkAllAsRead", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] MarkAllAsRead() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:40:10.054 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT [n].[Id], [n].[CreatedAt], [n].[IsRead], [n].[Message], [n].[RelatedEntityId], [n].[Title], [n].[Type], [n].[UniqueKey], [n].[UserId]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0 AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-07 12:40:10.065 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:40:10.067 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.MarkAllAsRead (SmartCity.API) in 27.3695ms
+2026-04-07 12:40:10.069 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.MarkAllAsRead (SmartCity.API)'
+2026-04-07 12:40:10.070 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/user/notifications/read-all - 200 null application/json; charset=utf-8 83.3986ms
+2026-04-07 12:40:22.776 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:40:22.803 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:40:53.603 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/notifications - null null
+2026-04-07 12:40:53.619 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:40:53.622 +05:30 [INF] Route matched with {action = "GetMyNotifications", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyNotifications() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:40:53.644 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__p_1='?' (DbType = Int32), @__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_1) [n].[Id], [n].[Title], [n].[Message], [n].[IsRead], [n].[CreatedAt]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0
+ORDER BY [n].[CreatedAt] DESC
+2026-04-07 12:40:53.651 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:40:53.656 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API) in 28.0368ms
+2026-04-07 12:40:53.662 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:40:53.665 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/notifications - 200 null application/json; charset=utf-8 62.3674ms
+2026-04-07 12:40:58.679 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/user/notifications/unread-count - null null
+2026-04-07 12:40:58.693 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.UserController.GetUnreadCount (SmartCity.API)'
+2026-04-07 12:40:58.697 +05:30 [INF] Route matched with {action = "GetUnreadCount", controller = "User"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUnreadCount() on controller SmartCity.API.Controllers.UserController (SmartCity.API).
+2026-04-07 12:40:58.718 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0 AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-07 12:40:58.726 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:40:58.731 +05:30 [INF] Executed action SmartCity.API.Controllers.UserController.GetUnreadCount (SmartCity.API) in 25.2878ms
+2026-04-07 12:40:58.740 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.UserController.GetUnreadCount (SmartCity.API)'
+2026-04-07 12:40:58.757 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/user/notifications/unread-count - 200 null application/json; charset=utf-8 79.9941ms
+2026-04-07 12:41:26.576 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-07 12:41:26.878 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 301.1423ms
+2026-04-07 12:41:26.977 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-07 12:41:26.977 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-07 12:41:26.993 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 16.1755ms
+2026-04-07 12:41:27.074 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 97.5239ms
+2026-04-07 12:41:27.134 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-07 12:41:27.190 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 56.4647ms
+2026-04-07 12:41:33.377 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/auth/login - application/json 59
+2026-04-07 12:41:33.405 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-07 12:41:33.423 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginCommand) on controller SmartCity.API.Controllers.AuthController (SmartCity.API).
+2026-04-07 12:41:33.474 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-04-07 12:41:33.614 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [RefreshTokens] ([Id], [CreatedAt], [ExpiryDate], [IsRevoked], [Token], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-04-07 12:41:33.624 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:41:33.635 +05:30 [INF] Executed action SmartCity.API.Controllers.AuthController.Login (SmartCity.API) in 201.8864ms
+2026-04-07 12:41:33.640 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-07 12:41:33.645 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/auth/login - 200 null application/json; charset=utf-8 269.6513ms
+2026-04-07 12:41:50.664 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/worker/notifications - null null
+2026-04-07 12:41:50.675 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:41:50.686 +05:30 [INF] Route matched with {action = "GetMyNotifications", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyNotifications() on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-07 12:41:50.702 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__p_1='?' (DbType = Int32), @__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(@__p_1) [n].[Id], [n].[Title], [n].[Message], [n].[IsRead], [n].[CreatedAt]
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0
+ORDER BY [n].[CreatedAt] DESC
+2026-04-07 12:41:50.709 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:41:50.714 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.GetMyNotifications (SmartCity.API) in 21.167ms
+2026-04-07 12:41:50.716 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.GetMyNotifications (SmartCity.API)'
+2026-04-07 12:41:50.719 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/worker/notifications - 200 null application/json; charset=utf-8 56.1466ms
+2026-04-07 12:42:22.833 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:42:22.856 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:44:22.892 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:44:22.924 +05:30 [INF] Executed DbCommand (28ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:46:22.956 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:46:22.977 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:48:23.010 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:48:23.030 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:50:23.077 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:50:23.103 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:52:23.143 +05:30 [INF] Executed DbCommand (15ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:52:23.164 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:53:03.147 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/worker/notifications/unread-count - null null
+2026-04-07 12:53:03.172 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.GetUnreadCount (SmartCity.API)'
+2026-04-07 12:53:03.182 +05:30 [INF] Route matched with {action = "GetUnreadCount", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetUnreadCount() on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-07 12:53:03.197 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Notifications] AS [n]
+WHERE [n].[UserId] = @__userId_0 AND [n].[IsRead] = CAST(0 AS bit)
+2026-04-07 12:53:03.203 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:53:03.207 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.GetUnreadCount (SmartCity.API) in 20.871ms
+2026-04-07 12:53:03.212 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.GetUnreadCount (SmartCity.API)'
+2026-04-07 12:53:03.215 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/worker/notifications/unread-count - 200 null application/json; charset=utf-8 69.0584ms
+2026-04-07 12:53:30.495 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/worker/issues?pageNumber=1&pageSize=10 - null null
+2026-04-07 12:53:30.518 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API)'
+2026-04-07 12:53:30.535 +05:30 [INF] Route matched with {action = "GetMyIssues", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetMyIssues(Int32, Int32) on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-07 12:53:30.561 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id]
+FROM [Workers] AS [w]
+WHERE [w].[UserId] = @__userId_0
+2026-04-07 12:53:30.581 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__workerId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [Issues] AS [i]
+INNER JOIN [IssueAssignments] AS [i0] ON [i].[Id] = [i0].[IssueId]
+WHERE [i0].[WorkerId] = @__workerId_0
+2026-04-07 12:53:30.608 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__workerId_0='?' (DbType = Guid), @__p_1='?' (DbType = Int32), @__p_2='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[Description], [i].[Location_Latitude], [i].[Location_Longitude], [i].[Status], [i0].[Deadline], [i0].[Salary], [i].[ImagePath], CASE
+    WHEN [i].[Status] = 6 THEN [i].[RejectionReason]
+    ELSE NULL
+END
+FROM [Issues] AS [i]
+INNER JOIN [IssueAssignments] AS [i0] ON [i].[Id] = [i0].[IssueId]
+WHERE [i0].[WorkerId] = @__workerId_0
+ORDER BY [i].[Id] DESC
+OFFSET @__p_1 ROWS FETCH NEXT @__p_2 ROWS ONLY
+2026-04-07 12:53:30.614 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:53:30.638 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API) in 95.3853ms
+2026-04-07 12:53:30.653 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.GetMyIssues (SmartCity.API)'
+2026-04-07 12:53:30.655 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/worker/issues?pageNumber=1&pageSize=10 - 200 null application/json; charset=utf-8 160.3685ms
+2026-04-07 12:54:20.919 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/worker/issues/start - application/json 55
+2026-04-07 12:54:20.938 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.StartIssue (SmartCity.API)'
+2026-04-07 12:54:20.947 +05:30 [INF] Route matched with {action = "StartIssue", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] StartIssue(SmartCity.Application.Features.Issues.Commands.StartIssue.StartIssueCommand) on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-07 12:54:21.001 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__get_Item_0
+2026-04-07 12:54:21.049 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[UserId] = @__userId_0
+2026-04-07 12:54:21.105 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p10='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Issues] SET [AssignedWorkerId] = @p0, [CreatedAt] = @p1, [CreatedByUserId] = @p2, [Description] = @p3, [ImagePath] = @p4, [RejectionReason] = @p5, [ResolvedAt] = @p6, [ResolvedImagePath] = @p7, [Status] = @p8, [Type] = @p9
+OUTPUT 1
+WHERE [Id] = @p10;
+2026-04-07 12:54:21.111 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:54:21.117 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.StartIssue (SmartCity.API) in 164.1209ms
+2026-04-07 12:54:21.120 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.StartIssue (SmartCity.API)'
+2026-04-07 12:54:21.123 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/worker/issues/start - 200 null application/json; charset=utf-8 203.5613ms
+2026-04-07 12:54:23.198 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:54:23.224 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:55:03.044 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/worker/issues/resolve - multipart/form-data; boundary=----WebKitFormBoundaryXgBBkv4RvRmp0B58 19435
+2026-04-07 12:55:03.072 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.WorkerController.ResolveIssue (SmartCity.API)'
+2026-04-07 12:55:03.088 +05:30 [INF] Route matched with {action = "ResolveIssue", controller = "Worker"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] ResolveIssue(SmartCity.Application.Features.Issues.Commands.ResolveIssue.ResolveIssueCommand) on controller SmartCity.API.Controllers.WorkerController (SmartCity.API).
+2026-04-07 12:55:03.133 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__get_Item_0
+2026-04-07 12:55:03.157 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__userId_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[UserId] = @__userId_0
+2026-04-07 12:55:03.191 +05:30 [INF] Executed DbCommand (14ms) [Parameters=[@p10='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Issues] SET [AssignedWorkerId] = @p0, [CreatedAt] = @p1, [CreatedByUserId] = @p2, [Description] = @p3, [ImagePath] = @p4, [RejectionReason] = @p5, [ResolvedAt] = @p6, [ResolvedImagePath] = @p7, [Status] = @p8, [Type] = @p9
+OUTPUT 1
+WHERE [Id] = @p10;
+2026-04-07 12:55:03.223 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-07 12:55:03.244 +05:30 [INF] Executed DbCommand (8ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-07 12:55:03.255 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-07 12:55:03.259 +05:30 [INF] Executed action SmartCity.API.Controllers.WorkerController.ResolveIssue (SmartCity.API) in 161.231ms
+2026-04-07 12:55:03.266 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.WorkerController.ResolveIssue (SmartCity.API)'
+2026-04-07 12:55:03.270 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/worker/issues/resolve - 200 null application/json; charset=utf-8 225.4419ms
+2026-04-07 12:55:10.392 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-07 12:55:10.441 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 49.9962ms
+2026-04-07 12:55:10.447 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-07 12:55:10.447 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-07 12:55:10.461 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 15.699ms
+2026-04-07 12:55:10.510 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 64.5361ms
+2026-04-07 12:55:10.596 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-07 12:55:10.621 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 24.4909ms
+2026-04-07 12:56:23.287 +05:30 [INF] Executed DbCommand (47ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:56:23.313 +05:30 [INF] Executed DbCommand (20ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:58:23.351 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-07 12:58:23.371 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)

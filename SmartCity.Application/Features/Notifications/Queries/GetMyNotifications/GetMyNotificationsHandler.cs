@@ -24,11 +24,23 @@ namespace SmartCity.Application.Features.Notifications.Queries.GetMyNotification
             CancellationToken cancellationToken)
         {
             var userId = _currentUser.UserId;
+            var role = _currentUser.Role; // 🔥 IMPORTANT
 
-            var notifications = await _context.Notifications
-                .Where(n => n.UserId == userId)
+            var query = _context.Notifications.AsQueryable();
+
+            // ✅ ROLE-BASED FILTER
+            if (role == "Admin")
+            {
+                query = query.Where(n => n.UserId == null);
+            }
+            else
+            {
+                query = query.Where(n => n.UserId == userId);
+            }
+
+            var notifications = await query
                 .OrderByDescending(n => n.CreatedAt)
-                .Take(50) // 🔥 prevent overload
+                .Take(50)
                 .Select(n => new NotificationDto
                 {
                     Id = n.Id,

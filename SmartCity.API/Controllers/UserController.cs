@@ -42,40 +42,5 @@ namespace SmartCity.API.Controllers
             return Ok(result);
         }
 
-        // 🔔 GET USER NOTIFICATIONS
-        [HttpGet("notifications")]
-        public async Task<IActionResult> GetMyNotifications()
-        {
-            var result = await _mediator.Send(new GetMyNotificationsQuery());
-
-            return Ok(ApiResponse<object>.SuccessResponse(
-                "Notifications fetched successfully",
-                result
-            ));
-        }
-
-        // 🔔 UNREAD COUNT
-        [HttpGet("notifications/unread-count")]
-        public async Task<IActionResult> GetUnreadCount()
-        {
-            var count = await _mediator.Send(new GetUnreadCountQuery());
-
-            return Ok(ApiResponse<object>.SuccessResponse(
-                "Unread count fetched",
-                new { count }
-            ));
-        }
-
-        // 🔔 MARK ALL AS READ
-        [HttpPost("notifications/read-all")]
-        public async Task<IActionResult> MarkAllAsRead()
-        {
-            var result = await _mediator.Send(new MarkAllAsReadCommand());
-
-            return Ok(ApiResponse<object>.SuccessResponse(
-                "All notifications marked as read",
-                result
-            ));
-        }
     }
 }

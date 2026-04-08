@@ -23,12 +23,20 @@ namespace SmartCity.Application.Features.Notifications.Queries.GetUnreadCount
             CancellationToken cancellationToken)
         {
             var userId = _currentUser.UserId;
+            var role = _currentUser.Role;
 
-            var count = await _context.Notifications
-                .Where(n => n.UserId == userId && !n.IsRead)
-                .CountAsync(cancellationToken);
+            var query = _context.Notifications.AsQueryable();
 
-            return count;
+            if (role == "Admin")
+            {
+                query = query.Where(n => n.UserId == null && !n.IsRead);
+            }
+            else
+            {
+                query = query.Where(n => n.UserId == userId && !n.IsRead);
+            }
+
+            return await query.CountAsync(cancellationToken);
         }
     }
 }

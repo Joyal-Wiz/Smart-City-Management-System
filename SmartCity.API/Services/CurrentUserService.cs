@@ -1,7 +1,9 @@
-﻿using SmartCity.Application.Interfaces;
+﻿using Microsoft.AspNetCore.Http;
+using SmartCity.Application.Interfaces;
+using System;
 using System.Security.Claims;
 
-namespace SmartCity.API.Services
+namespace SmartCity.Infrastructure.Services
 {
     public class CurrentUserService : ICurrentUserService
     {
@@ -18,12 +20,22 @@ namespace SmartCity.API.Services
             {
                 var userId = _httpContextAccessor.HttpContext?
                     .User?
-                    .FindFirstValue(ClaimTypes.NameIdentifier);
+                    .FindFirst(ClaimTypes.NameIdentifier)?
+                    .Value;
 
-                if (string.IsNullOrEmpty(userId))
-                    throw new UnauthorizedAccessException("User is not authenticated");
+                return userId != null ? Guid.Parse(userId) : Guid.Empty;
+            }
+        }
 
-                return Guid.Parse(userId);
+        // 🔥 ADD THIS (FIX)
+        public string Role
+        {
+            get
+            {
+                return _httpContextAccessor.HttpContext?
+                    .User?
+                    .FindFirst(ClaimTypes.Role)?
+                    .Value ?? string.Empty;
             }
         }
     }
