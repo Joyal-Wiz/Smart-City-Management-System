@@ -3,29 +3,35 @@ using SmartCity.Domain.Entities;
 using SmartCity.Domain.Interfaces;
 using SmartCity.Infrastructure.Persistence;
 
-public class UserRepository : IUserRepository
+namespace SmartCity.Infrastructure.Repositories
 {
-    private readonly AppDbContext _context;
-
-    public UserRepository(AppDbContext context)
+    public class UserRepository : IUserRepository   // ✅ CORRECT INTERFACE
     {
-        _context = context;
-    }
+        private readonly AppDbContext _context;
 
-    public async Task AddAsync(User user)
-    {
-        await _context.Users.AddAsync(user);
-        await _context.SaveChangesAsync();
-    }
+        public UserRepository(AppDbContext context)
+        {
+            _context = context;
+        }
 
-    public async Task<User?> GetByEmailAsync(string email)
-    {
-        return await _context.Users
-            .FirstOrDefaultAsync(x => x.Email == email);
-    }
+        // ✅ Add User
+        public async Task AddAsync(User user)
+        {
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
+        }
 
-    public async Task<User?> GetByIdAsync(Guid id)
-    {
-        return await _context.Users.FindAsync(id);
+        // ✅ Get by Email
+        public async Task<User?> GetByEmailAsync(string email)
+        {
+            return await _context.Users
+                .FirstOrDefaultAsync(u => u.Email == email);
+        }
+
+        // ✅ Get by Id
+        public async Task<User?> GetByIdAsync(Guid id)
+        {
+            return await _context.Users.FindAsync(id);
+        }
     }
 }

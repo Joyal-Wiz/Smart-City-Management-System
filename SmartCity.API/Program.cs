@@ -31,7 +31,7 @@ builder.Host.UseSerilog();
 // ✅ ADD SERVICES (BEFORE BUILD)
 builder.Services.AddValidatorsFromAssembly(typeof(RegisterUserValidator).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>(); 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtService, JwtService>();
 builder.Services.AddHttpContextAccessor();
@@ -88,8 +88,8 @@ builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 // ✅ Repository
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IIssueRepository, IssueRepository>();
-
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
