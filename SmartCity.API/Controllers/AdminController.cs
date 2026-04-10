@@ -6,6 +6,8 @@ using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.Commands.AssignIssue;
 using SmartCity.Application.Features.Issues.Commands.ReassignIssue;
 using SmartCity.Application.Features.Issues.Queries.GetAllIssues;
+using SmartCity.Application.Features.Sla.Queries.GetOverdueIssues;
+using SmartCity.Application.Features.Sla.Queries.GetSlaSummary;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
@@ -19,17 +21,17 @@ namespace SmartCity.API.Controllers
     public class AdminController : ControllerBase
     {
         private readonly IMediator _mediator;
-        private readonly NotificationRealtimeService _realtimeService; // 🔥 ADD
+        private readonly NotificationRealtimeService _realtimeService;
 
         public AdminController(
             IMediator mediator,
-            NotificationRealtimeService realtimeService) // 🔥 ADD
+            NotificationRealtimeService realtimeService)
         {
             _mediator = mediator;
-            _realtimeService = realtimeService; // 🔥 ADD
+            _realtimeService = realtimeService;
         }
 
-        // 👷 GET ALL WORKERS
+        //  GET ALL WORKERS
         [HttpGet("workers")]
         public async Task<IActionResult> GetAllWorkers(
             [FromQuery] int pageNumber = 1,
@@ -46,7 +48,7 @@ namespace SmartCity.API.Controllers
             return Ok(ApiResponse<object>.SuccessResponse("Workers fetched successfully", result));
         }
 
-        // 👷 GET PENDING WORKERS
+        //  GET PENDING WORKERS
         [HttpGet("workers/pending")]
         public async Task<IActionResult> GetPendingWorkers()
         {
@@ -55,7 +57,7 @@ namespace SmartCity.API.Controllers
             return Ok(ApiResponse<object>.SuccessResponse("Pending workers fetched", result));
         }
 
-        // 👷 APPROVE WORKER
+        //  APPROVE WORKER
         [HttpPost("workers/approve")]
         public async Task<IActionResult> ApproveWorker([FromBody] ApproveWorkerCommand command)
         {
@@ -64,7 +66,7 @@ namespace SmartCity.API.Controllers
             return Ok(ApiResponse<object>.SuccessResponse("Worker approved successfully", result));
         }
 
-        // 👷 REJECT WORKER
+        //  REJECT WORKER
         [HttpPost("workers/reject")]
         public async Task<IActionResult> RejectWorker([FromBody] RejectWorkerCommand command)
         {
@@ -73,7 +75,7 @@ namespace SmartCity.API.Controllers
             return Ok(ApiResponse<object>.SuccessResponse("Worker rejected successfully", result));
         }
 
-        // 🧾 GET ALL ISSUES
+        //  GET ALL ISSUES
         [HttpGet("issues")]
         public async Task<IActionResult> GetAllIssues([FromQuery] GetAllIssuesQuery query)
         {
@@ -82,40 +84,62 @@ namespace SmartCity.API.Controllers
             return Ok(ApiResponse<object>.SuccessResponse("Issues fetched successfully", result));
         }
 
-        // 🧾 ASSIGN ISSUE (🔥 REAL-TIME ADDED)
+        //  SLA OVERDUE API
+        [HttpGet("issues/overdue")]
+        public async Task<IActionResult> GetOverdueIssues()
+        {
+            var result = await _mediator.Send(new GetOverdueIssuesQuery());
+
+            return Ok(new
+            {
+                message = "Overdue issues fetched successfully",
+                data = result
+            });
+        }
+
+        //  ASSIGN ISSUE (FIXED REAL-TIME)
         [HttpPost("issues/assign")]
         public async Task<IActionResult> AssignIssue([FromBody] AssignIssueCommand command)
         {
             var result = await _mediator.Send(command);
 
-            // 🔥 REAL-TIME → WORKER
-            await _realtimeService.SendAsync(command.WorkerId, new
-            {
-                Title = "New Work Assigned",
-                Message = $"You have been assigned a new issue. Deadline: {command.Deadline}"
-            });
+            //  REAL-TIME → WORKER
+            await _realtimeService.SendAsync(
+                command.WorkerId,
+                $"New Work Assigned. Deadline: {command.Deadline}"
+            );
 
-            // 🔥 REAL-TIME → ADMIN
-            await _realtimeService.SendAsync(null, new
-            {
-                Title = "Issue Assigned",
-                Message = $"Issue assigned to worker {command.WorkerId}"
-            });
+            //  REAL-TIME → ADMIN
+            await _realtimeService.SendAsync(
+                null,
+                $"Issue assigned to worker {command.WorkerId}"
+            );
 
             return Ok(ApiResponse<object>.SuccessResponse("Issue assigned successfully", result));
         }
 
-        // 🧾 REASSIGN ISSUE (🔥 OPTIONAL REAL-TIME)
+        [HttpGet("sla-summary")]
+        public async Task<IActionResult> GetSlaSummary()
+        {
+            var result = await _mediator.Send(new GetSlaSummaryQuery());
+
+            return Ok(new
+            {
+                message = "SLA summary fetched successfully",
+                data = result
+            });
+        }
+
+        //  REASSIGN ISSUE 
         [HttpPost("issues/reassign")]
         public async Task<IActionResult> ReassignIssue([FromBody] ReassignIssueCommand command)
         {
             var result = await _mediator.Send(command);
 
-            await _realtimeService.SendAsync(command.WorkerId, new
-            {
-                Title = "Issue Reassigned",
-                Message = "A new issue has been reassigned to you"
-            });
+            await _realtimeService.SendAsync(
+                command.WorkerId,
+                "A new issue has been reassigned to you"
+            );
 
             return Ok(ApiResponse<object>.SuccessResponse("Issue reassigned successfully", result));
         }

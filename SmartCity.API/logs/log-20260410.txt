@@ -1,0 +1,1999 @@
+2026-04-10 12:11:46.160 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 12:11:46.394 +05:30 [INF] Deadline Checker Service started
+2026-04-10 12:11:47.141 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-10 12:11:47.144 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-10 12:11:47.547 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-10 12:11:47.857 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 12:11:47.860 +05:30 [INF] Hosting environment: Development
+2026-04-10 12:11:47.863 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-10 12:11:48.006 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-10 12:11:48.006 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-10 12:11:48.041 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 572.2634ms
+2026-04-10 12:11:48.067 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 63.0379ms
+2026-04-10 12:11:48.133 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 127.858ms
+2026-04-10 12:11:48.190 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-10 12:11:48.221 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 31.782ms
+2026-04-10 12:11:50.143 +05:30 [INF] Executed DbCommand (186ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 12:11:50.447 +05:30 [WRN] Deadline missed for IssueId: "d3a920a2-abad-4eb6-9c44-4fbc4db5576a"
+2026-04-10 12:11:50.503 +05:30 [INF] Executed DbCommand (12ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 12:11:50.810 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 12:11:50.842 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 12:11:50.857 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 12:11:50.867 +05:30 [WRN] Deadline missed for IssueId: "9f56ab36-80d3-4eb5-b474-b8fb7561c11f"
+2026-04-10 12:11:50.872 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 12:11:50.882 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 12:11:50.951 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime2), @p4='?' (DbType = Boolean), @p5='?' (Size = 4000), @p6='?' (DbType = Guid), @p7='?' (Size = 4000), @p8='?' (Size = 4000), @p9='?' (Size = 4000), @p10='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-04-10 12:11:51.030 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 12:11:51.045 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-04-10 12:13:51.160 +05:30 [INF] Executed DbCommand (21ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 12:13:51.191 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[IsDeadlineNotified], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:01:29.930 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 13:01:30.077 +05:30 [INF] Deadline Checker Service started
+2026-04-10 13:01:30.454 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:01:30.655 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-10 13:01:30.661 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-10 13:01:30.991 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 13:01:30.998 +05:30 [INF] Hosting environment: Development
+2026-04-10 13:01:31.003 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-10 13:03:30.602 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:05:04.199 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-10 13:05:04.693 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 506.8423ms
+2026-04-10 13:05:04.788 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-10 13:05:04.788 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-10 13:05:04.827 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 39.5223ms
+2026-04-10 13:05:04.879 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 91.3341ms
+2026-04-10 13:05:04.939 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-10 13:05:04.980 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 42.5192ms
+2026-04-10 13:05:20.912 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/auth/login - application/json 63
+2026-04-10 13:05:21.105 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-10 13:05:21.160 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginCommand) on controller SmartCity.API.Controllers.AuthController (SmartCity.API).
+2026-04-10 13:05:23.669 +05:30 [INF] Executed DbCommand (87ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-04-10 13:05:24.045 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [RefreshTokens] ([Id], [CreatedAt], [ExpiryDate], [IsRevoked], [Token], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-04-10 13:05:24.090 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:05:24.117 +05:30 [INF] Executed action SmartCity.API.Controllers.AuthController.Login (SmartCity.API) in 2943.3672ms
+2026-04-10 13:05:24.123 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-10 13:05:24.148 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/auth/login - 200 null application/json; charset=utf-8 3235.5888ms
+2026-04-10 13:05:30.675 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:05:40.960 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:05:41.062 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:05:41.082 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:05:41.437 +05:30 [INF] Executed DbCommand (41ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:05:41.448 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:05:41.495 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 405.5772ms
+2026-04-10 13:05:41.504 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:05:41.511 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 550.5941ms
+2026-04-10 13:07:30.710 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:09:30.756 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:09:36.954 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/sla-summary - null null
+2026-04-10 13:09:36.983 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetSlaSummary (SmartCity.API)'
+2026-04-10 13:09:36.995 +05:30 [INF] Route matched with {action = "GetSlaSummary", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetSlaSummary() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:09:37.064 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [IssueAssignments] AS [i]
+2026-04-10 13:09:37.089 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [IssueAssignments] AS [i]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:09:37.158 +05:30 [INF] Executed DbCommand (24ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+WHERE [i].[IsOverdue] = CAST(0 AS bit) AND [i0].[Status] = 4
+2026-04-10 13:09:37.185 +05:30 [INF] Executed DbCommand (11ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT COUNT(*)
+FROM [IssueAssignments] AS [i]
+WHERE [i].[IsOverdue] = CAST(1 AS bit) AND [i].[EscalationLevel] >= 2
+2026-04-10 13:09:37.192 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[SmartCity.Application.DTOs.Sla.SlaSummaryDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]]'.
+2026-04-10 13:09:37.202 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetSlaSummary (SmartCity.API) in 200.3393ms
+2026-04-10 13:09:37.209 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetSlaSummary (SmartCity.API)'
+2026-04-10 13:09:37.215 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/sla-summary - 200 null application/json; charset=utf-8 262.0981ms
+2026-04-10 13:11:30.807 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:13:30.832 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:14:11.476 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 165
+2026-04-10 13:14:11.505 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:14:11.518 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:14:11.597 +05:30 [INF] AssignIssue started for IssueId: "56c0ceda-39d0-400d-903a-64a7df090a23", WorkerId: "c802751b-92bd-4862-9f0a-e05e694a9bd1"
+2026-04-10 13:14:11.681 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__get_Item_0
+2026-04-10 13:14:11.836 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[Id] = @__get_Item_0
+2026-04-10 13:14:11.920 +05:30 [INF] Executed DbCommand (9ms) [Parameters=[@p10='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Issues] SET [AssignedWorkerId] = @p0, [CreatedAt] = @p1, [CreatedByUserId] = @p2, [Description] = @p3, [ImagePath] = @p4, [RejectionReason] = @p5, [ResolvedAt] = @p6, [ResolvedImagePath] = @p7, [Status] = @p8, [Type] = @p9
+OUTPUT 1
+WHERE [Id] = @p10;
+2026-04-10 13:14:12.002 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Int32), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Guid), @p9='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p10='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [IssueAssignments] ([Id], [AssignedAt], [AssignedBy], [Deadline], [EscalatedAt], [EscalationLevel], [IsDeadlineNotified], [IsOverdue], [IssueId], [Salary], [WorkerId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-04-10 13:14:12.034 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:14:12.079 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:14:12.088 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:14:12.094 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:14:12.108 +05:30 [INF] Issue "56c0ceda-39d0-400d-903a-64a7df090a23" assigned to Worker "c802751b-92bd-4862-9f0a-e05e694a9bd1"
+2026-04-10 13:14:12.112 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:14:12.121 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 596.5008ms
+2026-04-10 13:14:12.123 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:14:12.126 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 200 null application/json; charset=utf-8 663.3785ms
+2026-04-10 13:15:30.879 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:15:31.058 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:15:31.085 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:15:31.089 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:15:31.118 +05:30 [INF] Executed DbCommand (16ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:15:31.128 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:15:31.132 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 36.8632ms
+2026-04-10 13:15:31.156 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:15:31.161 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 103.3165ms
+2026-04-10 13:15:49.496 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 13:15:49.593 +05:30 [INF] Deadline Checker Service started
+2026-04-10 13:15:50.246 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:15:50.386 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-10 13:15:50.390 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-10 13:15:50.516 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 13:15:50.519 +05:30 [INF] Hosting environment: Development
+2026-04-10 13:15:50.530 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-10 13:15:50.548 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:15:50.748 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:15:50.774 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:15:52.750 +05:30 [INF] Executed DbCommand (42ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:15:52.811 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:15:52.843 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 2058.0028ms
+2026-04-10 13:15:52.848 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:15:52.865 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 2335.0384ms
+2026-04-10 13:15:57.901 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/index.html - null null
+2026-04-10 13:15:58.357 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/index.html - 200 null text/html;charset=utf-8 455.8895ms
+2026-04-10 13:15:58.460 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-10 13:15:58.460 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/_vs/browserLink - null null
+2026-04-10 13:15:58.485 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 25.8561ms
+2026-04-10 13:15:58.598 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/_vs/browserLink - 200 null text/javascript; charset=UTF-8 138.8443ms
+2026-04-10 13:15:58.659 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - null null
+2026-04-10 13:15:58.710 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 51.0409ms
+2026-04-10 13:16:00.373 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:16:10.055 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/auth/login - application/json 63
+2026-04-10 13:16:10.068 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-10 13:16:10.106 +05:30 [INF] Route matched with {action = "Login", controller = "Auth"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] Login(LoginCommand) on controller SmartCity.API.Controllers.AuthController (SmartCity.API).
+2026-04-10 13:16:10.349 +05:30 [INF] Executed DbCommand (34ms) [Parameters=[@__email_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [u].[Id], [u].[Email], [u].[IsBlocked], [u].[Name], [u].[PasswordHash], [u].[PhoneNumber], [u].[Role]
+FROM [Users] AS [u]
+WHERE [u].[Email] = @__email_0
+2026-04-10 13:16:10.419 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:16:10.709 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Boolean), @p4='?' (Size = 4000), @p5='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [RefreshTokens] ([Id], [CreatedAt], [ExpiryDate], [IsRevoked], [Token], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5);
+2026-04-10 13:16:10.732 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:16:10.742 +05:30 [INF] Executed action SmartCity.API.Controllers.AuthController.Login (SmartCity.API) in 628.1864ms
+2026-04-10 13:16:10.745 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AuthController.Login (SmartCity.API)'
+2026-04-10 13:16:10.747 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/auth/login - 200 null application/json; charset=utf-8 691.7452ms
+2026-04-10 13:16:20.478 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:16:22.894 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:16:22.910 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:16:22.914 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:16:22.942 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:16:22.949 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:16:22.954 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 34.2579ms
+2026-04-10 13:16:22.958 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:16:22.961 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 66.6192ms
+2026-04-10 13:16:30.538 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:16:40.603 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:16:50.649 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:17:00.673 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:17:10.725 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:17:20.758 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:17:30.807 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:17:40.857 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:17:50.909 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:18:00.956 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:18:10.989 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:18:21.017 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:18:31.065 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:18:41.100 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:18:51.140 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:19:01.186 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:19:06.601 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 164
+2026-04-10 13:19:06.614 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:19:06.627 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:19:06.985 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 349.9854ms
+2026-04-10 13:19:06.990 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:19:07.042 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 500 null application/json 442.1969ms
+2026-04-10 13:19:11.224 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:19:21.269 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:19:31.311 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:19:41.383 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:19:51.423 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:20:01.460 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:20:11.502 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:20:13.110 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 164
+2026-04-10 13:20:13.141 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:20:13.147 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:20:13.178 +05:30 [INF] AssignIssue started for IssueId: "8cd9e14f-3f70-46a7-844a-ff4ee2b2cdad", WorkerId: "27c9deb9-d9c5-4a1a-99ad-8a9acbf28a04"
+2026-04-10 13:20:13.256 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__get_Item_0
+2026-04-10 13:20:13.370 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[Id] = @__get_Item_0
+2026-04-10 13:20:13.436 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p10='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Issues] SET [AssignedWorkerId] = @p0, [CreatedAt] = @p1, [CreatedByUserId] = @p2, [Description] = @p3, [ImagePath] = @p4, [RejectionReason] = @p5, [ResolvedAt] = @p6, [ResolvedImagePath] = @p7, [Status] = @p8, [Type] = @p9
+OUTPUT 1
+WHERE [Id] = @p10;
+2026-04-10 13:20:13.503 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Int32), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Guid), @p9='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p10='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [IssueAssignments] ([Id], [AssignedAt], [AssignedBy], [Deadline], [EscalatedAt], [EscalationLevel], [IsDeadlineNotified], [IsOverdue], [IssueId], [Salary], [WorkerId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-04-10 13:20:13.540 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:20:13.589 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:20:13.597 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:20:13.604 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:20:13.609 +05:30 [INF] Issue "8cd9e14f-3f70-46a7-844a-ff4ee2b2cdad" assigned to Worker "27c9deb9-d9c5-4a1a-99ad-8a9acbf28a04"
+2026-04-10 13:20:13.614 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:20:13.623 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 465.695ms
+2026-04-10 13:20:13.625 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:20:13.627 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 200 null application/json; charset=utf-8 517.7134ms
+2026-04-10 13:20:21.548 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:20:31.578 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:20:41.604 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:20:51.641 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:21:01.675 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:21:11.710 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:21:21.743 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:21:31.790 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:21:41.837 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:21:51.872 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:22:01.902 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:22:11.935 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:22:21.957 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:22:31.992 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: No service for type 'SmartCity.Application.Interfaces.INotificationRealtimeService' has been registered.
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService(IServiceProvider provider, Type serviceType)
+   at Microsoft.Extensions.DependencyInjection.ServiceProviderServiceExtensions.GetRequiredService[T](IServiceProvider provider)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 37
+2026-04-10 13:22:38.426 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 13:22:38.486 +05:30 [INF] Deadline Checker Service started
+2026-04-10 13:22:38.721 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-10 13:22:38.725 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-10 13:22:38.823 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 13:22:38.825 +05:30 [INF] Hosting environment: Development
+2026-04-10 13:22:38.828 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-10 13:22:40.615 +05:30 [INF] Executed DbCommand (72ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:22:40.714 +05:30 [INF] Executed DbCommand (18ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:22:40.936 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:41.103 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:22:41.123 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:41.132 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:22:41.141 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:41.147 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:22:41.151 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:41.158 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:22:51.209 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:22:51.215 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:22:51.221 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:51.225 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:51.229 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:22:51.234 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:01.320 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:01.326 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:01.332 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:01.337 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:01.344 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:01.351 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:08.767 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:23:09.024 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:23:09.087 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:23:09.147 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:23:09.170 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:23:09.205 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 106.8544ms
+2026-04-10 13:23:09.211 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:23:09.226 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 470.5744ms
+2026-04-10 13:23:11.155 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:23:11.184 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:23:11.192 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:23:11.219 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:23:11.242 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:23:11.253 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 54.3396ms
+2026-04-10 13:23:11.262 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:23:11.270 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 115.2162ms
+2026-04-10 13:23:11.363 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:11.382 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:11.397 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:11.408 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:11.418 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:11.431 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:21.465 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:21.483 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:21.495 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:21.508 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:21.521 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:21.531 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:31.554 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:31.559 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:31.563 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:31.567 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:31.572 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:31.575 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:41.580 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:41.588 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:41.597 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:41.606 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:41.614 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:41.619 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:51.635 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:51.646 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:23:51.651 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:51.654 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:51.657 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:23:51.660 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:01.676 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:01.724 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:01.745 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:01.762 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:01.780 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:01.797 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:10.788 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 164
+2026-04-10 13:24:10.819 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:24:10.848 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:24:11.165 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 307.6629ms
+2026-04-10 13:24:11.169 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:24:11.202 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 500 null application/json 413.4887ms
+2026-04-10 13:24:11.826 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:11.833 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:11.837 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:11.842 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:11.845 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:11.849 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:21.867 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:21.881 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:21.895 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:21.906 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:21.914 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:21.921 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:31.942 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:31.954 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:31.962 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:31.968 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:31.979 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:31.985 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:42.005 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:42.028 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:42.052 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:42.065 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:42.076 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:42.086 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:52.105 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:52.118 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:24:52.130 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:52.137 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:52.143 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:24:52.149 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:02.157 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:02.164 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:02.173 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:02.180 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:02.194 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:02.206 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:12.227 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:12.235 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:12.241 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:12.246 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:12.250 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:12.254 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:21.844 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 164
+2026-04-10 13:25:21.877 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:25:21.880 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:25:21.899 +05:30 [INF] AssignIssue started for IssueId: "8cd9e14f-3f70-46a7-844a-ff4ee2b2cdad", WorkerId: "27c9deb9-d9c5-4a1a-99ad-8a9acbf28a04"
+2026-04-10 13:25:21.947 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__get_Item_0
+2026-04-10 13:25:21.976 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[Id] = @__get_Item_0
+2026-04-10 13:25:22.144 +05:30 [WRN] AssignIssue domain error: Issue must be in Reported state to assign
+2026-04-10 13:25:22.347 +05:30 [INF] Executed DbCommand (39ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:22.364 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 478.3462ms
+2026-04-10 13:25:22.375 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:22.378 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:25:22.386 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:22.545 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 400 null application/json 700.7855ms
+2026-04-10 13:25:22.552 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:22.575 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:22.595 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:32.627 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:32.639 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:32.649 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:32.657 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:32.661 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:32.666 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:39.579 +05:30 [INF] Request starting HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - application/json 164
+2026-04-10 13:25:39.593 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:25:39.597 +05:30 [INF] Route matched with {action = "AssignIssue", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] AssignIssue(SmartCity.Application.Features.Issues.Commands.AssignIssue.AssignIssueCommand) on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:25:39.608 +05:30 [INF] AssignIssue started for IssueId: "8b96457b-c9dd-4afb-aa6c-70c423248f4d", WorkerId: "27c9deb9-d9c5-4a1a-99ad-8a9acbf28a04"
+2026-04-10 13:25:39.619 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [i].[Id], [i].[AssignedWorkerId], [i].[CreatedAt], [i].[CreatedByUserId], [i].[Description], [i].[ImagePath], [i].[RejectionReason], [i].[ResolvedAt], [i].[ResolvedImagePath], [i].[Status], [i].[Type], [i].[Location_Latitude], [i].[Location_Longitude]
+FROM [Issues] AS [i]
+WHERE [i].[Id] = @__get_Item_0
+2026-04-10 13:25:39.637 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__get_Item_0='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SELECT TOP(1) [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [Workers] AS [w]
+WHERE [w].[Id] = @__get_Item_0
+2026-04-10 13:25:39.691 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p10='?' (DbType = Guid), @p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (Size = 4000), @p4='?' (Size = 4000), @p5='?' (Size = 4000), @p6='?' (DbType = DateTime2), @p7='?' (Size = 4000), @p8='?' (DbType = Int32), @p9='?' (DbType = Int32)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [Issues] SET [AssignedWorkerId] = @p0, [CreatedAt] = @p1, [CreatedByUserId] = @p2, [Description] = @p3, [ImagePath] = @p4, [RejectionReason] = @p5, [ResolvedAt] = @p6, [ResolvedImagePath] = @p7, [Status] = @p8, [Type] = @p9
+OUTPUT 1
+WHERE [Id] = @p10;
+2026-04-10 13:25:39.774 +05:30 [INF] Executed DbCommand (5ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Guid), @p3='?' (DbType = DateTime2), @p4='?' (DbType = DateTime2), @p5='?' (DbType = Int32), @p6='?' (DbType = Boolean), @p7='?' (DbType = Boolean), @p8='?' (DbType = Guid), @p9='?' (Precision = 18) (Scale = 2) (DbType = Decimal), @p10='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [IssueAssignments] ([Id], [AssignedAt], [AssignedBy], [Deadline], [EscalatedAt], [EscalationLevel], [IsDeadlineNotified], [IsOverdue], [IssueId], [Salary], [WorkerId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8, @p9, @p10);
+2026-04-10 13:25:39.786 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:39.820 +05:30 [INF] Executed DbCommand (19ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:25:39.862 +05:30 [INF] Executed DbCommand (6ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:39.897 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:25:39.904 +05:30 [INF] Issue "8b96457b-c9dd-4afb-aa6c-70c423248f4d" assigned to Worker "27c9deb9-d9c5-4a1a-99ad-8a9acbf28a04"
+2026-04-10 13:25:39.917 +05:30 [INF] Executing OkObjectResult, writing value of type 'SmartCity.Application.DTOs.ApiResponse`1[[System.Object, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:25:39.957 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API) in 357.0958ms
+2026-04-10 13:25:39.961 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.AssignIssue (SmartCity.API)'
+2026-04-10 13:25:39.963 +05:30 [INF] Request finished HTTP/2 POST https://localhost:7116/api/Admin/issues/assign - 200 null application/json; charset=utf-8 384.1902ms
+2026-04-10 13:25:42.683 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:42.696 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:42.707 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:42.722 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:25:42.731 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:42.738 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:42.746 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:42.754 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:52.769 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:52.779 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:25:52.784 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:52.790 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:52.797 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:52.802 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:25:52.808 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:05.053 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 13:26:05.132 +05:30 [INF] Deadline Checker Service started
+2026-04-10 13:26:05.527 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-10 13:26:05.530 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-10 13:26:05.594 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 13:26:05.597 +05:30 [INF] Hosting environment: Development
+2026-04-10 13:26:05.600 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-10 13:26:06.682 +05:30 [INF] Executed DbCommand (50ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:06.785 +05:30 [WRN] Deadline missed for IssueId: "8b96457b-c9dd-4afb-aa6c-70c423248f4d"
+2026-04-10 13:26:06.804 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:06.921 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p3='?' (DbType = Guid), @p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p4='?' (DbType = Guid), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Boolean), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [EscalatedAt] = @p0, [EscalationLevel] = @p1, [IsOverdue] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2026-04-10 13:26:06.945 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:06.953 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-10 13:26:06.972 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:06.987 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:06.992 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:07.002 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:07.008 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:07.027 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-04-10 13:26:17.065 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:17.073 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:17.078 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:17.084 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:17.089 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:17.093 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:27.180 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:27.187 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:27.192 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:27.196 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:27.200 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:27.204 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:37.232 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:37.258 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:37.279 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:37.291 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:37.304 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:37.319 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:38.105 +05:30 [INF] Request starting HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - null null
+2026-04-10 13:26:38.554 +05:30 [INF] Executing endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:26:38.612 +05:30 [INF] Route matched with {action = "GetOverdueIssues", controller = "Admin"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetOverdueIssues() on controller SmartCity.API.Controllers.AdminController (SmartCity.API).
+2026-04-10 13:26:38.691 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[IssueId], [i0].[Description], [i].[WorkerId], [u].[Name], [i].[Deadline], [i].[EscalationLevel]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+INNER JOIN [Users] AS [u] ON [w].[UserId] = [u].[Id]
+WHERE [i].[IsOverdue] = CAST(1 AS bit)
+2026-04-10 13:26:38.723 +05:30 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType0`2[[System.String, System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Collections.Generic.List`1[[SmartCity.Application.DTOs.Sla.OverdueIssueDto, SmartCity.Application, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null]], System.Private.CoreLib, Version=8.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-04-10 13:26:38.773 +05:30 [INF] Executed action SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API) in 145.0563ms
+2026-04-10 13:26:38.783 +05:30 [INF] Executed endpoint 'SmartCity.API.Controllers.AdminController.GetOverdueIssues (SmartCity.API)'
+2026-04-10 13:26:38.804 +05:30 [INF] Request finished HTTP/2 GET https://localhost:7116/api/Admin/issues/overdue - 200 null application/json; charset=utf-8 734.9569ms
+2026-04-10 13:26:47.346 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:47.361 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:47.375 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:47.384 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:47.394 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:47.401 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:57.424 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:57.441 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:26:57.454 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:57.460 +05:30 [INF] Executed DbCommand (0ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:57.464 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:26:57.476 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:27:05.723 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-10 13:27:05.854 +05:30 [INF] Deadline Checker Service started
+2026-04-10 13:27:06.384 +05:30 [INF] Now listening on: https://localhost:7116
+2026-04-10 13:27:06.386 +05:30 [INF] Now listening on: http://localhost:5193
+2026-04-10 13:27:06.523 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-10 13:27:06.530 +05:30 [INF] Hosting environment: Development
+2026-04-10 13:27:06.538 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-10 13:27:08.788 +05:30 [INF] Executed DbCommand (71ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:27:08.841 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-10 13:27:09.075 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:27:09.100 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:27:09.107 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-10 13:27:09.114 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END

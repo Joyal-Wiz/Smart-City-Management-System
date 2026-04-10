@@ -33,61 +33,90 @@ namespace SmartCity.Infrastructure.Services
                     var context = scope.ServiceProvider.GetRequiredService<IApplicationDbContext>();
                     var notificationService = scope.ServiceProvider.GetRequiredService<INotificationService>();
 
+                    //  NEW: Real-time service
+                    var realtimeService = scope.ServiceProvider.GetRequiredService<INotificationRealtimeService>();
+
                     var now = DateTime.UtcNow;
 
-                    // 🔥 DEADLINE MISSED
-                    var expiredIssues = await context.IssueAssignments
+                    //  DEADLINE MISSED (SLA + REAL-TIME)
+                    var expiredAssignments = await context.IssueAssignments
                         .Include(a => a.Issue)
                         .Include(a => a.Worker)
                         .Where(a =>
                             a.Deadline < now &&
                             a.Issue.Status != IssueStatus.Resolved &&
-                            a.IsDeadlineNotified == false)
+                            !a.IsDeadlineNotified)
                         .ToListAsync(stoppingToken);
 
-                    foreach (var assignment in expiredIssues)
+                    foreach (var assignment in expiredAssignments)
                     {
                         _logger.LogWarning("Deadline missed for IssueId: {IssueId}", assignment.IssueId);
 
-                        // 🔹 ADMIN NOTIFICATION
+                        //  SLA STATE UPDATE
+                        assignment.IsOverdue = true;
+                        assignment.EscalationLevel = 1;
+                        assignment.EscalatedAt = now;
+
+                        var adminMessage = $"Issue {assignment.IssueId} was not completed before deadline";
+                        var workerMessage = $"You missed the deadline for issue {assignment.IssueId}";
+
+                        //  ADMIN NOTIFICATION (DB)
                         await notificationService.CreateAsync(
                             "Deadline Missed",
-                            $"Issue {assignment.IssueId} was not completed before deadline",
+                            adminMessage,
                             "Issue",
                             assignment.IssueId
                         );
 
-                        // 🔹 WORKER NOTIFICATION
+                        //  REAL-TIME → ADMIN
+                        await realtimeService.SendAsync(null, adminMessage);
+
+                        //  WORKER NOTIFICATION (DB)
                         await notificationService.CreateAsync(
                             "Deadline Missed",
-                            $"You missed the deadline for issue {assignment.IssueId}",
+                            workerMessage,
                             "Issue",
                             assignment.IssueId,
                             assignment.Worker.UserId
                         );
 
+                        //  REAL-TIME → WORKER
+                        await realtimeService.SendAsync(
+                            assignment.Worker.UserId,
+                            workerMessage
+                        );
+
+                        //  Prevent duplicate alerts
                         assignment.IsDeadlineNotified = true;
                     }
 
-                    // 🔥 DEADLINE NEAR (WITHIN 2 HOURS)
-                    var nearDeadlineIssues = await context.IssueAssignments
+                    //  DEADLINE NEAR (10 HOURS BEFORE)
+                    var nearDeadlineAssignments = await context.IssueAssignments
                         .Include(a => a.Issue)
                         .Include(a => a.Worker)
                         .Where(a =>
                             a.Deadline > now &&
-                            a.Deadline <= now.AddHours(2) &&
+                            a.Deadline <= now.AddHours(10) &&
                             a.Issue.Status != IssueStatus.Resolved &&
-                            a.IsDeadlineNotified == false)
+                            !a.IsDeadlineNotified)
                         .ToListAsync(stoppingToken);
 
-                    foreach (var assignment in nearDeadlineIssues)
+                    foreach (var assignment in nearDeadlineAssignments)
                     {
+                        var message = $"Your issue deadline is near: {assignment.Deadline}";
+
                         await notificationService.CreateAsync(
                             "Deadline Approaching",
-                            $"Your issue deadline is near: {assignment.Deadline}",
+                            message,
                             "Issue",
                             assignment.IssueId,
                             assignment.Worker.UserId
+                        );
+
+                        // REAL-TIME → WORKER
+                        await realtimeService.SendAsync(
+                            assignment.Worker.UserId,
+                            message
                         );
                     }
 

@@ -17,7 +17,6 @@ namespace SmartCity.Domain.Interfaces
         // 🔹 Update
         Task UpdateAsync(Issue issue);
 
-        // 🔥 Map Feature (NO PAGED RESULT HERE ❗)
         Task<(List<Issue> Items, int TotalCount)> GetIssuesForMapAsync(
             double latitude,
             double longitude,

@@ -20,7 +20,7 @@ namespace SmartCity.API.Controllers
             _mediator = mediator;
         }
 
-        // 🧾 CREATE ISSUE (Citizen Only)
+        //  CREATE ISSUE (Citizen Only)
         [HttpPost]
         [Authorize(Roles = "Citizen")]
         public async Task<IActionResult> CreateIssue([FromForm] CreateIssueCommand command)
@@ -38,7 +38,7 @@ namespace SmartCity.API.Controllers
             ));
         }
 
-        // 🔥 MAP FEATURE — GET ISSUES BY LOCATION
+        //  MAP FEATURE — GET ISSUES BY LOCATION
         [HttpGet("map")]
         public async Task<IActionResult> GetIssuesForMap(
             [FromQuery] double lat,

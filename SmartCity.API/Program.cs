@@ -28,7 +28,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Host.UseSerilog(); 
 
 
-// ✅ ADD SERVICES (BEFORE BUILD)
+//  SERVICES
 builder.Services.AddValidatorsFromAssembly(typeof(RegisterUserValidator).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
 builder.Services.AddScoped<IUserRepository, UserRepository>(); 
@@ -42,11 +42,11 @@ builder.Services.AddValidatorsFromAssembly(typeof(CreateIssueValidator).Assembly
 builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 builder.Services.AddScoped<IIssueAssignmentRepository, IssueAssignmentRepository>();
 builder.Services.AddHttpContextAccessor();
-builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddHostedService<DeadlineCheckerService>();
 builder.Services.AddSignalR();
 builder.Services.AddScoped<NotificationRealtimeService>();
+builder.Services.AddScoped<INotificationRealtimeService, NotificationRealtimeService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
@@ -77,17 +77,17 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-// ✅ MediatR (v12 syntax)
+// MediatR 
 builder.Services.AddMediatR(cfg =>
 {
     cfg.RegisterServicesFromAssembly(typeof(CreateIssueCommand).Assembly);
 });
 
-// ✅ DbContext
+// DbContext
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
-// ✅ Repository
+//  Repository
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IIssueRepository, IssueRepository>();
 
@@ -115,10 +115,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-// ✅ BUILD APP
+//  BUILD APP
 var app = builder.Build();
 
-// ✅ MIDDLEWARE
+// MIDDLEWARE
 app.UseMiddleware<ExceptionMiddleware>();
 app.UseMiddleware<SmartCity.API.Middleware.ExceptionMiddleware>();
 
@@ -135,7 +135,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 app.UseAuthorization();
 
-// ✅ MAP CONTROLLERS
+//  MAP CONTROLLERS
 app.MapControllers();
 app.MapHub<SmartCity.API.Hubs.NotificationHub>("/hubs/notifications");
 

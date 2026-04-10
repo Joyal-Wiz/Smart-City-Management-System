@@ -9,8 +9,10 @@ namespace SmartCity.Domain.Entities
         public Issue Issue { get; set; }
 
         public Guid IssueId { get; set; }
+
         public Guid WorkerId { get; set; }
-        public Worker Worker { get; set; } 
+
+        public Worker Worker { get; set; }
 
         public DateTime Deadline { get; private set; }
 
@@ -19,6 +21,13 @@ namespace SmartCity.Domain.Entities
         public DateTime AssignedAt { get; private set; }
 
         public Guid AssignedBy { get; private set; }
+
+        public bool IsOverdue { get; set; } = false;
+
+        public int EscalationLevel { get; set; } = 0;
+
+        public DateTime? EscalatedAt { get; set; }
+
         public bool IsDeadlineNotified { get; set; } = false;
 
         private IssueAssignment() { }
@@ -53,7 +62,10 @@ namespace SmartCity.Domain.Entities
                 Deadline = deadline,
                 Salary = salary,
                 AssignedAt = DateTime.UtcNow,
-                AssignedBy = assignedBy
+                AssignedBy = assignedBy,
+                IsOverdue = false,
+                EscalationLevel = 0,
+                IsDeadlineNotified = false
             };
         }
     }

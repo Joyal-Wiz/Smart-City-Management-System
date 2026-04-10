@@ -1,9 +1,10 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using SmartCity.API.Hubs;
+using SmartCity.Application.Interfaces;
 
 namespace SmartCity.API.Services
 {
-    public class NotificationRealtimeService
+    public class NotificationRealtimeService : INotificationRealtimeService
     {
         private readonly IHubContext<NotificationHub> _hubContext;
 
@@ -12,23 +13,23 @@ namespace SmartCity.API.Services
             _hubContext = hubContext;
         }
 
-        public async Task SendAsync(Guid? userId, object notification)
+        public async Task SendAsync(Guid? userId, string message)
         {
-            Console.WriteLine("🔥 REALTIME TRIGGERED");
+            Console.WriteLine("REALTIME TRIGGERED");
 
             if (userId == null)
             {
-                Console.WriteLine("👉 Sending to Admins");
+                Console.WriteLine("Sending to Admins");
 
                 await _hubContext.Clients.Group("Admins")
-                    .SendAsync("ReceiveNotification", notification);
+                    .SendAsync("ReceiveNotification", message);
             }
             else
             {
-                Console.WriteLine($"👉 Sending to User: {userId}");
+                Console.WriteLine($"Sending to User: {userId}");
 
                 await _hubContext.Clients.Group(userId.ToString())
-                    .SendAsync("ReceiveNotification", notification);
+                    .SendAsync("ReceiveNotification", message);
             }
         }
     }
