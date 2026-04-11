@@ -205,18 +205,6 @@ namespace SmartCity.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Users");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = new Guid("11111111-1111-1111-1111-111111111111"),
-                            Email = "admin@smartcity.com",
-                            IsBlocked = false,
-                            Name = "Admin",
-                            PasswordHash = "6G94qKPK8LYNjnTllCqm2G3BUM08AzOK7yW30tfjrMc=",
-                            PhoneNumber = "9999999999",
-                            Role = 3
-                        });
                 });
 
             modelBuilder.Entity("SmartCity.Domain.Entities.Worker", b =>

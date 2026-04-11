@@ -66,20 +66,7 @@ namespace SmartCity.Infrastructure.Persistence
                 .HasOne(ia => ia.Worker)
                 .WithMany(w => w.Assignments)
                 .HasForeignKey(ia => ia.WorkerId)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            // 🔹 Seed Admin
-            var adminId = Guid.Parse("11111111-1111-1111-1111-111111111111");
-
-            modelBuilder.Entity<User>().HasData(new User
-            {
-                Id = adminId,
-                Name = "Admin",
-                Email = "admin@smartcity.com",
-                PhoneNumber = "9999999999",
-                PasswordHash = "6G94qKPK8LYNjnTllCqm2G3BUM08AzOK7yW30tfjrMc=",
-                Role = UserRole.Admin
-            });
+                .OnDelete(DeleteBehavior.Restrict);          
         }
     }
 }

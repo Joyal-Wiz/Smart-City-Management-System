@@ -140,11 +140,6 @@ namespace SmartCity.Infrastructure.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
-            migrationBuilder.InsertData(
-                table: "Users",
-                columns: new[] { "Id", "Email", "IsBlocked", "Name", "PasswordHash", "PhoneNumber", "Role" },
-                values: new object[] { new Guid("11111111-1111-1111-1111-111111111111"), "admin@smartcity.com", false, "Admin", "6G94qKPK8LYNjnTllCqm2G3BUM08AzOK7yW30tfjrMc=", "9999999999", 3 });
-
             migrationBuilder.CreateIndex(
                 name: "IX_IssueAssignments_IssueId",
                 table: "IssueAssignments",
