@@ -1,0 +1,161 @@
+2026-04-11 11:44:31.391 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-11 11:44:31.543 +05:30 [INF] Deadline Checker Service started
+2026-04-11 11:44:31.948 +05:30 [INF] Now listening on: http://[::]:5000
+2026-04-11 11:44:32.133 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-11 11:44:32.139 +05:30 [INF] Hosting environment: Development
+2026-04-11 11:44:32.143 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-11 11:44:34.558 +05:30 [INF] Executed DbCommand (106ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-11 11:44:34.803 +05:30 [WRN] Deadline missed for IssueId: "12d6bebb-c522-4fa0-833c-28264d0676d1"
+2026-04-11 11:44:34.836 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.002 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p3='?' (DbType = Guid), @p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p4='?' (DbType = Guid), @p5='?' (DbType = DateTime2), @p6='?' (DbType = Boolean), @p7='?' (Size = 4000), @p8='?' (DbType = Guid), @p9='?' (Size = 4000), @p10='?' (Size = 4000), @p11='?' (Size = 4000), @p12='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [EscalatedAt] = @p0, [EscalationLevel] = @p1, [IsOverdue] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p4, @p5, @p6, @p7, @p8, @p9, @p10, @p11, @p12);
+2026-04-11 11:44:35.033 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.045 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-11 11:44:35.059 +05:30 [WRN] Deadline missed for IssueId: "56c0ceda-39d0-400d-903a-64a7df090a23"
+2026-04-11 11:44:35.066 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.095 +05:30 [INF] Executed DbCommand (13ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p5='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime2), @p8='?' (DbType = Boolean), @p9='?' (Size = 4000), @p10='?' (DbType = Guid), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [IssueAssignments] SET [EscalatedAt] = @p2, [EscalationLevel] = @p3, [IsOverdue] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-04-11 11:44:35.104 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.113 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-11 11:44:35.120 +05:30 [WRN] Deadline missed for IssueId: "8cd9e14f-3f70-46a7-844a-ff4ee2b2cdad"
+2026-04-11 11:44:35.125 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.137 +05:30 [INF] Executed DbCommand (3ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean), @p5='?' (DbType = Guid), @p2='?' (DbType = DateTime2), @p3='?' (DbType = Int32), @p4='?' (DbType = Boolean), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime2), @p8='?' (DbType = Boolean), @p9='?' (Size = 4000), @p10='?' (DbType = Guid), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+UPDATE [IssueAssignments] SET [EscalatedAt] = @p2, [EscalationLevel] = @p3, [IsOverdue] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-04-11 11:44:35.144 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.154 +05:30 [INF] Executed DbCommand (4ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-11 11:44:35.160 +05:30 [WRN] Deadline missed for IssueId: "1dccb504-4882-43a0-b39d-32537c5cdae2"
+2026-04-11 11:44:35.163 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.189 +05:30 [INF] Executed DbCommand (17ms) [Parameters=[@p3='?' (DbType = Guid), @p0='?' (DbType = DateTime2), @p1='?' (DbType = Int32), @p2='?' (DbType = Boolean), @p5='?' (DbType = Guid), @p4='?' (DbType = Boolean), @p6='?' (DbType = Guid), @p7='?' (DbType = DateTime2), @p8='?' (DbType = Boolean), @p9='?' (Size = 4000), @p10='?' (DbType = Guid), @p11='?' (Size = 4000), @p12='?' (Size = 4000), @p13='?' (Size = 4000), @p14='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [EscalatedAt] = @p0, [EscalationLevel] = @p1, [IsOverdue] = @p2
+OUTPUT 1
+WHERE [Id] = @p3;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p4
+OUTPUT 1
+WHERE [Id] = @p5;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p6, @p7, @p8, @p9, @p10, @p11, @p12, @p13, @p14);
+2026-04-11 11:44:35.201 +05:30 [INF] Executed DbCommand (1ms) [Parameters=[@__uniqueKey_0='?' (Size = 4000)], CommandType='"Text"', CommandTimeout='30']
+SELECT CASE
+    WHEN EXISTS (
+        SELECT 1
+        FROM [Notifications] AS [n]
+        WHERE [n].[UniqueKey] = @__uniqueKey_0) THEN CAST(1 AS bit)
+    ELSE CAST(0 AS bit)
+END
+2026-04-11 11:44:35.212 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime2), @p2='?' (DbType = Boolean), @p3='?' (Size = 4000), @p4='?' (DbType = Guid), @p5='?' (Size = 4000), @p6='?' (Size = 4000), @p7='?' (Size = 4000), @p8='?' (DbType = Guid)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+INSERT INTO [Notifications] ([Id], [CreatedAt], [IsRead], [Message], [RelatedEntityId], [Title], [Type], [UniqueKey], [UserId])
+VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6, @p7, @p8);
+2026-04-11 11:44:35.268 +05:30 [INF] Executed DbCommand (10ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-11 11:44:35.284 +05:30 [INF] Executed DbCommand (7ms) [Parameters=[@p1='?' (DbType = Guid), @p0='?' (DbType = Boolean)], CommandType='"Text"', CommandTimeout='30']
+SET IMPLICIT_TRANSACTIONS OFF;
+SET NOCOUNT ON;
+UPDATE [IssueAssignments] SET [IsDeadlineNotified] = @p0
+OUTPUT 1
+WHERE [Id] = @p1;
+2026-04-11 11:46:35.393 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] < @__now_0 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-11 11:46:35.401 +05:30 [INF] Executed DbCommand (2ms) [Parameters=[@__now_0='?' (DbType = DateTime2), @__AddHours_1='?' (DbType = DateTime2)], CommandType='"Text"', CommandTimeout='30']
+SELECT [i].[Id], [i].[AssignedAt], [i].[AssignedBy], [i].[Deadline], [i].[EscalatedAt], [i].[EscalationLevel], [i].[IsDeadlineNotified], [i].[IsOverdue], [i].[IssueId], [i].[Salary], [i].[WorkerId], [i0].[Id], [i0].[AssignedWorkerId], [i0].[CreatedAt], [i0].[CreatedByUserId], [i0].[Description], [i0].[ImagePath], [i0].[RejectionReason], [i0].[ResolvedAt], [i0].[ResolvedImagePath], [i0].[Status], [i0].[Type], [i0].[Location_Latitude], [i0].[Location_Longitude], [w].[Id], [w].[CreatedAt], [w].[IsAvailable], [w].[Status], [w].[UserId]
+FROM [IssueAssignments] AS [i]
+INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
+INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
+WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)

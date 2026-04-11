@@ -150,11 +150,10 @@ var app = builder.Build();
 // Exception Handling
 app.UseMiddleware<ExceptionMiddleware>();
 
-if (app.Environment.IsDevelopment())
-{
+
     app.UseSwagger();
     app.UseSwaggerUI();
-}
+
 
 app.UseStaticFiles();
 
