@@ -16,7 +16,7 @@ using SmartCity.Infrastructure.Services;
 using SmartCity.API.Services;
 using System.Text;
 
-
+// 🔥 LOGGING
 Log.Logger = new LoggerConfiguration()
     .MinimumLevel.Information()
     .WriteTo.Console()
@@ -25,31 +25,70 @@ Log.Logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Host.UseSerilog(); 
+builder.Host.UseSerilog();
 
+// =====================
+// SERVICES
+// =====================
 
-//  SERVICES
+// Validators + MediatR
 builder.Services.AddValidatorsFromAssembly(typeof(RegisterUserValidator).Assembly);
+builder.Services.AddValidatorsFromAssembly(typeof(CreateIssueValidator).Assembly);
 builder.Services.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
-builder.Services.AddScoped<IUserRepository, UserRepository>(); 
+
+builder.Services.AddMediatR(cfg =>
+{
+    cfg.RegisterServicesFromAssembly(typeof(CreateIssueCommand).Assembly);
+});
+
+// Repositories & Services
+builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
+builder.Services.AddScoped<IIssueRepository, IssueRepository>();
+builder.Services.AddScoped<IIssueAssignmentRepository, IssueAssignmentRepository>();
+
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtService, JwtService>();
-builder.Services.AddHttpContextAccessor();
 builder.Services.AddScoped<ICurrentUserService, CurrentUserService>();
 builder.Services.AddScoped<IFileService, FileService>();
-builder.Services.AddScoped<IWorkerRepository, WorkerRepository>();
-builder.Services.AddValidatorsFromAssembly(typeof(CreateIssueValidator).Assembly);
-builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
-builder.Services.AddScoped<IIssueAssignmentRepository, IssueAssignmentRepository>();
-builder.Services.AddHttpContextAccessor();
+
 builder.Services.AddScoped<INotificationService, NotificationService>();
-builder.Services.AddHostedService<DeadlineCheckerService>();
-builder.Services.AddSignalR();
-builder.Services.AddScoped<NotificationRealtimeService>();
 builder.Services.AddScoped<INotificationRealtimeService, NotificationRealtimeService>();
 
-builder.Services.AddControllers();
+builder.Services.AddHttpContextAccessor();
+
+// DbContext
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+
+builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
+
+// Background Service (SLA)
+builder.Services.AddHostedService<DeadlineCheckerService>();
+
+// SignalR
+builder.Services.AddSignalR();
+
+// 🔥 CORS (FIXED POSITION)
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAll",
+        policy => policy.AllowAnyOrigin()
+                        .AllowAnyMethod()
+                        .AllowAnyHeader());
+});
+
+// Controllers
+builder.Services.AddControllers()
+    .AddJsonOptions(options =>
+    {
+        options.JsonSerializerOptions.Converters.Add(
+            new System.Text.Json.Serialization.JsonStringEnumConverter());
+    });
+
 builder.Services.AddEndpointsApiExplorer();
+
+// Swagger + JWT
 builder.Services.AddSwaggerGen(options =>
 {
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
@@ -77,25 +116,8 @@ builder.Services.AddSwaggerGen(options =>
         }
     });
 });
-// MediatR 
-builder.Services.AddMediatR(cfg =>
-{
-    cfg.RegisterServicesFromAssembly(typeof(CreateIssueCommand).Assembly);
-});
 
-// DbContext
-builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
-//  Repository
-builder.Services.AddScoped<IUserRepository, UserRepository>();
-builder.Services.AddScoped<IIssueRepository, IssueRepository>();
-
-builder.Services.AddControllers()
-    .AddJsonOptions(options =>
-    {
-        options.JsonSerializerOptions.Converters.Add(new System.Text.Json.Serialization.JsonStringEnumConverter());
-    });
+// Authentication
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
     {
@@ -115,28 +137,44 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//  BUILD APP
+// =====================
+// BUILD APP
+// =====================
+
 var app = builder.Build();
 
+// =====================
 // MIDDLEWARE
+// =====================
+
+// Exception Handling
 app.UseMiddleware<ExceptionMiddleware>();
-app.UseMiddleware<SmartCity.API.Middleware.ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 app.UseStaticFiles();
+
 app.UseHttpsRedirection();
 
-app.UseMiddleware<ExceptionMiddleware>();
+// 🔥 CORS (CORRECT PLACE)
+app.UseCors("AllowAll");
+
 app.UseAuthentication();
 app.UseAuthorization();
-app.UseAuthorization();
 
-//  MAP CONTROLLERS
+// =====================
+// ENDPOINTS
+// =====================
+
 app.MapControllers();
 app.MapHub<SmartCity.API.Hubs.NotificationHub>("/hubs/notifications");
+
+// 🔥 PORT CONFIG (FOR RENDER)
+var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+app.Urls.Add($"http://*:{port}");
 
 app.Run();
