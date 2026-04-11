@@ -12,15 +12,15 @@ using SmartCity.Infrastructure.Persistence;
 namespace SmartCity.Infrastructure.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260401093110_SeedAdminUser")]
-    partial class SeedAdminUser
+    [Migration("20260411074629_InitialPostgres")]
+    partial class InitialPostgres
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.0")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
@@ -47,8 +47,14 @@ namespace SmartCity.Infrastructure.Migrations
                     b.Property<string>("ImagePath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("RejectionReason")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<DateTime?>("ResolvedAt")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("ResolvedImagePath")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Status")
                         .HasColumnType("int");
@@ -76,6 +82,18 @@ namespace SmartCity.Infrastructure.Migrations
                     b.Property<DateTime>("Deadline")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("EscalatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("EscalationLevel")
+                        .HasColumnType("int");
+
+                    b.Property<bool>("IsDeadlineNotified")
+                        .HasColumnType("bit");
+
+                    b.Property<bool>("IsOverdue")
+                        .HasColumnType("bit");
+
                     b.Property<Guid>("IssueId")
                         .HasColumnType("uniqueidentifier");
 
@@ -93,6 +111,43 @@ namespace SmartCity.Infrastructure.Migrations
                     b.HasIndex("WorkerId");
 
                     b.ToTable("IssueAssignments");
+                });
+
+            modelBuilder.Entity("SmartCity.Domain.Entities.Notification", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<bool>("IsRead")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Message")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("RelatedEntityId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UniqueKey")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<Guid?>("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Notifications");
                 });
 
             modelBuilder.Entity("SmartCity.Domain.Entities.RefreshToken", b =>
@@ -219,11 +274,21 @@ namespace SmartCity.Infrastructure.Migrations
 
             modelBuilder.Entity("SmartCity.Domain.Entities.IssueAssignment", b =>
                 {
-                    b.HasOne("SmartCity.Domain.Entities.Issue", null)
-                        .WithMany()
+                    b.HasOne("SmartCity.Domain.Entities.Issue", "Issue")
+                        .WithMany("Assignments")
                         .HasForeignKey("IssueId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("SmartCity.Domain.Entities.Worker", "Worker")
+                        .WithMany("Assignments")
+                        .HasForeignKey("WorkerId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.Navigation("Issue");
+
+                    b.Navigation("Worker");
                 });
 
             modelBuilder.Entity("SmartCity.Domain.Entities.Worker", b =>
@@ -235,6 +300,16 @@ namespace SmartCity.Infrastructure.Migrations
                         .IsRequired();
 
                     b.Navigation("User");
+                });
+
+            modelBuilder.Entity("SmartCity.Domain.Entities.Issue", b =>
+                {
+                    b.Navigation("Assignments");
+                });
+
+            modelBuilder.Entity("SmartCity.Domain.Entities.Worker", b =>
+                {
+                    b.Navigation("Assignments");
                 });
 #pragma warning restore 612, 618
         }
