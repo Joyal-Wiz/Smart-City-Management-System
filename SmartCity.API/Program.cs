@@ -15,6 +15,7 @@ using SmartCity.Infrastructure.Repositories;
 using SmartCity.Infrastructure.Services;
 using SmartCity.API.Services;
 using System.Text;
+using Npgsql.EntityFrameworkCore.PostgreSQL;
 
 // 🔥 LOGGING
 Log.Logger = new LoggerConfiguration()
