@@ -54,7 +54,7 @@ builder.Services.AddScoped<IFileService, FileService>();
 
 builder.Services.AddScoped<INotificationService, NotificationService>();
 builder.Services.AddScoped<INotificationRealtimeService, NotificationRealtimeService>();
-
+builder.Services.AddScoped<NotificationRealtimeService>();
 builder.Services.AddHttpContextAccessor();
 
 // 🔥 DATABASE (POSTGRESQL)

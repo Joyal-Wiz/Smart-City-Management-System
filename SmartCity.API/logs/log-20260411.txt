@@ -465,3 +465,456 @@ FROM [IssueAssignments] AS [i]
 INNER JOIN [Issues] AS [i0] ON [i].[IssueId] = [i0].[Id]
 INNER JOIN [Workers] AS [w] ON [i].[WorkerId] = [w].[Id]
 WHERE [i].[Deadline] > @__now_0 AND [i].[Deadline] <= @__AddHours_1 AND [i0].[Status] <> 4 AND [i].[IsDeadlineNotified] = CAST(0 AS bit)
+2026-04-11 14:35:53.798 +05:30 [INF] Executed DbCommand (198ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-11 14:35:53.982 +05:30 [INF] Executed DbCommand (71ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-04-11 14:35:54.821 +05:30 [INF] Executed DbCommand (85ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-11 14:35:55.717 +05:30 [INF] Executed DbCommand (106ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-11 14:35:55.832 +05:30 [INF] Executed DbCommand (105ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-04-11 14:35:55.875 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-04-11 14:35:55.943 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-11 14:35:55.988 +05:30 [INF] Deadline Checker Service started
+2026-04-11 14:35:56.212 +05:30 [INF] Now listening on: http://[::]:5000
+2026-04-11 14:35:56.317 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-11 14:35:56.324 +05:30 [INF] Hosting environment: Development
+2026-04-11 14:35:56.329 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-11 14:35:56.568 +05:30 [INF] Executed DbCommand (105ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:35:56.702 +05:30 [INF] Executed DbCommand (71ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:37:56.946 +05:30 [INF] Executed DbCommand (67ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:37:57.039 +05:30 [INF] Executed DbCommand (80ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:39:57.193 +05:30 [INF] Executed DbCommand (89ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:39:57.291 +05:30 [INF] Executed DbCommand (93ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:55:05.574 +05:30 [INF] Executed DbCommand (129ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-11 14:55:05.688 +05:30 [INF] Executed DbCommand (60ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-04-11 14:55:07.096 +05:30 [INF] Executed DbCommand (66ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-11 14:55:08.023 +05:30 [INF] Executed DbCommand (115ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-11 14:55:08.128 +05:30 [INF] Executed DbCommand (87ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-04-11 14:55:08.155 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-04-11 14:55:08.190 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-11 14:55:08.223 +05:30 [INF] Deadline Checker Service started
+2026-04-11 14:55:08.345 +05:30 [INF] Now listening on: http://[::]:5000
+2026-04-11 14:55:08.399 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-11 14:55:08.402 +05:30 [INF] Hosting environment: Development
+2026-04-11 14:55:08.403 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.API
+2026-04-11 14:55:08.572 +05:30 [INF] Executed DbCommand (92ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:55:08.663 +05:30 [INF] Executed DbCommand (57ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:57:09.119 +05:30 [INF] Executed DbCommand (278ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:57:09.226 +05:30 [INF] Executed DbCommand (102ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:59:09.360 +05:30 [INF] Executed DbCommand (66ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 14:59:09.431 +05:30 [INF] Executed DbCommand (65ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:01:10.428 +05:30 [INF] Executed DbCommand (127ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:01:10.501 +05:30 [INF] Executed DbCommand (65ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:03:10.620 +05:30 [INF] Executed DbCommand (98ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:03:10.777 +05:30 [INF] Executed DbCommand (148ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:05:10.927 +05:30 [INF] Executed DbCommand (110ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:05:11.077 +05:30 [INF] Executed DbCommand (134ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:07:12.129 +05:30 [INF] Executed DbCommand (95ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:07:12.196 +05:30 [INF] Executed DbCommand (62ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:09:12.339 +05:30 [INF] Executed DbCommand (125ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:09:12.403 +05:30 [INF] Executed DbCommand (58ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:11:12.495 +05:30 [INF] Executed DbCommand (71ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:11:12.575 +05:30 [INF] Executed DbCommand (61ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:13:13.476 +05:30 [INF] Executed DbCommand (61ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:13:13.579 +05:30 [INF] Executed DbCommand (90ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:15:13.924 +05:30 [INF] Executed DbCommand (326ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:15:14.078 +05:30 [INF] Executed DbCommand (139ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:17:14.165 +05:30 [INF] Executed DbCommand (62ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:17:14.255 +05:30 [INF] Executed DbCommand (85ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:19:16.734 +05:30 [INF] Executed DbCommand (195ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:19:16.805 +05:30 [INF] Executed DbCommand (64ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:21:16.886 +05:30 [INF] Executed DbCommand (62ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:21:16.964 +05:30 [INF] Executed DbCommand (69ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:23:17.065 +05:30 [INF] Executed DbCommand (67ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:23:17.151 +05:30 [INF] Executed DbCommand (77ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:25:23.678 +05:30 [ERR] An error occurred using the connection to database 'smartcitydb_j63l' on server 'tcp://dpg-d7cuu1q8qa3s73av3hfg-a.singapore-postgres.render.com:5432'.
+2026-04-11 15:25:23.728 +05:30 [ERR] An exception occurred while iterating over the results of a query for context type 'SmartCity.Infrastructure.Persistence.AppDbContext'.
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 13.214.97.86:5432
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|213_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|34_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 13.214.97.86:5432
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|213_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|34_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+2026-04-11 15:25:24.024 +05:30 [ERR] Error in DeadlineCheckerService
+System.InvalidOperationException: An exception has been raised that is likely due to a transient failure.
+ ---> Npgsql.NpgsqlException (0x80004005): Failed to connect to 13.214.97.86:5432
+ ---> Npgsql.NpgsqlException (0x80004005): The operation has timed out
+ ---> System.TimeoutException: The operation has timed out.
+   at Npgsql.ThrowHelper.ThrowNpgsqlExceptionWithInnerTimeoutException(String message)
+   at Npgsql.Util.NpgsqlTimeout.Check()
+   at Npgsql.Util.NpgsqlTimeout.CheckAndGetTimeLeft()
+   at Npgsql.TaskTimeoutAndCancellation.ExecuteAsync(Func`2 getTaskFunc, NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.ConnectAsync(NpgsqlTimeout timeout, CancellationToken cancellationToken)
+   at Npgsql.Internal.NpgsqlConnector.RawOpen(SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.<Open>g__OpenCore|213_1(NpgsqlConnector conn, SslMode sslMode, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken, Boolean isFirstAttempt)
+   at Npgsql.Internal.NpgsqlConnector.Open(NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.OpenNewConnector(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.PoolingDataSource.<Get>g__RentAsync|34_0(NpgsqlConnection conn, NpgsqlTimeout timeout, Boolean async, CancellationToken cancellationToken)
+   at Npgsql.NpgsqlConnection.<Open>g__OpenAsync|42_0(Boolean async, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenInternalAsync(Boolean errorsExpected, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalConnection.OpenAsync(CancellationToken cancellationToken, Boolean errorsExpected)
+   at Microsoft.EntityFrameworkCore.Storage.RelationalCommand.ExecuteReaderAsync(RelationalCommandParameterObject parameterObject, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.InitializeReaderAsync(AsyncEnumerator enumerator, CancellationToken cancellationToken)
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   --- End of inner exception stack trace ---
+   at Npgsql.EntityFrameworkCore.PostgreSQL.Storage.Internal.NpgsqlExecutionStrategy.ExecuteAsync[TState,TResult](TState state, Func`4 operation, Func`4 verifySucceeded, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.Query.Internal.SingleQueryingEnumerable`1.AsyncEnumerator.MoveNextAsync()
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at Microsoft.EntityFrameworkCore.EntityFrameworkQueryableExtensions.ToListAsync[TSource](IQueryable`1 source, CancellationToken cancellationToken)
+   at SmartCity.Infrastructure.Services.DeadlineCheckerService.ExecuteAsync(CancellationToken stoppingToken) in C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\C# & .Net\Single Project\SmartCity.Infrastructure\Services\DeadlineCheckerService.cs:line 42
+2026-04-11 15:27:25.115 +05:30 [INF] Executed DbCommand (77ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:27:25.324 +05:30 [INF] Executed DbCommand (186ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:29:25.414 +05:30 [INF] Executed DbCommand (73ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:29:25.491 +05:30 [INF] Executed DbCommand (70ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:31:25.596 +05:30 [INF] Executed DbCommand (77ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:31:25.686 +05:30 [INF] Executed DbCommand (83ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:33:26.927 +05:30 [INF] Executed DbCommand (119ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:33:27.063 +05:30 [INF] Executed DbCommand (126ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:35:27.192 +05:30 [INF] Executed DbCommand (99ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:35:27.323 +05:30 [INF] Executed DbCommand (120ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:37:27.611 +05:30 [INF] Executed DbCommand (76ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:37:27.699 +05:30 [INF] Executed DbCommand (78ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:39:29.181 +05:30 [INF] Executed DbCommand (102ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-11 15:39:29.262 +05:30 [INF] Executed DbCommand (65ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
