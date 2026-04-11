@@ -57,9 +57,9 @@ builder.Services.AddScoped<INotificationRealtimeService, NotificationRealtimeSer
 
 builder.Services.AddHttpContextAccessor();
 
-// DbContext
+// 🔥 DB CONTEXT (POSTGRESQL FIX)
 builder.Services.AddDbContext<AppDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddScoped<IApplicationDbContext, AppDbContext>();
 
@@ -69,7 +69,7 @@ builder.Services.AddHostedService<DeadlineCheckerService>();
 // SignalR
 builder.Services.AddSignalR();
 
-// 🔥 CORS (FIXED POSITION)
+// 🔥 CORS
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowAll",
@@ -150,16 +150,15 @@ var app = builder.Build();
 // Exception Handling
 app.UseMiddleware<ExceptionMiddleware>();
 
-
-    app.UseSwagger();
-    app.UseSwaggerUI();
-
+// 🔥 ENABLE SWAGGER IN PRODUCTION
+app.UseSwagger();
+app.UseSwaggerUI();
 
 app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
-// 🔥 CORS (CORRECT PLACE)
+// CORS
 app.UseCors("AllowAll");
 
 app.UseAuthentication();
@@ -175,5 +174,12 @@ app.MapHub<SmartCity.API.Hubs.NotificationHub>("/hubs/notifications");
 // 🔥 PORT CONFIG (FOR RENDER)
 var port = Environment.GetEnvironmentVariable("PORT") ?? "5000";
 app.Urls.Add($"http://*:{port}");
+
+// 🔥 AUTO MIGRATION (VERY IMPORTANT)
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
+    db.Database.Migrate();
+}
 
 app.Run();
