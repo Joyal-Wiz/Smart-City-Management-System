@@ -26,24 +26,24 @@ namespace SmartCity.Application.Features.Issues.Commands.StartIssue
             StartIssueCommand request,
             CancellationToken cancellationToken)
         {
-            // 🔹 1. Get Issue
+            //  1. Get Issue
             var issue = await _issueRepository.GetByIdAsync(request.IssueId);
 
             if (issue == null)
                 return ApiResponse<string>.FailResponse("Issue not found");
 
-            // 🔹 2. Get current worker (from user)
+            //  2. Get current worker (from user)
             var worker = await _workerRepository
                 .GetByUserIdAsync(_currentUser.UserId);
 
             if (worker == null)
                 return ApiResponse<string>.FailResponse("Worker not found");
 
-            // 🔥 3. Ownership validation (CORRECT)
+            //  3. Ownership validation (CORRECT)
             if (issue.AssignedWorkerId != worker.Id)
                 return ApiResponse<string>.FailResponse("You are not assigned to this issue");
 
-            // 🔹 4. Domain logic
+            //  4. Domain logic
             try
             {
                 issue.StartProgress();
@@ -53,7 +53,7 @@ namespace SmartCity.Application.Features.Issues.Commands.StartIssue
                 return ApiResponse<string>.FailResponse(ex.Message);
             }
 
-            // 🔹 5. Save
+            // 5. Save
             await _issueRepository.UpdateAsync(issue);
 
             return ApiResponse<string>.SuccessResponse(
