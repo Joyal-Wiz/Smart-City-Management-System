@@ -10,6 +10,7 @@ using SmartCity.Application.Features.Sla.Queries.GetOverdueIssues;
 using SmartCity.Application.Features.Sla.Queries.GetSlaSummary;
 using SmartCity.Application.Features.Workers.Commands.ApproveWorker;
 using SmartCity.Application.Features.Workers.Commands.RejectWorker;
+using SmartCity.Application.Features.Workers.DTOs;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 
@@ -54,7 +55,10 @@ namespace SmartCity.API.Controllers
         {
             var result = await _mediator.Send(new GetPendingWorkersQuery());
 
-            return Ok(ApiResponse<object>.SuccessResponse("Pending workers fetched", result));
+            return Ok(ApiResponse<PagedResult<WorkerDto>>.SuccessResponse(
+                "Pending workers fetched",
+                result
+            ));
         }
 
         //  APPROVE WORKER

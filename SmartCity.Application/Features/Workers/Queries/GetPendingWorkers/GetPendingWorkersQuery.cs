@@ -6,7 +6,7 @@ using SmartCity.Application.Features.Workers.DTOs;
 
 namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
 {
-    public class GetPendingWorkersQuery : IRequest<ApiResponse<PagedResult<WorkerDto>>>
+    public class GetPendingWorkersQuery : IRequest<PagedResult<WorkerDto>>
     {
         public int PageNumber { get; set; } = 1;
 

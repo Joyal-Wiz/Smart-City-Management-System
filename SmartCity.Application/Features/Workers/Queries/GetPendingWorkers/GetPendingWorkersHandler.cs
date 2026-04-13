@@ -6,7 +6,7 @@ using SmartCity.Domain.Interfaces;
 namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
 {
     public class GetPendingWorkersHandler
-        : IRequestHandler<GetPendingWorkersQuery, ApiResponse<PagedResult<WorkerDto>>>
+        : IRequestHandler<GetPendingWorkersQuery,PagedResult<WorkerDto>>
     {
         private readonly IWorkerRepository _workerRepository;
 
@@ -15,7 +15,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
             _workerRepository = workerRepository;
         }
 
-        public async Task<ApiResponse<PagedResult<WorkerDto>>> Handle(
+        public async Task<PagedResult<WorkerDto>> Handle(
             GetPendingWorkersQuery request,
             CancellationToken cancellationToken)
         {
@@ -42,9 +42,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetPendingWorkers
                 TotalCount = totalCount
             };
 
-            return ApiResponse<PagedResult<WorkerDto>>.SuccessResponse(
-                "Pending workers fetched successfully",
-                result);
+            return result;
         }
     }
 }
