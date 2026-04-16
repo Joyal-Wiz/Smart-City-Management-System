@@ -14,6 +14,7 @@ using SmartCity.Application.Features.Workers.DTOs;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 
+
 namespace SmartCity.API.Controllers
 {
     [Route("api/[controller]")]

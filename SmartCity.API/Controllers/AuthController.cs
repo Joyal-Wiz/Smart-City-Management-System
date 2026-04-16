@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Auth.Commands.Login;
+using SmartCity.Application.Features.Auth.Commands.Logout;
 using SmartCity.Application.Features.Auth.Commands.RefreshToken;
 using SmartCity.Application.Features.Auth.Commands.Register;
 
@@ -18,7 +19,7 @@ namespace SmartCity.API.Controllers
             _mediator = mediator;
         }
 
-        // 📝 REGISTER
+        //  REGISTER
         [HttpPost("register")]
         public async Task<IActionResult> Register([FromBody] RegisterUserCommand command)
         {
@@ -30,7 +31,7 @@ namespace SmartCity.API.Controllers
             ));
         }
 
-        // 🔐 LOGIN
+        // LOGIN
         [HttpPost("login")]
         public async Task<IActionResult> Login([FromBody] LoginCommand command)
         {
@@ -42,7 +43,7 @@ namespace SmartCity.API.Controllers
             ));
         }
 
-        // 🔄 REFRESH TOKEN
+        //  REFRESH TOKEN
         [HttpPost("refresh")]
         public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command)
         {
@@ -52,6 +53,19 @@ namespace SmartCity.API.Controllers
                 "Token refreshed successfully",
                 result
             ));
+        }
+
+        [HttpPost("logout")]
+        public async Task<IActionResult> Logout([FromBody] LogoutCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result)
+            {
+                return BadRequest(ApiResponse<object>.FailResponse("Invalid refresh token"));
+            }
+
+            return Ok(ApiResponse<object>.SuccessResponse("Logged out successfully", null));
         }
     }
 }
