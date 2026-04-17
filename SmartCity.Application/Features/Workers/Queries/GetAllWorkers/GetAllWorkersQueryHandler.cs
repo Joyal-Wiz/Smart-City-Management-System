@@ -36,7 +36,9 @@ namespace SmartCity.Application.Features.Workers.Queries.GetAllWorkers
                     Id = w.Id,
                     Name = w.User.Name,
                     Email = w.User.Email,
-                    Status = w.Status
+                    Status = w.Status,
+                    IsAvailable = w.IsAvailable 
+
                 })
                 .ToListAsync(cancellationToken);
 
