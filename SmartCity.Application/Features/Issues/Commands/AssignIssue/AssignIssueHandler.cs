@@ -38,20 +38,28 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             AssignIssueCommand request,
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("AssignIssue started for IssueId: {IssueId}, WorkerId: {WorkerId}",
+            _logger.LogInformation(
+                "AssignIssue started for IssueId: {IssueId}, WorkerId: {WorkerId}",
                 request.IssueId, request.WorkerId);
 
+            // 🔹 GET ISSUE
             var issue = await _issueRepository.GetByIdAsync(request.IssueId);
             if (issue == null)
                 throw new NotFoundException("Issue not found");
 
+            // 🔹 GET WORKER
             var worker = await _workerRepository.GetByIdAsync(request.WorkerId);
             if (worker == null)
                 throw new NotFoundException("Worker not found");
 
+            // 🔹 VALIDATIONS
             if (worker.Status != WorkerStatus.Approved)
                 throw new BadRequestException("Worker is not approved");
 
+            if (!worker.IsAvailable)
+                throw new BadRequestException("Worker is not available");
+
+            // 🔹 ASSIGN WORKER TO ISSUE (DOMAIN LOGIC)
             try
             {
                 issue.AssignWorker(worker.Id);
@@ -62,6 +70,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 throw new BadRequestException(ex.Message);
             }
 
+            // 🔹 CREATE ASSIGNMENT
             IssueAssignment assignment;
             try
             {
@@ -79,10 +88,15 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 throw new BadRequestException(ex.Message);
             }
 
+            // 🔥 VERY IMPORTANT: UPDATE WORKER AVAILABILITY
+            worker.IsAvailable = false;
+
+            // 🔹 SAVE ALL
             await _issueRepository.UpdateAsync(issue);
             await _assignmentRepository.AddAsync(assignment);
+            await _workerRepository.UpdateAsync(worker); // 🔥 REQUIRED
 
-            // 🔔 Admin notification
+            // 🔔 ADMIN NOTIFICATION
             await _notificationService.CreateAsync(
                 "Issue Assigned",
                 $"Issue assigned to worker with ID: {request.WorkerId}",
@@ -90,7 +104,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 request.IssueId
             );
 
-            // 🔔 Worker notification
+            // 🔔 WORKER NOTIFICATION
             await _notificationService.CreateAsync(
                 "New Work Assigned",
                 $"You have been assigned a new issue. Deadline: {request.Deadline}",
@@ -99,9 +113,11 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 worker.UserId
             );
 
-            _logger.LogInformation("Issue {IssueId} assigned to Worker {WorkerId}",
+            _logger.LogInformation(
+                "Issue {IssueId} assigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);
 
+            // 🔹 RESPONSE
             return new AssignIssueResponseDto
             {
                 AssignmentId = assignment.Id,
