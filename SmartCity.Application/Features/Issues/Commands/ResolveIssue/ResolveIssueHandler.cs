@@ -32,28 +32,23 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
             ResolveIssueCommand request,
             CancellationToken cancellationToken)
         {
-            // 🔹 Get Issue
             var issue = await _issueRepository.GetByIdAsync(request.IssueId);
 
             if (issue == null)
                 return ApiResponse<string>.FailResponse("Issue not found");
 
-            // 🔹 Get Worker
             var worker = await _workerRepository
                 .GetByUserIdAsync(_currentUser.UserId);
 
             if (worker == null)
                 return ApiResponse<string>.FailResponse("Worker not found");
 
-            // 🔒 Ownership validation
             if (issue.AssignedWorkerId != worker.Id)
                 return ApiResponse<string>.FailResponse("You are not assigned to this issue");
 
-            // 🔹 Validate image
             if (request.Image == null)
                 return ApiResponse<string>.FailResponse("Resolved image is required");
 
-            // 🔹 Save image
             string imagePath;
             try
             {
@@ -64,7 +59,6 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
                 return ApiResponse<string>.FailResponse(ex.Message);
             }
 
-            // 🔹 Domain logic
             try
             {
                 issue.MarkResolved(imagePath);
@@ -74,20 +68,19 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
                 return ApiResponse<string>.FailResponse(ex.Message);
             }
 
-            // 🔹 Save changes
             await _issueRepository.UpdateAsync(issue);
-               
-            // FIXED: SEND TO CITIZEN
+
+            // 🔔 Notify Citizen
             await _notificationService.CreateAsync(
                 "Issue Resolved",
                 $"Your reported issue has been resolved.",
                 "Issue",
                 issue.Id,
-                issue.CreatedByUserId // ✅ THIS IS THE FIX
+                issue.CreatedByUserId
             );
 
             return ApiResponse<string>.SuccessResponse(
-                "Issue resolved with image successfully",
+                "Issue resolved successfully",
                 "RESOLVED"
             );
         }

@@ -47,19 +47,26 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             if (issue == null)
                 throw new NotFoundException("Issue not found");
 
+            // 🔹 PREVENT RE-ASSIGN (IMPORTANT)
+            if (issue.Status == IssueStatus.Assigned)
+                throw new BadRequestException("Issue is already assigned");
+
             // 🔹 GET WORKER
             var worker = await _workerRepository.GetByIdAsync(request.WorkerId);
             if (worker == null)
                 throw new NotFoundException("Worker not found");
 
-            // 🔹 VALIDATIONS
+            // 🔹 VALIDATION
             if (worker.Status != WorkerStatus.Approved)
                 throw new BadRequestException("Worker is not approved");
 
-            if (!worker.IsAvailable)
-                throw new BadRequestException("Worker is not available");
+            // 🔥 DERIVED AVAILABILITY (CORE LOGIC)
+            var activeCount = await _assignmentRepository.GetActiveAssignmentsCount(worker.Id);
 
-            // 🔹 ASSIGN WORKER TO ISSUE (DOMAIN LOGIC)
+            if (activeCount >= 4)
+                throw new BadRequestException("Worker is busy (max 4 tasks)");
+
+            // 🔹 DOMAIN ASSIGN
             try
             {
                 issue.AssignWorker(worker.Id);
@@ -88,13 +95,9 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 throw new BadRequestException(ex.Message);
             }
 
-            // 🔥 VERY IMPORTANT: UPDATE WORKER AVAILABILITY
-            worker.IsAvailable = false;
-
-            // 🔹 SAVE ALL
+            // 🔹 SAVE CHANGES
             await _issueRepository.UpdateAsync(issue);
             await _assignmentRepository.AddAsync(assignment);
-            await _workerRepository.UpdateAsync(worker); // 🔥 REQUIRED
 
             // 🔔 ADMIN NOTIFICATION
             await _notificationService.CreateAsync(
@@ -114,7 +117,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             );
 
             _logger.LogInformation(
-                "Issue {IssueId} assigned to Worker {WorkerId}",
+                "Issue {IssueId} successfully assigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);
 
             // 🔹 RESPONSE

@@ -10,5 +10,7 @@ namespace SmartCity.Domain.Interfaces
     public interface IIssueAssignmentRepository
     {
         Task AddAsync(IssueAssignment assignment);
+        Task<int> GetActiveAssignmentsCount(Guid workerId);
+
     }
 }
