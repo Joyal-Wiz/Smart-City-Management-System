@@ -47,7 +47,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             if (issue == null)
                 throw new NotFoundException("Issue not found");
 
-            // 🔹 PREVENT RE-ASSIGN (IMPORTANT)
+            // 🔹 PREVENT RE-ASSIGN
             if (issue.Status == IssueStatus.Assigned)
                 throw new BadRequestException("Issue is already assigned");
 
@@ -60,7 +60,7 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
             if (worker.Status != WorkerStatus.Approved)
                 throw new BadRequestException("Worker is not approved");
 
-            // 🔥 DERIVED AVAILABILITY (CORE LOGIC)
+            // 🔥 DERIVED AVAILABILITY
             var activeCount = await _assignmentRepository.GetActiveAssignmentsCount(worker.Id);
 
             if (activeCount >= 4)
@@ -95,26 +95,35 @@ namespace SmartCity.Application.Features.Issues.Commands.AssignIssue
                 throw new BadRequestException(ex.Message);
             }
 
-            // 🔹 SAVE CHANGES
+            // 🔹 SAVE CORE DATA (CRITICAL PART)
             await _issueRepository.UpdateAsync(issue);
             await _assignmentRepository.AddAsync(assignment);
 
-            // 🔔 ADMIN NOTIFICATION
-            await _notificationService.CreateAsync(
-                "Issue Assigned",
-                $"Issue assigned to worker with ID: {request.WorkerId}",
-                "Issue",
-                request.IssueId
-            );
+            // 🔔 NOTIFICATIONS (NON-CRITICAL → SAFE WRAP)
+            try
+            {
+                // Admin notification
+                await _notificationService.CreateAsync(
+                    "Issue Assigned",
+                    $"Issue assigned to worker with ID: {request.WorkerId}",
+                    "Issue",
+                    request.IssueId
+                );
 
-            // 🔔 WORKER NOTIFICATION
-            await _notificationService.CreateAsync(
-                "New Work Assigned",
-                $"You have been assigned a new issue. Deadline: {request.Deadline}",
-                "Issue",
-                request.IssueId,
-                worker.UserId
-            );
+                // Worker notification
+                await _notificationService.CreateAsync(
+                    "New Work Assigned",
+                    $"You have been assigned a new issue. Deadline: {request.Deadline}",
+                    "Issue",
+                    request.IssueId,
+                    worker.UserId
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Notification failed: {Message}", ex.Message);
+                // ❗ Do NOT throw — assignment already succeeded
+            }
 
             _logger.LogInformation(
                 "Issue {IssueId} successfully assigned to Worker {WorkerId}",
