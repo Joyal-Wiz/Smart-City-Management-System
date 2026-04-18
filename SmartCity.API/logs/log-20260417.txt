@@ -46,3 +46,61 @@ FROM "IssueAssignments" AS i
 INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
 INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
 WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-17 16:48:58.060 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger - null null
+2026-04-17 16:48:58.452 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger - 301 null null 412.1468ms
+2026-04-17 16:48:58.470 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html - null null
+2026-04-17 16:48:58.706 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.html - 200 null text/html;charset=utf-8 236.9768ms
+2026-04-17 16:48:58.719 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - null null
+2026-04-17 16:48:58.713 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - null null
+2026-04-17 16:48:58.747 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-17 16:48:58.760 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2026-04-17 16:48:58.766 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - null null
+2026-04-17 16:48:58.842 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 87.5428ms
+2026-04-17 16:48:58.956 +05:30 [INF] Sending file. Request path: '/swagger-ui-standalone-preset.js'. Physical path: 'N/A'
+2026-04-17 16:48:58.956 +05:30 [INF] Sending file. Request path: '/swagger-ui.css'. Physical path: 'N/A'
+2026-04-17 16:48:58.964 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-standalone-preset.js - 200 230280 text/javascript 245.3202ms
+2026-04-17 16:48:58.964 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui.css - 200 152034 text/css 198.1237ms
+2026-04-17 16:48:58.979 +05:30 [INF] Sending file. Request path: '/swagger-ui-bundle.js'. Physical path: 'N/A'
+2026-04-17 16:48:58.988 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/swagger-ui-bundle.js - 200 1456926 text/javascript 274.8825ms
+2026-04-17 16:48:59.057 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 297.016ms
+2026-04-17 16:48:59.099 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - null null
+2026-04-17 16:48:59.121 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - null null
+2026-04-17 16:48:59.131 +05:30 [INF] Sending file. Request path: '/favicon-32x32.png'. Physical path: 'N/A'
+2026-04-17 16:48:59.137 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/favicon-32x32.png - 200 628 image/png 16.3013ms
+2026-04-17 16:48:59.144 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 45.614ms
+2026-04-17 16:49:14.479 +05:30 [INF] Executed DbCommand (75ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-17 16:49:14.567 +05:30 [INF] Executed DbCommand (77ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-17 16:49:15.605 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 63
+2026-04-17 16:49:15.624 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 307 0 null 19.0771ms
+2026-04-17 16:50:20.545 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/index.html - null null
+2026-04-17 16:50:20.573 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/index.html - 200 null text/html;charset=utf-8 28.1301ms
+2026-04-17 16:50:20.595 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_vs/browserLink - null null
+2026-04-17 16:50:20.595 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - null null
+2026-04-17 16:50:20.636 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_framework/aspnetcore-browser-refresh.js - 200 14931 application/javascript; charset=utf-8 33.6479ms
+2026-04-17 16:50:20.661 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/_vs/browserLink - 200 null text/javascript; charset=UTF-8 66.3409ms
+2026-04-17 16:50:20.727 +05:30 [INF] Request starting HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - null null
+2026-04-17 16:50:20.748 +05:30 [INF] Request finished HTTP/1.1 GET http://localhost:5000/swagger/v1/swagger.json - 200 null application/json;charset=utf-8 20.8066ms
+2026-04-17 16:50:32.424 +05:30 [INF] Request starting HTTP/1.1 POST http://localhost:5000/api/auth/login - application/json 63
+2026-04-17 16:50:32.439 +05:30 [INF] Request finished HTTP/1.1 POST http://localhost:5000/api/auth/login - 307 0 null 14.5803ms
+2026-04-17 16:51:14.653 +05:30 [INF] Executed DbCommand (60ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-17 16:51:14.715 +05:30 [INF] Executed DbCommand (59ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")

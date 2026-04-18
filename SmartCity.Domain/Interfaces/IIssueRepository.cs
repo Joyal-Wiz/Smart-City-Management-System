@@ -17,6 +17,8 @@ namespace SmartCity.Domain.Interfaces
         // 🔹 Update
         Task UpdateAsync(Issue issue);
 
+        Task<Issue?> GetByIdWithDetailsAsync(Guid id);
+
         Task<(List<Issue> Items, int TotalCount)> GetIssuesForMapAsync(
             double latitude,
             double longitude,

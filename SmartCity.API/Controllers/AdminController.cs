@@ -13,7 +13,7 @@ using SmartCity.Application.Features.Workers.Commands.RejectWorker;
 using SmartCity.Application.Features.Workers.DTOs;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
-
+using SmartCity.Application.Features.Issues.Queries.GetIssueById;
 
 namespace SmartCity.API.Controllers
 {
@@ -48,6 +48,18 @@ namespace SmartCity.API.Controllers
             var result = await _mediator.Send(query);
 
             return Ok(ApiResponse<object>.SuccessResponse("Workers fetched successfully", result));
+        }
+
+        [HttpGet("issues/{id}")]
+        public async Task<IActionResult> GetIssueById(Guid id)
+        {
+            var result = await _mediator.Send(new GetIssueByIdQuery(id));
+
+            return Ok(new
+            {
+                message = "Issue details fetched successfully",
+                data = result
+            });
         }
 
         //  GET PENDING WORKERS

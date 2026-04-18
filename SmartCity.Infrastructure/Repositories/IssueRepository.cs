@@ -85,5 +85,13 @@ namespace SmartCity.Infrastructure.Repositories
 
             return (items, totalCount);
         }
+        public async Task<Issue?> GetByIdWithDetailsAsync(Guid id)
+        {
+            return await _context.Issues
+                .Include(i => i.Assignments)
+                    .ThenInclude(a => a.Worker)
+                        .ThenInclude(w => w.User)
+                .FirstOrDefaultAsync(i => i.Id == id);
+        }
     }
 }
