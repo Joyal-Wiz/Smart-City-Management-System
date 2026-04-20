@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartCity.Application.DTOs;
+using SmartCity.Application.Features.Notifications.Commands.ClearNotifications;
 using SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead;
 using SmartCity.Application.Features.Notifications.Commands.MarkAsRead;
 using SmartCity.Application.Features.Notifications.Queries.GetMyNotifications;
@@ -11,7 +12,7 @@ namespace SmartCity.API.Controllers
 {
     [ApiController]
     [Route("api/notifications")]
-    [Authorize] // 🔒 all logged-in users
+    [Authorize] //  all logged-in users
     public class NotificationController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -21,7 +22,7 @@ namespace SmartCity.API.Controllers
             _mediator = mediator;
         }
 
-        // 🔔 GET MY NOTIFICATIONS
+        // GET MY NOTIFICATIONS
         [HttpGet]
         public async Task<IActionResult> GetMyNotifications()
         {
@@ -33,7 +34,7 @@ namespace SmartCity.API.Controllers
             ));
         }
 
-        // 🔔 UNREAD COUNT
+        // UNREAD COUNT
         [HttpGet("unread-count")]
         public async Task<IActionResult> GetUnreadCount()
         {
@@ -45,7 +46,7 @@ namespace SmartCity.API.Controllers
             ));
         }
 
-        // 🔔 MARK ALL AS READ
+        //  MARK ALL AS READ
         [HttpPost("read-all")]
         public async Task<IActionResult> MarkAllAsRead()
         {
@@ -56,7 +57,7 @@ namespace SmartCity.API.Controllers
             ));
         }
 
-        // 🔔 MARK SINGLE
+        //  MARK SINGLE
         [HttpPost("read")]
         public async Task<IActionResult> MarkAsRead([FromBody] MarkNotificationAsReadCommand command)
         {
@@ -65,6 +66,18 @@ namespace SmartCity.API.Controllers
             return Ok(ApiResponse<object>.SuccessResponse(
                 "Notification marked as read"
             ));
+        }
+        // clear all
+        [HttpPost("clear")]
+        public async Task<IActionResult> ClearNotifications()
+        {
+            var result = await _mediator.Send(new ClearNotificationsCommand());
+
+            return Ok(new
+            {
+                message = "Notifications cleared successfully",
+                data = result
+            });
         }
     }
 }
