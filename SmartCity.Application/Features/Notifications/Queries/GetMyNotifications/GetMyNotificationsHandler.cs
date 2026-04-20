@@ -26,7 +26,9 @@ namespace SmartCity.Application.Features.Notifications.Queries.GetMyNotification
             var userId = _currentUser.UserId;
             var role = _currentUser.Role; // 🔥 IMPORTANT
 
-            var query = _context.Notifications.AsQueryable();
+            var query = _context.Notifications
+                .Where(n => !n.IsDeleted)   
+                .AsQueryable();
 
             // ✅ ROLE-BASED FILTER
             if (role == "Admin")
