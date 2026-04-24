@@ -8,7 +8,7 @@ using SmartCity.Domain.Enums;
 namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
 {
     public class GetMyIssuesQueryHandler
-        : IRequestHandler<GetMyIssuesQuery, PagedResult<WorkerIssueDto>> // ✅ FIX
+        : IRequestHandler<GetMyIssuesQuery, PagedResult<WorkerIssueDto>>
     {
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUser;
@@ -35,7 +35,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
 
             if (workerId == Guid.Empty)
             {
-                throw new Exception("Worker not found"); // ✅ Let controller handle response
+                throw new Exception("Worker not found");
             }
 
             // 🔹 Base query
@@ -58,15 +58,23 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
                         : null
                 };
 
+            // 🔥 STATUS FILTER (NEW)
+            if (!string.IsNullOrEmpty(request.Status))
+            {
+                query = query.Where(i => i.Status.ToString() == request.Status);
+            }
+
+            // 🔹 Total count AFTER filter
             var totalCount = await query.CountAsync(cancellationToken);
 
+            // 🔹 Pagination
             var items = await query
                 .OrderByDescending(i => i.IssueId)
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync(cancellationToken);
 
-            return new PagedResult<WorkerIssueDto> // ✅ PURE DATA
+            return new PagedResult<WorkerIssueDto>
             {
                 Items = items,
                 PageNumber = request.PageNumber,

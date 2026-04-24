@@ -8,5 +8,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
+        public string? Status { get; set; } 
+
     }
 }

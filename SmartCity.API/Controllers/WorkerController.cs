@@ -26,13 +26,15 @@ namespace SmartCity.API.Controllers
         // 🔧 GET MY ISSUES
         [HttpGet("issues")]
         public async Task<IActionResult> GetMyIssues(
-            [FromQuery] int pageNumber = 1,
-            [FromQuery] int pageSize = 10)
+    [FromQuery] int pageNumber = 1,
+    [FromQuery] int pageSize = 10,
+    [FromQuery] string? status = null) // 🔥 NEW
         {
             var query = new GetMyIssuesQuery
             {
                 PageNumber = pageNumber,
-                PageSize = pageSize
+                PageSize = pageSize,
+                Status = status
             };
 
             var result = await _mediator.Send(query);
