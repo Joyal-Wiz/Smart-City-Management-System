@@ -9,6 +9,7 @@ using SmartCity.Application.Features.Notifications.Commands.MarkAllAsRead;
 using SmartCity.Application.Features.Notifications.Queries.GetMyNotifications;
 using SmartCity.Application.Features.Notifications.Queries.GetUnreadCount;
 using SmartCity.Application.Features.Workers.Queries.GetMyIssues;
+using SmartCity.Application.Features.Workers.Queries.GetWorkerIssueById;
 
 namespace SmartCity.API.Controllers
 {
@@ -40,6 +41,14 @@ namespace SmartCity.API.Controllers
             var result = await _mediator.Send(query);
 
             return Ok(ApiResponse<object>.SuccessResponse("Worker issues fetched", result));
+        }
+
+        [HttpGet("issues/{id}")]
+        public async Task<IActionResult> GetIssueById(Guid id)
+        {
+            var result = await _mediator.Send(new GetWorkerIssueByIdQuery { Id = id });
+
+            return Ok(ApiResponse<object>.SuccessResponse("Issue fetched", result));
         }
 
         // ▶️ START ISSUE
