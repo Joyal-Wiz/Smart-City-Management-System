@@ -25,6 +25,9 @@ Log.Logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Configuration.SetFileLoadExceptionHandler(_ => { });
+builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
+builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: false);
 builder.Host.UseSerilog();
 
 // =====================
@@ -178,7 +181,7 @@ app.Urls.Add($"http://*:{port}");
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();
+    db.Database.Migrate();                                                                                                                                                                                                                              
 }
 
 app.Run();
