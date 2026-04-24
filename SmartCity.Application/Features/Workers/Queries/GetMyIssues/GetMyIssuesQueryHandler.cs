@@ -8,7 +8,7 @@ using SmartCity.Domain.Enums;
 namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
 {
     public class GetMyIssuesQueryHandler
-        : IRequestHandler<GetMyIssuesQuery, ApiResponse<PagedResult<WorkerIssueDto>>>
+        : IRequestHandler<GetMyIssuesQuery, PagedResult<WorkerIssueDto>> // ✅ FIX
     {
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUser;
@@ -21,7 +21,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
             _currentUser = currentUser;
         }
 
-        public async Task<ApiResponse<PagedResult<WorkerIssueDto>>> Handle(
+        public async Task<PagedResult<WorkerIssueDto>> Handle(
             GetMyIssuesQuery request,
             CancellationToken cancellationToken)
         {
@@ -35,11 +35,10 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
 
             if (workerId == Guid.Empty)
             {
-                return ApiResponse<PagedResult<WorkerIssueDto>>
-                    .FailResponse("Worker not found");
+                throw new Exception("Worker not found"); // ✅ Let controller handle response
             }
 
-            // 🔹 Base query (JOIN)
+            // 🔹 Base query
             var query =
                 from i in _context.Issues
                 join a in _context.IssueAssignments
@@ -54,33 +53,26 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
                     Deadline = a.Deadline,
                     Salary = a.Salary,
                     ImageUrl = i.ImagePath,
-
-                    // 🔥 NEW FIELD
                     RejectionReason = i.Status == IssueStatus.Rejected
                         ? i.RejectionReason
                         : null
                 };
 
-            // 🔹 Total count
             var totalCount = await query.CountAsync(cancellationToken);
 
-            // 🔹 Pagination
             var items = await query
-                .OrderByDescending(i => i.IssueId) // optional sorting
+                .OrderByDescending(i => i.IssueId)
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                 .ToListAsync(cancellationToken);
 
-            var result = new PagedResult<WorkerIssueDto>
+            return new PagedResult<WorkerIssueDto> // ✅ PURE DATA
             {
                 Items = items,
                 PageNumber = request.PageNumber,
                 PageSize = request.PageSize,
                 TotalCount = totalCount
             };
-
-            return ApiResponse<PagedResult<WorkerIssueDto>>
-                .SuccessResponse("Worker issues fetched successfully", result);
         }
     }
 }
