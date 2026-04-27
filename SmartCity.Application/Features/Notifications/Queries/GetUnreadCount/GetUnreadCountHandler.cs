@@ -25,7 +25,9 @@ namespace SmartCity.Application.Features.Notifications.Queries.GetUnreadCount
             var userId = _currentUser.UserId;
             var role = _currentUser.Role;
 
-            var query = _context.Notifications.AsQueryable();
+            var query = _context.Notifications
+                .Where(n => !n.IsDeleted) 
+                .AsQueryable();
 
             if (role == "Admin")
             {

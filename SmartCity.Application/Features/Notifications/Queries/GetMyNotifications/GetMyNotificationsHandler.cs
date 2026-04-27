@@ -24,13 +24,12 @@ namespace SmartCity.Application.Features.Notifications.Queries.GetMyNotification
             CancellationToken cancellationToken)
         {
             var userId = _currentUser.UserId;
-            var role = _currentUser.Role; // 🔥 IMPORTANT
+            var role = _currentUser.Role;
 
             var query = _context.Notifications
-                .Where(n => !n.IsDeleted)   
+                .Where(n => !n.IsDeleted) 
                 .AsQueryable();
 
-            // ✅ ROLE-BASED FILTER
             if (role == "Admin")
             {
                 query = query.Where(n => n.UserId == null);
