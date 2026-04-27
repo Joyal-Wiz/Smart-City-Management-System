@@ -12,25 +12,26 @@ namespace SmartCity.Application.Features.Issues.Commands.ReassignIssue
         private readonly IApplicationDbContext _context;
         private readonly ICurrentUserService _currentUser;
         private readonly ILogger<ReassignIssueHandler> _logger;
-        private readonly INotificationService _notificationService; // 🔥 ADD
+        private readonly INotificationService _notificationService;
 
         public ReassignIssueHandler(
             IApplicationDbContext context,
             ICurrentUserService currentUser,
             ILogger<ReassignIssueHandler> logger,
-            INotificationService notificationService) // 🔥 ADD
+            INotificationService notificationService)
         {
             _context = context;
             _currentUser = currentUser;
             _logger = logger;
-            _notificationService = notificationService; // 🔥 ADD
+            _notificationService = notificationService;
         }
 
         public async Task<bool> Handle(
             ReassignIssueCommand request,
             CancellationToken cancellationToken)
         {
-            _logger.LogInformation("ReassignIssue started for IssueId: {IssueId}, WorkerId: {WorkerId}",
+            _logger.LogInformation(
+                "ReassignIssue started for IssueId: {IssueId}, WorkerId: {WorkerId}",
                 request.IssueId, request.WorkerId);
 
             var issue = await _context.Issues
@@ -49,10 +50,10 @@ namespace SmartCity.Application.Features.Issues.Commands.ReassignIssue
                 throw new InvalidOperationException("Only rejected issues can be reassigned");
             }
 
-            var workerExists = await _context.Workers
-                .AnyAsync(w => w.Id == request.WorkerId, cancellationToken);
+            var worker = await _context.Workers
+                .FirstOrDefaultAsync(w => w.Id == request.WorkerId, cancellationToken);
 
-            if (!workerExists)
+            if (worker == null)
             {
                 _logger.LogWarning("Reassign failed - Worker not found: {WorkerId}", request.WorkerId);
                 throw new Exception("Worker not found");
@@ -72,15 +73,23 @@ namespace SmartCity.Application.Features.Issues.Commands.ReassignIssue
 
             await _context.SaveChangesAsync(cancellationToken);
 
-            // 🔥 ADD NOTIFICATION (IMPORTANT)
-            await _notificationService.CreateAsync(
-                "Issue Reassigned",
-                $"Issue has been reassigned to a new worker (WorkerId: {request.WorkerId})",
-                "Issue",
-                request.IssueId
-            );
+            try
+            {
+                await _notificationService.CreateAsync(
+                    "Issue Reassigned",
+                    $"You have been assigned a reassigned issue. Deadline: {request.Deadline}",
+                    "Issue",
+                    request.IssueId,
+                    worker.UserId 
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Notification failed: {Message}", ex.Message);
+            }
 
-            _logger.LogInformation("Issue {IssueId} reassigned to Worker {WorkerId}",
+            _logger.LogInformation(
+                "Issue {IssueId} reassigned to Worker {WorkerId}",
                 request.IssueId, request.WorkerId);
 
             return true;
