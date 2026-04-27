@@ -25,9 +25,9 @@ Log.Logger = new LoggerConfiguration()
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Configuration.SetFileLoadExceptionHandler(_ => { });
-builder.Configuration.AddJsonFile("appsettings.json", optional: false, reloadOnChange: false);
-builder.Configuration.AddJsonFile($"appsettings.{builder.Environment.EnvironmentName}.json", optional: true, reloadOnChange: false);
+// 🔥 IMPORTANT (Render / Docker issue)
+AppContext.SetSwitch("DOTNET_USE_POLLING_FILE_WATCHER", true);
+
 builder.Host.UseSerilog();
 
 // =====================
@@ -76,12 +76,13 @@ builder.Services.AddSignalR();
 // CORS
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy("AllowAll",
-        policy => policy.AllowAnyOrigin()
-                        .AllowAnyMethod()
-                        .AllowAnyHeader());
+    options.AddPolicy("AllowAngular",
+        policy => policy
+            .WithOrigins("http://localhost:4200") 
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
 });
-
 // Controllers
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -161,7 +162,7 @@ app.UseStaticFiles();
 
 app.UseHttpsRedirection();
 
-app.UseCors("AllowAll");
+app.UseCors("AllowAngular");
 
 app.UseAuthentication();
 app.UseAuthorization();
@@ -181,7 +182,7 @@ app.Urls.Add($"http://*:{port}");
 using (var scope = app.Services.CreateScope())
 {
     var db = scope.ServiceProvider.GetRequiredService<AppDbContext>();
-    db.Database.Migrate();                                                                                                                                                                                                                              
+    db.Database.Migrate();
 }
 
 app.Run();

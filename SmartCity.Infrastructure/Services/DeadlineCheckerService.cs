@@ -33,7 +33,7 @@ namespace SmartCity.Infrastructure.Services
                     var context = scope.ServiceProvider.GetRequiredService<IApplicationDbContext>();
                     var notificationService = scope.ServiceProvider.GetRequiredService<INotificationService>();
 
-                    //  NEW: Real-time service
+                    //   Real-time service
                     var realtimeService = scope.ServiceProvider.GetRequiredService<INotificationRealtimeService>();
 
                     var now = DateTime.UtcNow;

@@ -1,0 +1,48 @@
+2026-04-24 11:43:44.121 +05:30 [INF] Executed DbCommand (287ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-24 11:43:44.402 +05:30 [INF] Executed DbCommand (231ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-04-24 11:43:45.964 +05:30 [INF] Executed DbCommand (246ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-24 11:43:47.371 +05:30 [INF] Executed DbCommand (92ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+2026-04-24 11:43:47.607 +05:30 [INF] Executed DbCommand (222ms) [Parameters=[], CommandType='"Text"', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+2026-04-24 11:43:47.653 +05:30 [INF] No migrations were applied. The database is already up to date.
+2026-04-24 11:43:47.717 +05:30 [INF] User profile is available. Using 'C:\Users\ALAN\AppData\Local\ASP.NET\DataProtection-Keys' as key repository and Windows DPAPI to encrypt keys at rest.
+2026-04-24 11:43:47.754 +05:30 [INF] Deadline Checker Service started
+2026-04-24 11:43:47.958 +05:30 [INF] Now listening on: http://[::]:5000
+2026-04-24 11:43:48.026 +05:30 [INF] Application started. Press Ctrl+C to shut down.
+2026-04-24 11:43:48.028 +05:30 [INF] Hosting environment: Development
+2026-04-24 11:43:48.029 +05:30 [INF] Content root path: C:\Users\ALAN\Desktop\JOYAL\BRIDGEON\COURSE\CSharp_DotNet\Single project\Single Project-backend\SmartCity.API
+2026-04-24 11:43:48.190 +05:30 [INF] Executed DbCommand (115ms) [Parameters=[@__now_0='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" < @__now_0 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")
+2026-04-24 11:43:48.418 +05:30 [INF] Executed DbCommand (183ms) [Parameters=[@__now_0='?' (DbType = DateTime), @__AddHours_1='?' (DbType = DateTime)], CommandType='"Text"', CommandTimeout='30']
+SELECT i."Id", i."AssignedAt", i."AssignedBy", i."Deadline", i."EscalatedAt", i."EscalationLevel", i."IsDeadlineNotified", i."IsOverdue", i."IssueId", i."Salary", i."WorkerId", i0."Id", i0."AssignedWorkerId", i0."CreatedAt", i0."CreatedByUserId", i0."Description", i0."ImagePath", i0."RejectionReason", i0."ResolvedAt", i0."ResolvedImagePath", i0."Status", i0."Type", i0."Location_Latitude", i0."Location_Longitude", w."Id", w."CreatedAt", w."IsAvailable", w."Status", w."UserId"
+FROM "IssueAssignments" AS i
+INNER JOIN "Issues" AS i0 ON i."IssueId" = i0."Id"
+INNER JOIN "Workers" AS w ON i."WorkerId" = w."Id"
+WHERE i."Deadline" > @__now_0 AND i."Deadline" <= @__AddHours_1 AND i0."Status" <> 4 AND NOT (i."IsDeadlineNotified")

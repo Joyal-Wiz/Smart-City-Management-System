@@ -13,18 +13,18 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
         private readonly IUserRepository _userRepository;
         private readonly IPasswordHasher _passwordHasher;
         private readonly IWorkerRepository _workerRepository;
-        private readonly INotificationService _notificationService; // 🔥 ADD
+        private readonly INotificationService _notificationService; 
 
         public RegisterUserHandler(
             IUserRepository userRepository,
             IPasswordHasher passwordHasher,
             IWorkerRepository workerRepository,
-            INotificationService notificationService) // 🔥 ADD
+            INotificationService notificationService)
         {
             _userRepository = userRepository;
             _passwordHasher = passwordHasher;
             _workerRepository = workerRepository;
-            _notificationService = notificationService; // 🔥 ADD
+            _notificationService = notificationService; 
         }
 
         public async Task<ApiResponse<RegisterResponseDto>> Handle(
@@ -52,7 +52,7 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
 
             await _userRepository.AddAsync(user);
 
-            // 🔥 WORKER CREATION
+            // WORKER CREATION
             if (user.Role == UserRole.Worker)
             {
                 var worker = new Worker
@@ -65,7 +65,7 @@ namespace SmartCity.Application.Features.Auth.Commands.Register
 
                 await _workerRepository.AddAsync(worker);
 
-                // 🔥 ADD NOTIFICATION (IMPORTANT)
+                // ADD NOTIFICATION (IMPORTANT)
                 await _notificationService.CreateAsync(
                     "New Worker Registered",
                     $"Worker {user.Name} has registered and is waiting for approval",

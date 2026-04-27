@@ -50,7 +50,7 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
                 ImagePath = imagePath
             };
 
-            await _issueRepository.AddAsync(issue);
+            await _issueRepository.AddAsync(issue); // whats this and how it works - This line is calling the AddAsync method of the IIssueRepository interface to add the newly created issue to the database. The AddAsync method is typically implemented in a repository class that interacts with the database, and it is responsible for saving the issue entity to the appropriate table or collection. The method is asynchronous, meaning it will run in the background and allow other operations to continue while it is executing. Once the issue is successfully added to the database, it will be assigned an Id (if not already set) and can be retrieved later for further processing or display.
 
             await _notificationService.CreateAsync(
                 "New Issue Reported",
