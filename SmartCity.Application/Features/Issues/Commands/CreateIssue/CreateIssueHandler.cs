@@ -8,23 +8,24 @@ using SmartCity.Domain.ValueObjects;
 namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
 {
     public class CreateIssueHandler
-        : IRequestHandler<CreateIssueCommand, CreateIssueResponseDto> // ✅ FIXED
+        : IRequestHandler<CreateIssueCommand, CreateIssueResponseDto>
     {
         private readonly IIssueRepository _issueRepository;
-        private readonly IFileService _fileService;
         private readonly ICurrentUserService _currentUser;
         private readonly INotificationService _notificationService;
+        private readonly ICloudinaryService _cloudinaryService; // ✅ FIXED
 
         public CreateIssueHandler(
             IIssueRepository issueRepository,
-            IFileService fileService,
             ICurrentUserService currentUser,
-            INotificationService notificationService)
+            INotificationService notificationService,
+            ICloudinaryService cloudinaryService // ✅ FIXED
+        )
         {
             _issueRepository = issueRepository;
-            _fileService = fileService;
             _currentUser = currentUser;
             _notificationService = notificationService;
+            _cloudinaryService = cloudinaryService;
         }
 
         public async Task<CreateIssueResponseDto> Handle(
@@ -33,11 +34,12 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
         {
             var location = new Location(request.Latitude, request.Longitude);
 
-            string? imagePath = null;
+            string? imageUrl = null;
 
+            // 🔥 Upload to Cloudinary
             if (request.Image is not null)
             {
-                imagePath = await _fileService.SaveFileAsync(request.Image);
+                imageUrl = await _cloudinaryService.UploadImageAsync(request.Image);
             }
 
             var issue = new Issue
@@ -47,10 +49,12 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
                 Type = request.Type,
                 Location = location,
                 CreatedByUserId = _currentUser.UserId,
-                ImagePath = imagePath
+
+                // 🔥 IMPORTANT: now storing FULL URL
+                ImagePath = imageUrl
             };
 
-            await _issueRepository.AddAsync(issue); // whats this and how it works - This line is calling the AddAsync method of the IIssueRepository interface to add the newly created issue to the database. The AddAsync method is typically implemented in a repository class that interacts with the database, and it is responsible for saving the issue entity to the appropriate table or collection. The method is asynchronous, meaning it will run in the background and allow other operations to continue while it is executing. Once the issue is successfully added to the database, it will be assigned an Id (if not already set) and can be retrieved later for further processing or display.
+            await _issueRepository.AddAsync(issue);
 
             await _notificationService.CreateAsync(
                 "New Issue Reported",
@@ -62,7 +66,7 @@ namespace SmartCity.Application.Features.Issues.Commands.CreateIssue
             return new CreateIssueResponseDto
             {
                 IssueId = issue.Id,
-                Status = issue.Status.ToString() 
+                Status = issue.Status.ToString()
             };
         }
     }
