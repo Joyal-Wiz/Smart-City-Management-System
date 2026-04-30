@@ -42,10 +42,12 @@ namespace SmartCity.Application.Features.Issues.Queries.GetMyIssuesList
                     Description = i.Description,
                     Status = i.Status.ToString(),
                     CreatedAt = i.CreatedAt,
-
                     AssignedWorkerName = i.Assignments
-                        .Select(a => a.Worker.User.Name)
-                        .FirstOrDefault() ?? "Not Assigned"
+                    .Select(a => a.Worker.User.Name)
+                    .FirstOrDefault() ?? "Not Assigned",
+
+                    Latitude = i.Location.Latitude,
+                    Longitude = i.Location.Longitude
                 })
                 .ToListAsync(cancellationToken);
 
