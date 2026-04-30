@@ -10,12 +10,18 @@ namespace SmartCity.Application.Features.Workers.DTOs
         public string Description { get; set; }
 
         public string Location { get; set; }
+
         public DateTime Deadline { get; set; }
 
         public decimal Salary { get; set; }
 
         public IssueStatus Status { get; set; }
+
         public string? ImageUrl { get; set; }
+
+        // 🔥 AFTER IMAGE
+        public string? ResolutionImageUrl { get; set; }
+
         public string? RejectionReason { get; set; }
     }
 }

@@ -19,6 +19,7 @@ namespace SmartCity.Domain.Entities
         public Guid CreatedByUserId { get; set; }
 
         public Guid? AssignedWorkerId { get; private set; }
+        public string? ResolutionImageUrl { get; private set; }
 
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
