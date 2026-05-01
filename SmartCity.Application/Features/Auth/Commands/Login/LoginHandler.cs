@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Auth.DTOs;
 using SmartCity.Application.Interfaces;
@@ -55,7 +55,8 @@ namespace SmartCity.Application.Features.Auth.Commands.Login
                 AccessToken = accessToken,
                 RefreshToken = refreshToken,
                 Email = user.Email,
-                Role = user.Role.ToString()
+                Role = user.Role.ToString(),
+                Name = user.Name
             };
         }
     }
