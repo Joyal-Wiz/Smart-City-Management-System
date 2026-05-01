@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Interfaces;
+using SmartCity.Application.Common.Interfaces; 
 using SmartCity.Domain.Interfaces;
-using Microsoft.AspNetCore.SignalR;
-using SmartCity.API.Hubs;
 
 namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
 {
@@ -15,7 +14,7 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
         private readonly ICurrentUserService _currentUser;
         private readonly ICloudinaryService _cloudinaryService;
         private readonly INotificationService _notificationService;
-        private readonly IHubContext<IssueHub> _hubContext;
+        private readonly IRealTimeService _realTimeService; 
 
         public ResolveIssueHandler(
             IIssueRepository issueRepository,
@@ -23,7 +22,7 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
             ICurrentUserService currentUser,
             ICloudinaryService cloudinaryService,
             INotificationService notificationService,
-            IHubContext<IssueHub> hubContext // 🔥 FIXED
+            IRealTimeService realTimeService
         )
         {
             _issueRepository = issueRepository;
@@ -31,7 +30,7 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
             _currentUser = currentUser;
             _cloudinaryService = cloudinaryService;
             _notificationService = notificationService;
-            _hubContext = hubContext; // 🔥 FIXED
+            _realTimeService = realTimeService; // 🔥 NEW
         }
 
         public async Task<ApiResponse<string>> Handle(
@@ -63,7 +62,6 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
 
             try
             {
-                // 🔥 Upload image
                 imageUrl = await _cloudinaryService.UploadImageAsync(request.Image);
             }
             catch (Exception ex)
@@ -73,7 +71,6 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
 
             try
             {
-                // 🔥 Update issue
                 issue.MarkResolved(imageUrl);
             }
             catch (Exception ex)
@@ -84,12 +81,11 @@ namespace SmartCity.Application.Features.Issues.Commands.ResolveIssue
             // 💾 Save
             await _issueRepository.UpdateAsync(issue);
 
-            // 🔥 SIGNALR EVENT (MOST IMPORTANT)
-            await _hubContext.Clients.All.SendAsync("IssueUpdated", new
-            {
-                issueId = issue.Id,
-                status = issue.Status.ToString()
-            });
+            // 🔥 REAL-TIME EVENT (CLEAN WAY)
+            await _realTimeService.SendIssueUpdated(
+                issue.Id,
+                issue.Status.ToString()
+            );
 
             // 🔔 Notify citizen
             await _notificationService.CreateAsync(

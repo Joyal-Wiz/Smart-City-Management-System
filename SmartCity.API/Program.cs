@@ -8,6 +8,7 @@ using SmartCity.API.Hubs;
 using SmartCity.API.Middleware;
 using SmartCity.API.Services;
 using SmartCity.Application.Behaviors;
+using SmartCity.Application.Common.Interfaces;
 using SmartCity.Application.Features.Auth.Commands.Register;
 using SmartCity.Application.Features.Issues.Commands.CreateIssue;
 using SmartCity.Application.Interfaces;
@@ -52,6 +53,8 @@ builder.Services.AddScoped<IIssueRepository, IssueRepository>();
 builder.Services.AddScoped<IIssueAssignmentRepository, IssueAssignmentRepository>();
 builder.Services.AddScoped<CloudinaryService>();
 builder.Services.AddScoped<ICloudinaryService, CloudinaryService>();
+builder.Services.AddScoped<IRealTimeService, RealTimeService>();
+
 
 builder.Services.AddScoped<IPasswordHasher, PasswordHasher>();
 builder.Services.AddScoped<IJwtService, JwtService>();

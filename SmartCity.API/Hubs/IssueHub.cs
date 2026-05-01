@@ -1,6 +1,8 @@
-﻿namespace SmartCity.API.Hubs
+﻿using Microsoft.AspNetCore.SignalR;
+
+namespace SmartCity.API.Hubs
 {
-    public class IssueHub
+    public class IssueHub : Hub
     {
     }
 }
