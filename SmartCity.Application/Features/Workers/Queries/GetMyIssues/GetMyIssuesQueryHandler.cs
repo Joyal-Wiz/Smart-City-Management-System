@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Workers.DTOs;
@@ -59,9 +59,16 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
                 };
 
             // 🔥 STATUS FILTER (NEW)
-            if (!string.IsNullOrEmpty(request.Status))
+            if (!string.IsNullOrEmpty(request.Status) && Enum.TryParse<IssueStatus>(request.Status, true, out var statusEnum))
             {
-                query = query.Where(i => i.Status.ToString() == request.Status);
+                query = query.Where(i => i.Status == statusEnum);
+            }
+
+            // 🔥 SEARCH FILTER (NEW)
+            if (!string.IsNullOrEmpty(request.Search))
+            {
+                var searchTerm = request.Search.ToLower();
+                query = query.Where(i => i.Description.ToLower().Contains(searchTerm));
             }
 
             // 🔹 Total count AFTER filter
