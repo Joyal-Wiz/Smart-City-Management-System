@@ -4,7 +4,9 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Serilog;
+using SmartCity.API.Hubs;
 using SmartCity.API.Middleware;
+using SmartCity.API.Services;
 using SmartCity.Application.Behaviors;
 using SmartCity.Application.Features.Auth.Commands.Register;
 using SmartCity.Application.Features.Issues.Commands.CreateIssue;
@@ -13,7 +15,6 @@ using SmartCity.Domain.Interfaces;
 using SmartCity.Infrastructure.Persistence;
 using SmartCity.Infrastructure.Repositories;
 using SmartCity.Infrastructure.Services;
-using SmartCity.API.Services;
 using System.Text;
 
 // 🔥 LOGGING
@@ -174,6 +175,9 @@ app.UseAuthorization();
 // =====================
 
 app.MapControllers();
+
+
+app.MapHub<IssueHub>("/hubs/issues");
 app.MapHub<SmartCity.API.Hubs.NotificationHub>("/hubs/notifications");
 
 // 🔥 PORT (Render fix)
