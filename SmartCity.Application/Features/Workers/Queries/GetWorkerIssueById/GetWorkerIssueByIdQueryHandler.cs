@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.Features.Workers.DTOs;
 using SmartCity.Application.Features.Workers.Queries.GetWorkerIssueById;
@@ -37,6 +37,7 @@ public class GetWorkerIssueByIdQueryHandler
 
                 // 🔥 AFTER IMAGE (CORRECT FIELD)
                 ResolutionImageUrl = i.ResolvedImagePath,
+                ResolvedAt = i.ResolvedAt,
 
                 RejectionReason = i.RejectionReason
             }
