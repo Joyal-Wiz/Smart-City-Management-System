@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SmartCity.Domain.Enums;
 
 namespace SmartCity.Application.Features.Workers.DTOs
@@ -21,7 +21,7 @@ namespace SmartCity.Application.Features.Workers.DTOs
 
         // 🔥 AFTER IMAGE
         public string? ResolutionImageUrl { get; set; }
-
+        public DateTime? ResolvedAt { get; set; }
         public string? RejectionReason { get; set; }
     }
 }

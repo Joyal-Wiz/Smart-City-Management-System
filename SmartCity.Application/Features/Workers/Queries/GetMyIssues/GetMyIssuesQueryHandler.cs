@@ -53,6 +53,8 @@ namespace SmartCity.Application.Features.Workers.Queries.GetMyIssues
                     Deadline = a.Deadline,
                     Salary = a.Salary,
                     ImageUrl = i.ImagePath,
+                    ResolutionImageUrl = i.ResolvedImagePath,
+                    ResolvedAt = i.ResolvedAt,
                     RejectionReason = i.Status == IssueStatus.Rejected
                         ? i.RejectionReason
                         : null
