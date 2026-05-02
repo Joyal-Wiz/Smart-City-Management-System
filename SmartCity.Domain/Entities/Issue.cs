@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SmartCity.Domain.Enums;
 using SmartCity.Domain.ValueObjects;
 
@@ -80,8 +80,8 @@ namespace SmartCity.Domain.Entities
         }
         public void ReassignWorker(Guid workerId)
         {
-            if (Status != IssueStatus.Rejected)
-                throw new InvalidOperationException("Only rejected issues can be reassigned");
+            if (Status == IssueStatus.Resolved)
+                throw new InvalidOperationException("Resolved issues cannot be reassigned");
 
             AssignedWorkerId = workerId;
             Status = IssueStatus.Assigned;

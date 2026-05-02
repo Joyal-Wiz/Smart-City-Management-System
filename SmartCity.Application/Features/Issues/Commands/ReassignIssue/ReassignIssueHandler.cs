@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using SmartCity.Application.Interfaces;
@@ -44,10 +44,10 @@ namespace SmartCity.Application.Features.Issues.Commands.ReassignIssue
                 throw new Exception("Issue not found");
             }
 
-            if (issue.Status != IssueStatus.Rejected)
+            if (issue.Status == IssueStatus.Resolved)
             {
-                _logger.LogWarning("Reassign failed - Issue not rejected: {IssueId}", request.IssueId);
-                throw new InvalidOperationException("Only rejected issues can be reassigned");
+                _logger.LogWarning("Reassign failed - Issue is resolved: {IssueId}", request.IssueId);
+                throw new InvalidOperationException("Resolved issues cannot be reassigned");
             }
 
             var worker = await _context.Workers
