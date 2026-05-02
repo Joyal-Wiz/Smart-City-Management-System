@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Interfaces;
@@ -51,7 +51,8 @@ namespace SmartCity.Application.Features.Issues.Queries.GetAllIssues
 
             // 📦 DATA FETCH
             var issues = await query
-                .OrderByDescending(i => i.CreatedAt)
+                .OrderByDescending(i => i.Status == IssueStatus.Rejected)
+                .ThenByDescending(i => i.CreatedAt)
                 .Skip((request.PageNumber - 1) * request.PageSize)
                 .Take(request.PageSize)
                .Select(i => new IssueAdminDto
