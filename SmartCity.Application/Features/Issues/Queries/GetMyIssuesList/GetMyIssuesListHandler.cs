@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Issues.DTOs;
@@ -41,6 +41,7 @@ namespace SmartCity.Application.Features.Issues.Queries.GetMyIssuesList
                     Id = i.Id,
                     Description = i.Description,
                     Status = i.Status.ToString(),
+                    Type = i.Type.ToString(),
                     CreatedAt = i.CreatedAt,
                     AssignedWorkerName = i.Assignments
                     .Select(a => a.Worker.User.Name)

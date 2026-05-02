@@ -1,4 +1,4 @@
-﻿namespace SmartCity.Application.Features.Issues.DTOs
+namespace SmartCity.Application.Features.Issues.DTOs
 {
     public class IssueListDto
     {
@@ -15,5 +15,7 @@
         // 🔥 ADD THESE
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        
+        public string Type { get; set; }
     }
 }
