@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using SmartCity.Application.Features.Issues.DTOs;
 using SmartCity.Domain.Interfaces;
 
@@ -18,7 +18,7 @@ namespace SmartCity.Application.Features.Issues.Queries.GetIssueById
             GetIssueByIdQuery request,
             CancellationToken cancellationToken)
         {
-            var issue = await _issueRepository.GetByIdAsync(request.Id);
+            var issue = await _issueRepository.GetByIdWithDetailsAsync(request.Id);
 
             if (issue == null)
                 throw new Exception("Issue not found");
