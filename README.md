@@ -34,17 +34,16 @@ It handles authentication, issue management, real-time updates, and map-based da
   - Assignment
   - Resolution
 - No polling required
-- Decoupled using **Clean Architecture (interface-based SignalR integration)**
+- Clean architecture implementation using abstraction (no direct dependency in Application layer)
 
 ---
 
 ### 🗺️ Map API
 - Fetch issues within radius
-- Support for:
+- Supports:
   - Nearby issue detection
   - Duplicate prevention
   - Admin map visualization
-- Optimized queries for performance
 
 ---
 
@@ -60,8 +59,65 @@ It handles authentication, issue management, real-time updates, and map-based da
 
 Follows **Clean Architecture principles**:
 
-```text
-API Layer        → Controllers, SignalR Hubs
-Application      → CQRS (Commands & Queries), DTOs
-Domain           → Entities, Enums, Business Rules
-Infrastructure   → Database, Repositories, External Services
+API Layer → Controllers, SignalR Hubs
+Application → CQRS (Commands & Queries), DTOs
+Domain → Entities, Enums, Business Rules
+Infrastructure → Database, Repositories, External Services
+---
+
+## 🧠 Design Patterns
+
+- CQRS (Command Query Responsibility Segregation)
+- MediatR
+- Repository Pattern
+- Dependency Injection
+- Interface-based abstraction for SignalR
+
+---
+
+## 🛠️ Tech Stack
+
+- ASP.NET Core Web API
+- Entity Framework Core
+- MediatR
+- SignalR
+- SQL Server
+- Cloudinary (image storage)
+
+---
+
+## 📂 Project Structure
+
+SmartCity.API # Controllers + SignalR Hub
+SmartCity.Application # Business logic (CQRS)
+SmartCity.Domain # Core entities
+SmartCity.Infrastructure # DB + external services
+
+
+---
+
+## ▶️ How to Run the Backend
+
+### 📌 Prerequisites
+
+- .NET SDK (6 or above)
+- SQL Server
+- Visual Studio / VS Code
+- Postman / Swagger (optional)
+
+---
+
+### ⚙️ Step 1 — Clone Repository
+
+git clone https://github.com/your-username/smart-city-backend.git
+cd smart-city-backend 
+
+### ⚙️ Step 2 — Configure Database
+
+Open the `appsettings.json` file and update the connection string:
+
+```json
+"ConnectionStrings": {
+  "DefaultConnection": "Server=localhost;Database=SmartCityDb;Trusted_Connection=True;TrustServerCertificate=True;"
+}
+dotnet ef database update
