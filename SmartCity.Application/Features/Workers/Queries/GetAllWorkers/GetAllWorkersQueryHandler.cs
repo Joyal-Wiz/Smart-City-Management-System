@@ -28,7 +28,7 @@ namespace SmartCity.Application.Features.Workers.Queries.GetAllWorkers
             var query = _workerRepository
      .GetQueryable()
      .Include(w => w.User)
-     .Where(w => w.Status == WorkerStatus.Approved);
+     .Where(w => w.Status == WorkerStatus.Approved || w.Status == WorkerStatus.Blocked);
 
             var totalCount = await query.CountAsync(cancellationToken);
 
