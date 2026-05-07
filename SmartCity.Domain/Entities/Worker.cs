@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using SmartCity.Domain.Enums;
 
@@ -15,7 +15,7 @@ namespace SmartCity.Domain.Entities
         public bool IsAvailable { get; set; } = true;
 
         public WorkerStatus Status { get; set; } = WorkerStatus.Pending;
-
+        public string? BlockReason { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
         public ICollection<IssueAssignment> Assignments { get; set; } = new List<IssueAssignment>();

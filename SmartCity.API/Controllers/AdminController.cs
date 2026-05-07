@@ -16,6 +16,8 @@ using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 using SmartCity.Application.Features.Issues.Queries.GetIssueById;
 using SmartCity.Application.Features.Workers.Queries.GetWorkerById;
 using SmartCity.Application.Features.Workers.DTO;
+using SmartCity.Application.Features.Workers.Commands.BlockWorker;
+using SmartCity.Application.Features.Workers.Commands.UnblockWorker;
 
 namespace SmartCity.API.Controllers
 {
@@ -107,7 +109,32 @@ namespace SmartCity.API.Controllers
         {
             var result = await _mediator.Send(command);
 
-            return Ok(ApiResponse<object>.SuccessResponse("Worker rejected successfully", result));
+            if (!result)
+                return BadRequest(ApiResponse<object>.FailResponse("Rejection failed"));
+
+            return Ok(ApiResponse<object>.SuccessResponse("Worker registration rejected"));
+        }
+
+        [HttpPost("workers/block")]
+        public async Task<IActionResult> BlockWorker([FromBody] BlockWorkerCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result)
+                return BadRequest(ApiResponse<object>.FailResponse("Blocking failed"));
+
+            return Ok(ApiResponse<object>.SuccessResponse("Worker blocked successfully"));
+        }
+
+        [HttpPost("workers/unblock")]
+        public async Task<IActionResult> UnblockWorker([FromBody] UnblockWorkerCommand command)
+        {
+            var result = await _mediator.Send(command);
+
+            if (!result)
+                return BadRequest(ApiResponse<object>.FailResponse("Unblocking failed"));
+
+            return Ok(ApiResponse<object>.SuccessResponse("Worker unblocked successfully"));
         }
 
         //  GET ALL ISSUES

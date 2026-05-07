@@ -1,9 +1,10 @@
-﻿namespace SmartCity.Domain.Enums
+namespace SmartCity.Domain.Enums
 {
     public enum WorkerStatus
     {
         Pending = 1,
         Approved,
-        Rejected
+        Rejected,
+        Blocked
     }
 }

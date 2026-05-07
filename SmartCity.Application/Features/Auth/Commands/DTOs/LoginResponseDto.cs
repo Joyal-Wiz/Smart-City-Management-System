@@ -11,5 +11,7 @@ namespace SmartCity.Application.Features.Auth.DTOs
         public string Role { get; set; } = string.Empty;
 
         public string Name { get; set; } = string.Empty;
+        public bool IsBlocked { get; set; }
+        public string? BlockReason { get; set; }
     }
 }

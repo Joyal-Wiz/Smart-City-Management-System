@@ -4,6 +4,8 @@ using SmartCity.Application.Features.Auth.DTOs;
 using SmartCity.Application.Interfaces;
 using SmartCity.Domain.Entities;
 using SmartCity.Domain.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using SmartCity.Domain.Enums;
 
 namespace SmartCity.Application.Features.Auth.Commands.Login
 {
@@ -50,13 +52,28 @@ namespace SmartCity.Application.Features.Auth.Commands.Login
             await _context.RefreshTokens.AddAsync(refreshTokenEntity, cancellationToken);
             await _context.SaveChangesAsync(cancellationToken);
 
+            var isBlocked = false;
+            string? blockReason = null;
+
+            if (user.Role == UserRole.Worker)
+            {
+                var worker = await _context.Workers.FirstOrDefaultAsync(w => w.UserId == user.Id, cancellationToken);
+                if (worker != null && worker.Status == WorkerStatus.Blocked)
+                {
+                    isBlocked = true;
+                    blockReason = worker.BlockReason;
+                }
+            }
+
             return new LoginResponseDto
             {
                 AccessToken = accessToken,
                 RefreshToken = refreshToken,
                 Email = user.Email,
                 Role = user.Role.ToString(),
-                Name = user.Name
+                Name = user.Name,
+                IsBlocked = isBlocked,
+                BlockReason = blockReason
             };
         }
     }
