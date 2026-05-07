@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using SmartCity.Domain.Enums;
 
 namespace SmartCity.Application.Features.Workers.DTOs
@@ -14,5 +14,6 @@ namespace SmartCity.Application.Features.Workers.DTOs
         public WorkerStatus Status { get; set; }
 
         public bool IsAvailable { get; set; }
+        public string? BlockReason { get; set; }
     }
 }

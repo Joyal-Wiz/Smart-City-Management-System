@@ -13,5 +13,6 @@ namespace SmartCity.Application.Features.Workers.DTO
         public bool IsAvailable { get; set; }
         public DateTime CreatedAt { get; set; }
         public int TotalIssuesAssigned { get; set; }
+        public string? BlockReason { get; set; }
     }
 }

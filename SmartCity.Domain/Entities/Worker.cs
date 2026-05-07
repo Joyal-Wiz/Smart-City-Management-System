@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using SmartCity.Domain.Enums;
 
 namespace SmartCity.Domain.Entities
@@ -15,6 +16,7 @@ namespace SmartCity.Domain.Entities
         public bool IsAvailable { get; set; } = true;
 
         public WorkerStatus Status { get; set; } = WorkerStatus.Pending;
+        [NotMapped]
         public string? BlockReason { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 

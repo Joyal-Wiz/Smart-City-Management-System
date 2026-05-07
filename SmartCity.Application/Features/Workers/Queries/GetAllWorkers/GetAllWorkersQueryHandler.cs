@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
 using SmartCity.Application.DTOs;
 using SmartCity.Application.Features.Workers.DTOs;
@@ -49,7 +49,8 @@ namespace SmartCity.Application.Features.Workers.Queries.GetAllWorkers
                     Name = w.User.Name,
                     Email = w.User.Email,
                     Status = w.Status,
-                    IsAvailable = activeCount < 4 // 🔥 FINAL LOGIC
+                    IsAvailable = activeCount < 4, // 🔥 FINAL LOGIC
+                    BlockReason = w.BlockReason
                 });
             }
 

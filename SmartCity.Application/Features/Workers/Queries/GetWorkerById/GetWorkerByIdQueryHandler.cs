@@ -37,7 +37,8 @@ namespace SmartCity.Application.Features.Workers.Queries.GetWorkerById
                 Status = worker.Status,
                 IsAvailable = worker.IsAvailable,
                 CreatedAt = worker.CreatedAt,
-                TotalIssuesAssigned = worker.Assignments.Count
+                TotalIssuesAssigned = worker.Assignments.Count,
+                BlockReason = worker.BlockReason
             };
         }
     }
