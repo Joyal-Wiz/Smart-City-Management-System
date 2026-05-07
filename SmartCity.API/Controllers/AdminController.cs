@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SmartCity.API.Services;
@@ -14,6 +14,7 @@ using SmartCity.Application.Features.Workers.DTOs;
 using SmartCity.Application.Features.Workers.Queries.GetAllWorkers;
 using SmartCity.Application.Features.Workers.Queries.GetPendingWorkers;
 using SmartCity.Application.Features.Issues.Queries.GetIssueById;
+using SmartCity.Application.Features.Workers.Queries.GetWorkerById;
 
 namespace SmartCity.API.Controllers
 {
@@ -62,6 +63,20 @@ namespace SmartCity.API.Controllers
             });
         }
 
+        [HttpGet("workers/{id}")]
+        public async Task<IActionResult> GetWorkerById(Guid id)
+        {
+            var result = await _mediator.Send(new GetWorkerByIdQuery(id));
+
+            if (result == null)
+                return NotFound(ApiResponse<object>.ErrorResponse("Worker not found"));
+
+            return Ok(ApiResponse<GetWorkerByIdResponseDto>.SuccessResponse(
+                "Worker details fetched successfully",
+                result
+            ));
+        }
+
         //  GET PENDING WORKERS
         [HttpGet("workers/pending")]
         public async Task<IActionResult> GetPendingWorkers()
@@ -73,6 +88,8 @@ namespace SmartCity.API.Controllers
                 result
             ));
         }
+
+        //  APPROVE WORKERS
 
         //  APPROVE WORKER
         [HttpPost("workers/approve")]
